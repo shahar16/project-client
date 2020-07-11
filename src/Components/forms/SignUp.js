@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
-import UserService from '../../services/user.service'
+import UserService from '../../Services/user.service'
 
 const SignUpSchema = Yup.object().shape( {
 	firstName:       Yup.string()
