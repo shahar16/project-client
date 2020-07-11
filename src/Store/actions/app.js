@@ -29,14 +29,14 @@ export const finishAction = () => {
 	};
 };
 
-const authSuccess = ( token ) => {
+export const authSuccess = ( token ) => {
 	return {
 		token: token,
 		type:  actionsTypes.AUTH_SUCCESS,
 	};
 };
 
-const authFail = ( err ) => {
+export const authFail = ( err ) => {
 	return {
 		error: err,
 		type:  actionsTypes.AUTH_FAIL,

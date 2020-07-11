@@ -4,6 +4,8 @@ export {
 	login,
 	authLogout,
 	checkState,
+	authSuccess,
+	authFail,
 	//TODO : remove - only for practice
 	test,
 	shahar

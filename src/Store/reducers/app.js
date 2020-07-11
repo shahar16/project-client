@@ -43,14 +43,15 @@ const finishAction = ( state, action ) => {
 
 const authSuccess = ( state, action ) => {
 	return updateObject( state, {
-		token: action.token
+		token: action.token,
+		error: null
 	} );
 }
 const authFail = ( state, action ) => {
 	return updateObject( state, {
 		error:   action.error,
 		loading: false,
-		token:   false
+		token:   null
 	} );
 }
 

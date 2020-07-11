@@ -10,7 +10,6 @@ class UserService {
 	}
 
 	_crateRequest( values, url ) {
-		console.log( "jdfkksdfjhksdhfd" );
 		return fetch( url, {
 			method: "POST",
 			headers: {

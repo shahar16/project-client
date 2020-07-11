@@ -1,5 +1,10 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
+.form-validation-alert {
+    font-size: 12px;
+    color: #B22222;
+}
+
 body {
     margin: 0;
     text-align: center;

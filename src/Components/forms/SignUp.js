@@ -1,7 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
+import { connect } from "react-redux";
 import * as Yup from 'yup';
 import UserService from '../../Services/user.service'
+import * as actions from "../../Store/actions";
 
 const SignUpSchema = Yup.object().shape( {
 	firstName:       Yup.string()
@@ -24,9 +26,11 @@ function SignUp( props ) {
 		try {
 			const token = await UserService.register( values );
 			props.setToken( token );
+			props.authSuccess( token );
 		} catch ( err ) {
-			const { error } = await err.response.json();
-			setErrorMessage( error );
+			const error = await err.response.json();
+			setErrorMessage( error.message );
+			props.authFail( error.message );
 		}
 	}
 
@@ -79,4 +83,11 @@ function SignUp( props ) {
 	)
 }
 
-export default SignUp;
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		authSuccess: ( token ) => dispatch( actions.authSuccess( token ) ),
+		authFail:    ( err ) => dispatch( actions.authFail( err ) )
+	}
+};
+
+export default connect( null, mapDispatchToProps )( SignUp );
