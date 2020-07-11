@@ -10,7 +10,6 @@ function ProductsList() {
 	useEffect( () => {
 		fetchP.getProduct( 12345678 )
 			.then( ( item ) => {
-				console.log( item )
 				setItem( item );
 			} )
 	}, [] )
