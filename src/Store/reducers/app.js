@@ -43,8 +43,9 @@ const finishAction = ( state, action ) => {
 
 const authSuccess = ( state, action ) => {
 	return updateObject( state, {
-		token: action.token,
-		error: null
+		token:   action.token,
+		loading: false,
+		error:   null
 	} );
 }
 const authFail = ( state, action ) => {
