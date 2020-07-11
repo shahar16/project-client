@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as actionsTypes from "./actionTypes";
-
+//TODO : remove - only for practice
 export const shahar = ( name ) => {
 	return {
 		type:          actionsTypes.SHAHAR_TEST,
@@ -9,7 +9,7 @@ export const shahar = ( name ) => {
 }
 // Todo 5 : Add the action you want to do....
 
-
+//TODO : remove - only for practice
 export const test = () => {
 	return {
 		type:    actionsTypes.TEST,

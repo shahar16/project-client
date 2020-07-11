@@ -7,17 +7,17 @@ const initialState = {
 	token:         null,
 	error:         null,
 	loading:       null,
+	//TODO : remove - only for practice
 	message:       null,
 	shaharMessage: null
 }
 
-
+//TODO : remove - only for practice
 const test = ( state, action ) => {
 	return updateObject( state, {
 		message: action.message
 	} );
 }
-
 const shahar = ( state, action ) => {
 	return updateObject( state, {
 		shaharMessage: action.shaharMessage
@@ -67,7 +67,7 @@ const authLogout = ( state, action ) => {
 
 const reducer = ( state = initialState, action ) => {
 	switch ( action.type ) {
-		case actionTypes.TEST:
+		case actionTypes.TEST://TODO : remove - only for practice
 			return test( state, action );
 		case actionTypes.START_ACTION:
 			return startAction( state, action );
@@ -79,7 +79,7 @@ const reducer = ( state = initialState, action ) => {
 			return authFail( state, action );
 		case actionTypes.AUTH_LOGOUT:
 			return authLogout( state, action );
-		case actionTypes.SHAHAR_TEST:
+		case actionTypes.SHAHAR_TEST://TODO : remove - only for practice
 			return shahar( state, action );
 		default:
 			return state;

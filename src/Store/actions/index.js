@@ -4,6 +4,7 @@ export {
 	login,
 	authLogout,
 	checkState,
+	//TODO : remove - only for practice
 	test,
 	shahar
 } from './app'

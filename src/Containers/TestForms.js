@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Login from '../Components/forms/Login';
-import SignUp from '../Components/forms/SignUp'
+import SignUp from '../Components/forms/SignUp';
 
 function TestForms() {
 	const [token, setToken] = useState(null);
