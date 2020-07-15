@@ -10,7 +10,7 @@
 
 [back to top](#index)
 
-##Redux
+## Redux
 To add a field to redux state please follow this instructions:
 * Add the filed to the initialState in ```src/Store/reducers/app.js```.
 * Add the type to ```src/Store/actions/app.js```.
