@@ -1,8 +1,6 @@
 import { updateObject } from '../../Shared/Util/Util';
 import * as actionTypes from '../actions/actionTypes';
 
-
-// Todo 1: add need prop to state
 const initialState = {
 	token:         null,
 	error:         null,
@@ -23,9 +21,6 @@ const shahar = ( state, action ) => {
 		shaharMessage: action.shaharMessage
 	} );
 }
-
-// Todo 4  : Add the handler for that case.
-
 
 const startAction = ( state, action ) => {
 	return updateObject( state, {
@@ -63,9 +58,6 @@ const authLogout = ( state, action ) => {
 		loading: false
 	} );
 }
-
-
-// Todo 3  : Add the new case.
 
 const reducer = ( state = initialState, action ) => {
 	switch ( action.type ) {

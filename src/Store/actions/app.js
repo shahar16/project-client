@@ -7,7 +7,6 @@ export const shahar = ( name ) => {
 		shaharMessage: name
 	}
 }
-// Todo 5 : Add the action you want to do....
 
 //TODO : remove - only for practice
 export const test = () => {
@@ -62,47 +61,47 @@ export const setAuthincationTimeOut = ( experationTime ) => {
 };
 
 // This mehtod get userAuthInfo as object that holds all the information you need in order to loging "email, password, ..."
-export const login = ( userAuthInfo ) => {
-	return async ( dispatch ) => {
-		dispatch( startAction() );
-		const data = new FormData();
-
-		data.append( "email", userAuthInfo.email );
-		data.append( "password", userAuthInfo.password );
-
-		try {
-			const url = "Enter the route of loging in your server";
-			const res = await axios.post( url, data );
-			// I printed the result from the server so check what you need
-			// and how the res object looks like.
-			console.log( res );
-
-			// I need to create a date, so I can limit the time  user can be logged in.
-			// First I calculate the date I want the user to be loggedout auto.
-			const expirationDate = new Date(
-				new Date().getTime() + res.data.expirationTimeInMiliSeconds
-			);
-
-			//Now I calculatint the time I want him to be loggedout so i can use it in the setTimeout function.
-			const timeToLoggout = expirationDate.getTime() - new Date().getTime();
-
-			// Here I know that everything went well so i will save the token in the local storage
-
-			localStorage.setItem( "token", res.data.token );
-			localStorage.setItem( "expirationDate", expirationDate );
-
-			dispatch( setAuthincationTimeOut( timeToLoggout ) );
-			dispatch( authSuccess( res.data.token ) );
-			dispatch( finishAction() );
-		} catch ( err ) {
-			// It is important for you to check what you are sending as error
-			// So I am printinf the error
-			// Send the object or massege you want to save in the reducer
-			console.log( err );
-			dispatch( authFail( err ) );
-		}
-	};
-};
+// export const login = ( userAuthInfo ) => {
+// 	return async ( dispatch ) => {
+// 		dispatch( startAction() );
+// 		const data = new FormData();
+//
+// 		data.append( "email", userAuthInfo.email );
+// 		data.append( "password", userAuthInfo.password );
+//
+// 		try {
+// 			const url = "Enter the route of loging in your server";
+// 			const res = await axios.post( url, data );
+// 			// I printed the result from the server so check what you need
+// 			// and how the res object looks like.
+// 			console.log( res );
+//
+// 			// I need to create a date, so I can limit the time  user can be logged in.
+// 			// First I calculate the date I want the user to be loggedout auto.
+// 			const expirationDate = new Date(
+// 				new Date().getTime() + res.data.expirationTimeInMiliSeconds
+// 			);
+//
+// 			//Now I calculatint the time I want him to be loggedout so i can use it in the setTimeout function.
+// 			const timeToLoggout = expirationDate.getTime() - new Date().getTime();
+//
+// 			// Here I know that everything went well so i will save the token in the local storage
+//
+// 			localStorage.setItem( "token", res.data.token );
+// 			localStorage.setItem( "expirationDate", expirationDate );
+//
+// 			dispatch( setAuthincationTimeOut( timeToLoggout ) );
+// 			dispatch( authSuccess( res.data.token ) );
+// 			dispatch( finishAction() );
+// 		} catch ( err ) {
+// 			// It is important for you to check what you are sending as error
+// 			// So I am printinf the error
+// 			// Send the object or massege you want to save in the reducer
+// 			console.log( err );
+// 			dispatch( authFail( err ) );
+// 		}
+// 	};
+// };
 
 export const checkState = () => {
 	return async ( dispatch ) => {

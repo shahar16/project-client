@@ -1,7 +1,6 @@
 export {
 	startAction,
 	finishAction,
-	login,
 	authLogout,
 	checkState,
 	authSuccess,
@@ -11,5 +10,3 @@ export {
 	test,
 	shahar
 } from './app'
-
-// TODO 6 : add to this

@@ -7,5 +7,3 @@ export const AUTH_FAIL = 'AUTH_FAIL';
 export const TEST = 'TEST';
 export const SHAHAR_TEST = 'SHAHAR_TEST';
 
-// Todo 2  : Add the new type you need in the reducer.
-
