@@ -12,14 +12,15 @@ const SignUpSchema = Yup.object().shape( {
 				  .required( 'Password is required' ).min( 6 )
 } )
 
-//TODO: need to use 'setAuthincationTimeOut' action.
 function Login( props ) {
 	const [ errorMessage, setErrorMessage ] = useState( null );
 
 	const login = async ( values ) => {
 		props.startAction();
 		try {
-			const token = await UserService.login( values );
+			const { token, expiresTimeInMiliseconds } = await UserService.login( values );
+			UserService.writeToLocalStorage(token, expiresTimeInMiliseconds);
+			props.setAuthincationTimeOut( expiresTimeInMiliseconds );
 			props.setToken( token );
 			props.authSuccess( token );
 		} catch ( err ) {
@@ -81,9 +82,10 @@ function Login( props ) {
 
 const mapDispatchToProps = ( dispatch ) => {
 	return {
-		authSuccess:  ( token ) => dispatch( actions.authSuccess( token ) ),
-		authFail:     ( err ) => dispatch( actions.authFail( err ) ),
-		startAction:  () => dispatch( actions.startAction() )
+		authSuccess:            ( token ) => dispatch( actions.authSuccess( token ) ),
+		authFail:               ( err ) => dispatch( actions.authFail( err ) ),
+		startAction:            () => dispatch( actions.startAction() ),
+		setAuthincationTimeOut: ( experationTime ) => dispatch( actions.setAuthincationTimeOut( experationTime ) )
 	}
 };
 

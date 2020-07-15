@@ -6,6 +6,7 @@ export {
 	checkState,
 	authSuccess,
 	authFail,
+	setAuthincationTimeOut,
 	//TODO : remove - only for practice
 	test,
 	shahar

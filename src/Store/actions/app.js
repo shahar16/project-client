@@ -48,11 +48,12 @@ export const authLogout = () => {
 	localStorage.removeItem( "expirationDate" );
 
 	return {
+		token: null,
 		type: actionsTypes.AUTH_LOGOUT,
 	};
 };
 
-const setAuthincationTimeOut = ( experationTime ) => {
+export const setAuthincationTimeOut = ( experationTime ) => {
 	return ( dispatch ) => {
 		setTimeout( () => {
 			dispatch( authLogout() );

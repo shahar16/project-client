@@ -11,11 +11,11 @@ class UserService {
 
 	_crateRequest( values, url ) {
 		return fetch( url, {
-			method: "POST",
+			method:  "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify( values )
+			body:    JSON.stringify( values )
 		} ).then( ( res ) => {
 			if ( res.status >= 300 || res.status < 200 ) {
 				const requestFailed = new Error();
@@ -24,7 +24,12 @@ class UserService {
 			}
 			console.log( res );
 			return res.json();
-		} ).then( json => json.token )
+		} ).then( json => {
+			return {
+				token:                    json.token,
+				expiresTimeInMiliseconds: json.expiresTimeInMiliseconds
+			}
+		} )
 	}
 
 	login = ( values ) => {
@@ -35,6 +40,13 @@ class UserService {
 		return this._crateRequest( values, `${this.url}register` );
 	}
 
+	writeToLocalStorage( token, expiresTimeInMiliseconds ) {
+		const expirationDate = new Date(
+			new Date().getTime() + expiresTimeInMiliseconds
+		);
+		localStorage.setItem( "token", token );
+		localStorage.setItem( "expirationDate", expirationDate.toLocaleString() );
+	}
 }
 
 export default new UserService();
