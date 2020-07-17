@@ -60,6 +60,13 @@ export const setAuthincationTimeOut = ( experationTime ) => {
 	};
 };
 
+export const setUser = ( user ) => {
+	return {
+		user: user,
+		type: actionsTypes.SET_USER
+	};
+}
+
 // This mehtod get userAuthInfo as object that holds all the information you need in order to loging "email, password, ..."
 // export const login = ( userAuthInfo ) => {
 // 	return async ( dispatch ) => {

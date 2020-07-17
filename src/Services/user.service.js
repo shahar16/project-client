@@ -27,6 +27,7 @@ class UserService {
 		} ).then( json => {
 			return {
 				token:                    json.token,
+				user:                     json.user,
 				expiresTimeInMiliseconds: json.expiresTimeInMiliseconds
 			}
 		} )

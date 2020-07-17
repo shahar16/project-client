@@ -18,10 +18,12 @@ function Login( props ) {
 	const login = async ( values ) => {
 		props.startAction();
 		try {
-			const { token, expiresTimeInMiliseconds } = await UserService.login( values );
-			UserService.writeToLocalStorage(token, expiresTimeInMiliseconds);
+			const { token, expiresTimeInMiliseconds, user } = await UserService.login( values );
+			UserService.writeToLocalStorage( token, expiresTimeInMiliseconds );
 			props.setAuthincationTimeOut( expiresTimeInMiliseconds );
 			props.setToken( token );
+			console.log(user);
+			props.setUser( user );
 			props.authSuccess( token );
 		} catch ( err ) {
 			console.log( err );
@@ -85,7 +87,8 @@ const mapDispatchToProps = ( dispatch ) => {
 		authSuccess:            ( token ) => dispatch( actions.authSuccess( token ) ),
 		authFail:               ( err ) => dispatch( actions.authFail( err ) ),
 		startAction:            () => dispatch( actions.startAction() ),
-		setAuthincationTimeOut: ( experationTime ) => dispatch( actions.setAuthincationTimeOut( experationTime ) )
+		setAuthincationTimeOut: ( experationTime ) => dispatch( actions.setAuthincationTimeOut( experationTime ) ),
+		setUser:                ( user ) => dispatch( actions.setUser( user ) )
 	}
 };
 
