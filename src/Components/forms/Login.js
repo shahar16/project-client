@@ -19,9 +19,8 @@ function Login( props ) {
 		props.startAction();
 		try {
 			const { token, expiresTimeInMiliseconds, user } = await UserService.login( values );
-			UserService.writeToLocalStorage( token, expiresTimeInMiliseconds );
+			UserService.writeToLocalStorage( token, expiresTimeInMiliseconds, user );
 			props.setAuthincationTimeOut( expiresTimeInMiliseconds );
-			props.setToken( token );
 			console.log(user);
 			props.setUser( user );
 			props.authSuccess( token );

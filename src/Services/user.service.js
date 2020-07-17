@@ -41,12 +41,13 @@ class UserService {
 		return this._crateRequest( values, `${this.url}register` );
 	}
 
-	writeToLocalStorage( token, expiresTimeInMiliseconds ) {
+	writeToLocalStorage( token, expiresTimeInMiliseconds, user ) {
 		const expirationDate = new Date(
 			new Date().getTime() + expiresTimeInMiliseconds
 		);
 		localStorage.setItem( "token", token );
 		localStorage.setItem( "expirationDate", expirationDate.toLocaleString() );
+		localStorage.setItem( "user", JSON.stringify( user ) );
 	}
 }
 

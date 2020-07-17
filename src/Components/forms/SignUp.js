@@ -26,9 +26,8 @@ function SignUp( props ) {
 		props.startAction();
 		try {
 			const { token, expiresTimeInMiliseconds, user } = await UserService.register( values );
-			UserService.writeToLocalStorage( token, expiresTimeInMiliseconds );
+			UserService.writeToLocalStorage( token, expiresTimeInMiliseconds, user );
 			props.setAuthincationTimeOut( expiresTimeInMiliseconds );
-			props.setToken( token );
 			props.setUser( user );
 			props.authSuccess( token );
 		} catch ( err ) {
