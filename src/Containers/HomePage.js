@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import NavBar from "../Components/NavBar";
 import * as actions from "../Store/actions";
 import TestForms from "./TestForms";
+import TestProduct from "./TestProduct";
 
 function HomePage( props ) {
 
@@ -13,6 +14,7 @@ function HomePage( props ) {
 	return (
 		<div>
 			<NavBar/>
+			<TestProduct />
 			<TestForms/>
 		</div>
 	);
