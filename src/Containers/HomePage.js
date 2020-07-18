@@ -15,7 +15,7 @@ function HomePage( props ) {
 		<div>
 			<NavBar/>
 			<TestProduct />
-			<TestForms/>
+			{/*<TestForms/>*/}
 		</div>
 	);
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card } from "react-bootstrap";
-import constants from "../Shared/Util/Constants"
+import constants from "../../Shared/Util/Constants"
 
 function ProductItem( { item } ) {
 	return (

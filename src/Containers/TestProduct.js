@@ -1,12 +1,12 @@
 import React from "react";
-import ProductsList from "../Components/ProductsList"
+import ProductsGalleryView from "../Components/products/ProductsGalleryView"
 
 function TestProduct () {
 	return (
 		<div className="App">
 			<div className="container">
 				<div className="row justify-content-center">
-					<ProductsList />
+					<ProductsGalleryView />
 				</div>
 			</div>
 		</div>
