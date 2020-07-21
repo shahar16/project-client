@@ -15,7 +15,7 @@ function NavBar( props ) {
 	}
 
 	return (
-		<Navbar bg="light" variant="light">
+		<Navbar bg="light" variant="light" fixed="top">
 			<Navbar.Brand href="#home"><h1>Retail-it!</h1></Navbar.Brand>
 			<Nav className="mr-auto">
 				<Navbar.Collapse className="justify-content-end">

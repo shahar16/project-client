@@ -5,6 +5,10 @@
     color: #B22222;
 }
 
+.under-nav-bar {
+    margin-top:80px
+}
+
 body {
     margin: 0;
     text-align: center;

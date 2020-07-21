@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductService from "../../Services/product.test.service";
-import ProductItem from "./ProductItem";
+import ProductsGroup from "./ProductsGroup";
 
 //TODO: change this component
 function ProductsGalleryView() {
+	const numOfCardInRaw = 5;
 	const [ productsList, setProductsList ] = useState( null );
 
 	useEffect( () => {
@@ -14,11 +15,27 @@ function ProductsGalleryView() {
 	const fetchMoreData = async () => {
 		console.log( "fetch data" );
 		const list = await ProductService.getProducts()
+		const groupList = getGroupList( list );
 		if ( productsList ) {
-			setProductsList( productsList.concat( list ) );
+			setProductsList( productsList.concat( groupList ) );
 		} else {
-			setProductsList( list );
+			setProductsList( groupList );
 		}
+	}
+
+	const getGroupList = ( list ) => {
+		let returnValue = [];
+		let group = [];
+		for ( let i = 0; i < list.length; i++ ) {
+			group.push( list[i] );
+			if ( i % numOfCardInRaw == numOfCardInRaw - 1 ) {
+				returnValue.push( group );
+				group = [];
+			}
+		}
+
+		console.log( returnValue );
+		return returnValue;
 	}
 
 	return (
@@ -30,7 +47,7 @@ function ProductsGalleryView() {
 				hasMore={true}
 				loader={<h4>Loading...</h4>}
 			>
-				{productsList.map( ( item, index ) =>  <ProductItem key={index} item={item}/>  )}
+				{productsList.map( ( items, index ) => <ProductsGroup items={items}/> )}
 			</InfiniteScroll>
 			}
 		</div>
