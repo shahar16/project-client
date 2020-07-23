@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
-import ModalForLogin from "../Components/modals/ModalForAuth";
+import ModalForAuth from "../Components/modals/ModalForAuth";
 import NavBar from "../Components/NavBar";
 import ProductsGalleryView from "../Components/products/ProductsGalleryView";
 import * as actions from "../Store/actions";
@@ -15,10 +15,10 @@ function HomePage( props ) {
 	return (
 		<BrowserRouter>
 			<Route exact path="/login">
-				<ModalForLogin signUp={false}/>
+				<ModalForAuth signUp={false}/>
 			</Route>
 			<Route exact path="/signup">
-				<ModalForLogin signUp={true}/>
+				<ModalForAuth signUp={true}/>
 			</Route>
 			<NavBar/>
 			<div className="under-nav-bar">
