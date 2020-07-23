@@ -4,7 +4,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ProductService from "../../Services/product.test.service";
 import ProductsGroup from "./ProductsGroup";
 
-//TODO: change this component
 function ProductsGalleryView() {
 	const numOfCardInRaw = 5;
 	const [ productsList, setProductsList ] = useState( null );
