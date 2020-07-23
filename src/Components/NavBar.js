@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormControl, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { connect } from "react-redux";
+import Constants from "../Shared/Util/Constants";
 
 function NavBar( props ) {
 
@@ -9,7 +10,7 @@ function NavBar( props ) {
 			return `Hi ${props.user.firstName} ${props.user.lastName}`;
 		} else {
 			return <div>
-				Hi, please <a href="#login">Log in</a> or <a href="#signup">Sign Up</a>
+				Hi, please <a href={`${Constants.applicationUrl}/login`}>Log in</a> or <a href={`${Constants.applicationUrl}/signup`}>Sign Up</a>
 			</div>
 		}
 	}
