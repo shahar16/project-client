@@ -30,6 +30,7 @@ function SignUp( props ) {
 			props.setAuthincationTimeOut( expiresTimeInMiliseconds );
 			props.setUser( user );
 			props.authSuccess( token );
+			props.onLog();
 		} catch ( err ) {
 			const error = await err.response.json();
 			setErrorMessage( error.message );

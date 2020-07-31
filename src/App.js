@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import HomePage from "./Containers/HomePage";
@@ -15,9 +14,7 @@ function App( props ) {
 
 	return (
 		<Provider store={store}>
-			<BrowserRouter>
-				<HomePage/>
-			</BrowserRouter>
+			<HomePage/>
 		</Provider>
 	);
 }

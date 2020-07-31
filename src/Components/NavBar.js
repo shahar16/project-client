@@ -9,7 +9,7 @@ function NavBar( props ) {
 			return `Hi ${props.user.firstName} ${props.user.lastName}`;
 		} else {
 			return <div>
-				Hi, please <a href="#login">Log in</a> or <a href="#signup">Sign Up</a>
+				Hi, please <a href="/login">Log in</a> or <a href="/signup">Sign Up</a>
 			</div>
 		}
 	}
@@ -24,7 +24,7 @@ function NavBar( props ) {
 					</Navbar.Text>
 				</Navbar.Collapse>
 			</Nav>
-			<Nav.Link href="#home">Home</Nav.Link>
+			<Nav.Link href="/">Home</Nav.Link>
 			<Nav.Link href="#features">Features</Nav.Link>
 			<Nav.Link href="#pricing">Pricing</Nav.Link>
 			<NavDropdown title="Dropdown" id="collasible-nav-dropdown">

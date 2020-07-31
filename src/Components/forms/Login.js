@@ -24,6 +24,7 @@ function Login( props ) {
 			console.log(user);
 			props.setUser( user );
 			props.authSuccess( token );
+			props.onLog();
 		} catch ( err ) {
 			console.log( err );
 			const error = await err.response.json();
