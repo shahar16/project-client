@@ -25,11 +25,12 @@ function SignUp( props ) {
 	const register = async ( values ) => {
 		props.startAction();
 		try {
-			const { token, expiresTimeInMiliseconds } = await UserService.register( values );
-			UserService.writeToLocalStorage( token, expiresTimeInMiliseconds );
+			const { token, expiresTimeInMiliseconds, user } = await UserService.register( values );
+			UserService.writeToLocalStorage( token, expiresTimeInMiliseconds, user );
 			props.setAuthincationTimeOut( expiresTimeInMiliseconds );
-			props.setToken( token );
+			props.setUser( user );
 			props.authSuccess( token );
+			props.onLog();
 		} catch ( err ) {
 			const error = await err.response.json();
 			setErrorMessage( error.message );
@@ -91,7 +92,8 @@ const mapDispatchToProps = ( dispatch ) => {
 		authSuccess:            ( token ) => dispatch( actions.authSuccess( token ) ),
 		authFail:               ( err ) => dispatch( actions.authFail( err ) ),
 		startAction:            () => dispatch( actions.startAction() ),
-		setAuthincationTimeOut: ( expiresTimeInMiliseconds ) => dispatch( actions.setAuthincationTimeOut( expiresTimeInMiliseconds ) )
+		setAuthincationTimeOut: ( expiresTimeInMiliseconds ) => dispatch( actions.setAuthincationTimeOut( expiresTimeInMiliseconds ) ),
+		setUser:                ( user ) => dispatch( actions.setUser( user ) )
 	}
 };
 

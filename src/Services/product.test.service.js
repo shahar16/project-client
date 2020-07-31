@@ -25,6 +25,16 @@ class ProductService {
 			return res.json();
 		} )
 	}
+
+	getProducts = async () => {
+		let products = []
+		let item = await this.getProduct( 12345678 );
+		for ( let i = 0; i < 20; i++ ) {
+			products.push( item );
+		}
+
+		return products;
+	}
 }
 
 export default new ProductService();

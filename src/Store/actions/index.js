@@ -5,6 +5,7 @@ export {
 	checkState,
 	authSuccess,
 	authFail,
+	setUser,
 	setAuthincationTimeOut,
 	//TODO : remove - only for practice
 	test,
