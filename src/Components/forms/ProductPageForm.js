@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { authLogout } from "../../Store/actions";
 
+// TODO: Add logic!!
 const ProductPageForm = ( { item } ) => {
 	const [ selectedOption, setSelectedOption ] = useState( null );
 
@@ -15,10 +15,10 @@ const ProductPageForm = ( { item } ) => {
 
 	const getQuantityOptions = () => {
 		const amount = item.stock.quantities[selectedOption];
-		if (amount === 0) {
+		if ( amount === 0 ) {
 			return <option disabled>no items left from this {item.stock.type}</option>
 		}
-		return Array.apply(null, Array(amount)).map((_, index)=> <option>{index + 1}</option>);
+		return Array.apply( null, Array( amount ) ).map( ( _, index ) => <option>{index + 1}</option> );
 	};
 
 	return (
