@@ -8,7 +8,6 @@ import ProductPage from "./ProductPage";
 import fakeProduct from "../Shared/Util/fakeProduct";
 
 function HomePage( props ) {
-	//TODO: Remove! only for test the productPage
 
 	useEffect( () => {
 		props.checkAuth();
