@@ -5,28 +5,10 @@ import ModalForAuth from "../Components/modals/ModalForAuth";
 import NavBar from "../Components/NavBar";
 import * as actions from "../Store/actions";
 import ProductPage from "./ProductPage";
+import fakeProduct from "../Shared/Util/fakeProduct";
 
 function HomePage( props ) {
 	//TODO: Remove! only for test the productPage
-	const item = {
-		name:  "computer",
-		price: "300",
-		desc:  "Dnaiel, do not warry, we will finish this project some day",
-		image: [
-			"uploads/images/pic4.jpg",
-			"uploads/images/pic5.jpg",
-			"uploads/images/pic3.jpg"
-		],
-		stock: {
-			type: "size",
-			quantities: {
-				"Small": 50,
-				"Medium": 60,
-				"Large": 70,
-				"X - large": 80
-			}
-		}
-	}
 
 	useEffect( () => {
 		props.checkAuth();
@@ -42,7 +24,7 @@ function HomePage( props ) {
 			</Route>
 			<NavBar/>
 			<div className="under-nav-bar">
-				<ProductPage item={item}/>
+				<ProductPage item={fakeProduct}/>
 				{/*<ProductsGalleryView/>*/}
 			</div>
 		</BrowserRouter>
