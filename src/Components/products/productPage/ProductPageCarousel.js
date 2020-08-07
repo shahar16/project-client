@@ -2,8 +2,6 @@ import React from 'react';
 import { Carousel } from "react-bootstrap";
 import Constants from "../../../Shared/Util/Constants";
 
-const style = { height: "600px" }
-
 const ProductPageCarousel = ( {item} ) => {
 	return (
 		<div>
@@ -14,7 +12,7 @@ const ProductPageCarousel = ( {item} ) => {
 							className="d-block w-100"
 							src={`${Constants.serverUrl}/${imag}`}
 							alt={item.name}
-							style={style}
+							style={Constants.productPageStyle}
 						/>
 					</Carousel.Item>)
 				}
