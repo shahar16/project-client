@@ -8,7 +8,7 @@ function ProductsGroup( { items } ) {
 		<div>
 			<br/>
 			<Row className="justify-content-md-center">
-				{items && items.map( ( item, index ) => <Col md={2}><ProductItem item={item} key={item.id}/></Col> )}
+				{items && items.map( ( item ) => <Col md={2}><ProductItem item={item} key={item.id}/></Col> )}
 			</Row>
 		</div>
 	);

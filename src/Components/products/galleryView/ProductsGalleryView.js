@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useId } from "react-id-generator"
 import InfiniteScroll from "react-infinite-scroll-component";
-import ProductService from "../../Services/product.test.service";
+import ProductService from "../../../Services/product.test.service";
 import ProductsGroup from "./ProductsGroup";
 
+//TODO: fit to array of images!!!
 function ProductsGalleryView() {
 	const numOfCardInRaw = 5;
 	const [ productsList, setProductsList ] = useState( null );
