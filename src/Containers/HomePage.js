@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
+import NewProductForm from "../Components/forms/NewProductForm";
 import ModalForAuth from "../Components/modals/ModalForAuth";
 import NavBar from "../Components/NavBar";
 import * as actions from "../Store/actions";
@@ -23,7 +24,11 @@ function HomePage( props ) {
 			</Route>
 			<NavBar/>
 			<div className="under-nav-bar">
-				<ProductPage item={fakeProduct}/>
+				<div className={"col-sm-4"}>
+					<br/>
+					<NewProductForm />
+				</div>
+				{/*<ProductPage item={fakeProduct}/>*/}
 				{/*<ProductsGalleryView/>*/}
 			</div>
 		</BrowserRouter>
