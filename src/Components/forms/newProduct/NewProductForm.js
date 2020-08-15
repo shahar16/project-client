@@ -178,16 +178,6 @@ function NewProductForm( props ) {
 									values.images.map( ( _, index ) => (
 										<div className="row" key={index}>
 											<div className="col-10">
-												{/*<Field*/}
-												{/*	name={`images.${index}.image`}*/}
-												{/*	className="form-control"*/}
-												{/*	// onChange={fileSelected}*/}
-												{/*	// onChange={(event) => {*/}
-												{/*	// 	setFieldValue( "image", event.currentTarget.files[0] )*/}
-												{/*	// }}*/}
-
-												{/*	type="file"*/}
-												{/*/>*/}
 												<input type="file" name={`images.${index}.image`} className={"form-control"} onChange={(event) => {
 													setFieldValue(`images.${index}.image`, event.currentTarget.files[0]);
 												}}/>
@@ -212,7 +202,7 @@ function NewProductForm( props ) {
 									<button
 										type="button"
 										className="btn btn-outline-success btn-block"
-										onClick={() => push( { name: "", quantity: "" } )}
+										onClick={() => values.images.length < 10 && push( { name: "", quantity: "" } )}
 									>
 										Add Image
 									</button>
