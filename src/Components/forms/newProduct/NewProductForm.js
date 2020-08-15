@@ -1,14 +1,16 @@
 import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from "yup";
-import DropZone from "./DropZone";
+import FieldArrayErrorMassage from "./FieldArrayErrorMassage";
 
 const NewProductSchema = Yup.object().shape( {
 	name:       Yup.string().required( 'Product name is required' ),
 	price:      Yup.number().required( 'Price is required' ),
 	desc:       Yup.string().required( 'Description is required' ),
 	type:       Yup.string().required( 'Type is required' ),
-	// images:     Yup.array().min(1).required( 'Images is required' ),
+	images:     Yup.array().of( Yup.object().shape( {
+		path: Yup.string().required( 'image is required' ),
+	} ) ).min( 1 ).required( 'Please insert at least one image.' ),
 	recaptcha:  Yup.array(),
 	quantities: Yup.array().of( Yup.object().shape( {
 		name:     Yup.string().required( 'Name is required' ),
@@ -16,20 +18,11 @@ const NewProductSchema = Yup.object().shape( {
 	} ) ).min( 1 )
 } );
 
-const dropzoneStyle = {
-	width:        "100%",
-	height:       "auto",
-	borderWidth:  2,
-	borderColor:  "rgb(102, 102, 102)",
-	borderStyle:  "dashed",
-	borderRadius: 5,
-}
-
 function NewProductForm( props ) {
 	const [ errorMessage, setErrorMessage ] = useState( null );
 	const [ images, setImages ] = useState( [] );
 
-	const hendleSubmit = async ( values ) => {
+	const handleSubmit = async ( values ) => {
 		console.log( values )
 		// props.startAction();
 		// try {
@@ -64,10 +57,12 @@ function NewProductForm( props ) {
 					name:     "",
 					quantity: ""
 				} ],
-				images:     []
+				images:     [ {
+					path: ""
+				} ]
 			}}
 			validationSchema={NewProductSchema}
-			onSubmit={hendleSubmit}>
+			onSubmit={handleSubmit}>
 			{( { values, setFieldValue } ) => {
 				return (
 					<Form>
@@ -143,11 +138,56 @@ function NewProductForm( props ) {
 								</div>
 							)}
 						</FieldArray>
+						<div className="form-validation-alert">
+							<FieldArrayErrorMassage name="quantities"/>
+						</div>
 						<br/>
 						<div className="form-group">
 							<label>Images</label>
 						</div>
-						<DropZone/>
+						<FieldArray name="images">
+							{( { insert, remove, push } ) => (
+								<div>
+									{values.images.length > 0 &&
+									values.images.map( ( _, index ) => (
+										<div className="row" key={index}>
+											<div className="col-10">
+												<Field
+													name={`images.${index}.path`}
+													className="form-control"
+													type="file"
+												/>
+												<ErrorMessage
+													name={`images.${index}.path`}
+													component="div"
+													className="form-validation-alert"
+												/>
+											</div>
+											<div className="col-2">
+												<button
+													type="button"
+													className="btn btn-secondary btn-sm"
+													onClick={() => remove( index )}
+												>
+													X
+												</button>
+											</div>
+											<br/><br/>
+										</div>
+									) )}
+									<button
+										type="button"
+										className="btn btn-outline-success btn-block"
+										onClick={() => push( { name: "", quantity: "" } )}
+									>
+										Add Image
+									</button>
+								</div>
+							)}
+						</FieldArray>
+						<div className="form-validation-alert">
+							<FieldArrayErrorMassage name="images"/>
+						</div>
 						<br/>
 						<div className="form-group">
 							<button type="submit" className="btn btn-primary btn-block">Submit</button>
