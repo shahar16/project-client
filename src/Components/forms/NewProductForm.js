@@ -1,8 +1,10 @@
 import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from "yup";
-import ProductService from "../../../Services/product.service"
-import FieldArrayErrorMassage from "./FieldArrayErrorMassage";
+import ProductService from "../../Services/product.service"
+import FieldArrayErrorMassage from "./fieldArray/FieldArrayErrorMassage";
+import ImagesFieldArray from "./fieldArray/ImagesFieldArray";
+import QuantitiesFielArray from "./fieldArray/QuantitiesFielArray";
 
 const NewProductSchema = Yup.object().shape( {
 	name:       Yup.string().required( 'Product name is required' ),
@@ -12,7 +14,6 @@ const NewProductSchema = Yup.object().shape( {
 	images:     Yup.array().of( Yup.object().shape( {
 		image: Yup.mixed().required('image is required')
 	} ) ).min( 1 ).required( 'Please insert at least one image.' ),
-	recaptcha:  Yup.array(),
 	quantities: Yup.array().of( Yup.object().shape( {
 		name:     Yup.string().required( 'Name is required' ),
 		quantity: Yup.number().min( 1 ).required( 'Quantity is required' )
@@ -21,7 +22,6 @@ const NewProductSchema = Yup.object().shape( {
 
 function NewProductForm( props ) {
 	const [ errorMessage, setErrorMessage ] = useState( null );
-	const [images, setImages] = useState([]);
 
 	const buildStock = ( values ) => {
 		let stock = { "type": values.type }
@@ -67,11 +67,6 @@ function NewProductForm( props ) {
 		// }
 	};
 
-	const fileSelected = (event) => {
-		setImages(images.concat(event.target.files[0]));
-		console.log(images);
-	};
-
 	return (
 		<Formik
 			initialValues={{
@@ -110,108 +105,12 @@ function NewProductForm( props ) {
 							<Field type="text" name="type" className="form-control" placeholder="Option Type"/>
 							<ErrorMessage name="type" component="div" className="form-validation-alert"/>
 						</div>
-						<FieldArray name="quantities">
-							{( { insert, remove, push } ) => (
-								<div>
-									{values.quantities.length > 0 &&
-									values.quantities.map( ( _, index ) => (
-										<div className="row" key={index}>
-											<div className="col-5">
-												<Field
-													name={`quantities.${index}.name`}
-													className="form-control"
-													placeholder="Name"
-													type="text"
-												/>
-												<ErrorMessage
-													name={`quantities.${index}.name`}
-													component="div"
-													className="form-validation-alert"
-												/>
-											</div>
-											<div className="col-5">
-												<Field
-													name={`quantities.${index}.quantity`}
-													className="form-control"
-													placeholder="Quantity"
-													type="number"
-												/>
-												<ErrorMessage
-													name={`quantities.${index}.quantity`}
-													component="div"
-													className="form-validation-alert"
-												/>
-											</div>
-											<div className="col-2">
-												<button
-													type="button"
-													className="btn btn-secondary btn-sm"
-													onClick={() => remove( index )}
-												>
-													X
-												</button>
-											</div>
-											<br/><br/>
-										</div>
-									) )}
-									<button
-										type="button"
-										className="btn btn-outline-success btn-block"
-										onClick={() => push( { name: "", quantity: "" } )}
-									>
-										Add Quantity
-									</button>
-								</div>
-							)}
-						</FieldArray>
-						<div className="form-validation-alert">
-							<FieldArrayErrorMassage name="quantities"/>
-						</div>
+						<QuantitiesFielArray values={values} />
 						<br/>
 						<div className="form-group">
 							<label>Images</label>
 						</div>
-						<FieldArray name="images">
-							{( { insert, remove, push } ) => (
-								<div>
-									{values.images.length > 0 &&
-									values.images.map( ( _, index ) => (
-										<div className="row" key={index}>
-											<div className="col-10">
-												<input type="file" name={`images.${index}.image`} className={"form-control"} onChange={(event) => {
-													setFieldValue(`images.${index}.image`, event.currentTarget.files[0]);
-												}}/>
-												<ErrorMessage
-													name={`images.${index}.image`}
-													component="div"
-													className="form-validation-alert"
-												/>
-											</div>
-											<div className="col-2">
-												<button
-													type="button"
-													className="btn btn-secondary btn-sm"
-													onClick={() => remove( index )}
-												>
-													X
-												</button>
-											</div>
-											<br/><br/>
-										</div>
-									) )}
-									<button
-										type="button"
-										className="btn btn-outline-success btn-block"
-										onClick={() => values.images.length < 10 && push( { name: "", quantity: "" } )}
-									>
-										Add Image
-									</button>
-								</div>
-							)}
-						</FieldArray>
-						<div className="form-validation-alert">
-							<FieldArrayErrorMassage name="images"/>
-						</div>
+						<ImagesFieldArray values={values} setFieldValue={setFieldValue}/>
 						<br/>
 						<div className="form-group">
 							<button type="submit" className="btn btn-primary btn-block">Submit</button>
