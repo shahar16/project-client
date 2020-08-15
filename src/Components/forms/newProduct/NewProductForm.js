@@ -1,6 +1,7 @@
 import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from "yup";
+import ProductService from "../../../Services/product.service"
 import FieldArrayErrorMassage from "./FieldArrayErrorMassage";
 
 const NewProductSchema = Yup.object().shape( {
@@ -9,7 +10,7 @@ const NewProductSchema = Yup.object().shape( {
 	desc:       Yup.string().required( 'Description is required' ),
 	type:       Yup.string().required( 'Type is required' ),
 	images:     Yup.array().of( Yup.object().shape( {
-		path: Yup.string().required( 'image is required' ),
+		image: Yup.mixed().required('image is required')
 	} ) ).min( 1 ).required( 'Please insert at least one image.' ),
 	recaptcha:  Yup.array(),
 	quantities: Yup.array().of( Yup.object().shape( {
@@ -20,10 +21,35 @@ const NewProductSchema = Yup.object().shape( {
 
 function NewProductForm( props ) {
 	const [ errorMessage, setErrorMessage ] = useState( null );
-	const [ images, setImages ] = useState( [] );
+	const [images, setImages] = useState([]);
+
+	const buildStock = ( values ) => {
+		let stock = { "type": values.type }
+		let quantities = {}
+		values.quantities.forEach( ( field ) => quantities[field.name] = field.quantity )
+		stock["quantities"] = quantities;
+
+		return JSON.stringify(stock)
+	}
 
 	const handleSubmit = async ( values ) => {
 		console.log( values )
+		let formData = new FormData();
+		const stock = buildStock( values );
+		values.images.forEach((currentImage) => formData.append('image', currentImage.image));
+		formData.append( 'name', values.name );
+		formData.append( 'price', values.price );
+		formData.append( 'desc', values.desc );
+		formData.append( 'stock', stock );
+		formData.append( 'storeID', '12345678' ); // TODO: change to real storeID
+		formData.append( 'owner', 'shaharyig@gmail.com' ); // TODO: change to real owner
+		console.log( formData );
+		try {
+			const response = await ProductService.addProduct( formData );
+		} catch ( err ) {
+			console.log(err)
+		}
+
 		// props.startAction();
 		// try {
 		// 	const { token, expiresTimeInMiliseconds, user } = await UserService.login( values );
@@ -41,10 +67,10 @@ function NewProductForm( props ) {
 		// }
 	};
 
-	// const handleChange = (event) => {
-	// 	setImages(images.concat(event.target.value));
-	// 	console.log(images);
-	// };
+	const fileSelected = (event) => {
+		setImages(images.concat(event.target.files[0]));
+		console.log(images);
+	};
 
 	return (
 		<Formik
@@ -58,7 +84,7 @@ function NewProductForm( props ) {
 					quantity: ""
 				} ],
 				images:     [ {
-					path: ""
+					image: null
 				} ]
 			}}
 			validationSchema={NewProductSchema}
@@ -152,13 +178,21 @@ function NewProductForm( props ) {
 									values.images.map( ( _, index ) => (
 										<div className="row" key={index}>
 											<div className="col-10">
-												<Field
-													name={`images.${index}.path`}
-													className="form-control"
-													type="file"
-												/>
+												{/*<Field*/}
+												{/*	name={`images.${index}.image`}*/}
+												{/*	className="form-control"*/}
+												{/*	// onChange={fileSelected}*/}
+												{/*	// onChange={(event) => {*/}
+												{/*	// 	setFieldValue( "image", event.currentTarget.files[0] )*/}
+												{/*	// }}*/}
+
+												{/*	type="file"*/}
+												{/*/>*/}
+												<input type="file" name={`images.${index}.image`} className={"form-control"} onChange={(event) => {
+													setFieldValue(`images.${index}.image`, event.currentTarget.files[0]);
+												}}/>
 												<ErrorMessage
-													name={`images.${index}.path`}
+													name={`images.${index}.image`}
 													component="div"
 													className="form-validation-alert"
 												/>
