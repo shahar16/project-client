@@ -1,12 +1,13 @@
-import { ErrorMessage, FieldArray, Form } from "formik";
+import { ErrorMessage, FieldArray } from "formik";
 import React from 'react';
+import { PlusCircle } from "react-bootstrap-icons";
 import FieldArrayErrorMassage from "./FieldArrayErrorMassage";
 
 function ImagesFieldArray( { values, setFieldValue } ) {
 	return (
 		<div>
 			<FieldArray name="images">
-				{( { insert, remove, push } ) => (
+				{( { remove, push } ) => (
 					<div>
 						{values.images.length > 0 &&
 						values.images.map( ( _, index ) => (
@@ -39,7 +40,7 @@ function ImagesFieldArray( { values, setFieldValue } ) {
 							className="btn btn-outline-success btn-block"
 							onClick={() => values.images.length < 10 && push( { name: "", quantity: "" } )}
 						>
-							Add Image
+							<PlusCircle style={{ "marginRight": "5px" }}/> Add Image
 						</button>
 					</div>
 				)}
