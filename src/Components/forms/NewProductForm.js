@@ -32,6 +32,7 @@ function NewProductForm( props ) {
 		return JSON.stringify(stock)
 	}
 
+	// TODO: add real logic and connect to redux
 	const handleSubmit = async ( values ) => {
 		console.log( values )
 		let formData = new FormData();

@@ -15,6 +15,7 @@ const NewProductSchema = Yup.object().shape( {
 function NewProductForm( props ) {
 	const [ errorMessage, setErrorMessage ] = useState( null );
 
+	//TODO: add real logic and connect to redux
 	const handleSubmit = async ( values ) => {
 		console.log( values )
 		let formData = new FormData();
