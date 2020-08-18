@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
 import ModalForAuth from "../Components/modals/ModalForAuth";
 import NavBar from "../Components/NavBar";
-import ProductsGalleryView from "../Components/products/ProductsGalleryView";
 import * as actions from "../Store/actions";
+import ProductPage from "./ProductPage";
+import fakeProduct from "../Shared/Util/fakeProduct";
 
 function HomePage( props ) {
 
@@ -22,7 +23,8 @@ function HomePage( props ) {
 			</Route>
 			<NavBar/>
 			<div className="under-nav-bar">
-				<ProductsGalleryView/>
+				<ProductPage item={fakeProduct}/>
+				{/*<ProductsGalleryView/>*/}
 			</div>
 		</BrowserRouter>
 	);
