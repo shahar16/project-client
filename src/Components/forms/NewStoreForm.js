@@ -1,8 +1,7 @@
-import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from "yup";
 import StoreService from "../../Services/store.service"
-import FieldArrayErrorMassage from "./fieldArray/FieldArrayErrorMassage";
 import ImagesFieldArray from "./fieldArray/ImagesFieldArray";
 
 const NewProductSchema = Yup.object().shape( {
