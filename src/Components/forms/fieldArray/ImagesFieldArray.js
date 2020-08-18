@@ -38,7 +38,7 @@ function ImagesFieldArray( { values, setFieldValue } ) {
 						<button
 							type="button"
 							className="btn btn-outline-success btn-block"
-							onClick={() => values.images.length < 10 && push( { name: "", quantity: "" } )}
+							onClick={() => values.images.length < 10 && push( { image: null } )}
 						>
 							<PlusCircle style={{ "marginRight": "5px" }}/> Add Image
 						</button>
