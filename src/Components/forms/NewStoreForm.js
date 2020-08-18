@@ -63,7 +63,7 @@ function NewProductForm( props ) {
 					<Form>
 						<div className="form-group">
 							<label>General Information</label>
-							<Field type="text" name="name" className="form-control" placeholder="Product Name"/>
+							<Field type="text" name="name" className="form-control" placeholder="Store Name"/>
 							<ErrorMessage name="name" component="div" className="form-validation-alert"/>
 						</div>
 						<div className="form-group">
