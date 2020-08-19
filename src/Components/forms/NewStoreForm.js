@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as Yup from "yup";
+import StoreService from "../../Services/store.service"
 import * as actions from "../../Store/actions";
 import ImagesFieldArray from "./fieldArray/ImagesFieldArray";
-import StoreService from "../../Services/store.service"
 
 const NewStoreSchema = Yup.object().shape( {
 	name:        Yup.string().required( 'Product name is required' ),
@@ -43,14 +43,16 @@ function NewStoreForm( props ) {
 		formData.append( 'name', values.name );
 		formData.append( 'desc', values.desc );
 		formData.append( 'contact', contact );
-		formData.append( 'owner', 'Koby.Narkis@gmail.com' ); // TODO: change to real owner
+		formData.append( 'owner', 'Koby.Narks@gmail.com' ); // TODO: change to real owner
 
 		props.startAction();
 		try {
 			const response = await StoreService.addStore( formData );
 			props.storeAdded();
 		} catch ( err ) {
-			console.log( err )
+			const errors = await err.response.data.message.split( ":" );
+			const error = errors[errors.length - 1];
+			setErrorMessage( error );
 		} finally {
 			props.finishAction();
 		}
