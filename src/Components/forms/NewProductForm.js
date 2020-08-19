@@ -1,8 +1,9 @@
-import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
+import { connect } from "react-redux";
 import * as Yup from "yup";
 import ProductService from "../../Services/product.service"
-import FieldArrayErrorMassage from "./fieldArray/FieldArrayErrorMassage";
+import * as actions from "../../Store/actions";
 import ImagesFieldArray from "./fieldArray/ImagesFieldArray";
 import QuantitiesFielArray from "./fieldArray/QuantitiesFielArray";
 
@@ -12,7 +13,7 @@ const NewProductSchema = Yup.object().shape( {
 	desc:       Yup.string().required( 'Description is required' ),
 	type:       Yup.string().required( 'Type is required' ),
 	images:     Yup.array().of( Yup.object().shape( {
-		image: Yup.mixed().required('image is required')
+		image: Yup.mixed().required( 'image is required' )
 	} ) ).min( 1 ).required( 'Please insert at least one image.' ),
 	quantities: Yup.array().of( Yup.object().shape( {
 		name:     Yup.string().required( 'Name is required' ),
@@ -29,55 +30,46 @@ function NewProductForm( props ) {
 		values.quantities.forEach( ( field ) => quantities[field.name] = field.quantity )
 		stock["quantities"] = quantities;
 
-		return JSON.stringify(stock)
+		return JSON.stringify( stock )
 	}
 
 	// TODO: add real logic and connect to redux
 	const handleSubmit = async ( values ) => {
-		console.log( values )
+
 		let formData = new FormData();
 		const stock = buildStock( values );
-		values.images.forEach((currentImage) => formData.append('image', currentImage.image));
+		values.images.forEach( ( currentImage ) => formData.append( 'image', currentImage.image ) );
 		formData.append( 'name', values.name );
 		formData.append( 'price', values.price );
 		formData.append( 'desc', values.desc );
 		formData.append( 'stock', stock );
-		formData.append( 'storeID', '12345678' ); // TODO: change to real storeID
-		formData.append( 'owner', 'shaharyig@gmail.com' ); // TODO: change to real owner
-		console.log( formData );
+		formData.append( 'sn', values.sn );
+		formData.append( 'storeID', '2' ); // TODO: change to real storeID
+		formData.append( 'owner', 'Koby.Golan@gmail.com' ); // TODO: change to real owner
+
+		props.startAction();
 		try {
 			const response = await ProductService.addProduct( formData );
+			props.productAdded();
 		} catch ( err ) {
-			console.log(err)
+			const error = err.response.data.message.split().toString().split( ':' )[3];
+			setErrorMessage( error );
+		} finally {
+			props.finishAction();
 		}
-
-		// props.startAction();
-		// try {
-		// 	const { token, expiresTimeInMiliseconds, user } = await UserService.login( values );
-		// 	UserService.writeToLocalStorage( token, expiresTimeInMiliseconds, user );
-		// 	props.setAuthincationTimeOut( expiresTimeInMiliseconds );
-		// 	console.log(user);
-		// 	props.setUser( user );
-		// 	props.authSuccess( token );
-		// 	props.onLog();
-		// } catch ( err ) {
-		// 	console.log( err );
-		// 	const error = await err.response.json();
-		// 	setErrorMessage( error.message );
-		// 	props.authFail( error.message );
-		// }
 	};
 
 	return (
 		<Formik
 			initialValues={{
-				name:       "",
-				price:      "",
-				desc:       "",
-				type:       "",
+				name:       "123",
+				price:      "123",
+				desc:       "123",
+				type:       "123",
+				sn:         "123",
 				quantities: [ {
-					name:     "",
-					quantity: ""
+					name:     "123",
+					quantity: "123"
 				} ],
 				images:     [ {
 					image: null
@@ -102,11 +94,15 @@ function NewProductForm( props ) {
 							<ErrorMessage name="desc" component="div" className="form-validation-alert"/>
 						</div>
 						<div className="form-group">
+							<Field type="text" name="sn" className="form-control" placeholder="Serial Number"/>
+							<ErrorMessage name="sn" component="div" className="form-validation-alert"/>
+						</div>
+						<div className="form-group">
 							<label>Quantities</label>
 							<Field type="text" name="type" className="form-control" placeholder="Option Type"/>
 							<ErrorMessage name="type" component="div" className="form-validation-alert"/>
 						</div>
-						<QuantitiesFielArray values={values} />
+						<QuantitiesFielArray values={values}/>
 						<br/>
 						<div className="form-group">
 							<label>Images</label>
@@ -127,4 +123,11 @@ function NewProductForm( props ) {
 	)
 }
 
-export default NewProductForm;
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		startAction:  () => dispatch( actions.startAction() ),
+		finishAction: () => dispatch( actions.finishAction() )
+	}
+};
+
+export default connect( null, mapDispatchToProps )( NewProductForm );
