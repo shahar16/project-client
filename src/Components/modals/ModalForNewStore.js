@@ -18,6 +18,11 @@ function ModalForNewProduct() {
 	const handleStoreAdded = () => {
 		setStoreAdded(true);
 		setTimeout(handleClose, 1000);
+		setTimeout(afterAdded, 1100);
+	};
+
+	const afterAdded = () => {
+		setStoreAdded(false);
 	};
 
 	return (

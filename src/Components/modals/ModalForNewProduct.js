@@ -19,6 +19,11 @@ function ModalForNewProduct() {
 	const handleUpload = () => {
 		setProductAdded(true);
 		setTimeout(handleClose, 1000);
+		setTimeout(afterAdded, 1100);
+	};
+
+	const afterAdded = () => {
+		setProductAdded(false);
 	};
 
 	return (
