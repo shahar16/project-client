@@ -62,14 +62,14 @@ function NewProductForm( props ) {
 	return (
 		<Formik
 			initialValues={{
-				name:       "123",
-				price:      "123",
-				desc:       "123",
-				type:       "123",
-				sn:         "123",
+				name:       "",
+				price:      "",
+				desc:       "",
+				type:       "",
+				sn:         "",
 				quantities: [ {
-					name:     "123",
-					quantity: "123"
+					name:     "",
+					quantity: ""
 				} ],
 				images:     [ {
 					image: null
