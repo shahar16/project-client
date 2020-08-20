@@ -1,10 +1,9 @@
 import React from 'react';
 import { Col, Jumbotron, Row, Table } from "react-bootstrap";
-import StoreTd from "../Components/StoreTd";
+import StoreTd from "../Components/storeManagement/StoreTd";
 import Constants from "../Shared/Util/Constants";
-import fakeStores from "../Shared/Util/fakeStores"
 
-function StoreManagementPage( props ) {
+function StoreManagementPage( { stores } ) {
 	return (
 		<div>
 			<br/>
@@ -12,7 +11,7 @@ function StoreManagementPage( props ) {
 				<Col md={1}></Col>
 				<Col md={10}>
 					{/*<Jumbotron  style={Constants.productPageStyle}>*/}
-						<Table striped bordered hover>
+						<Table responsive>
 							<thead>
 							<tr>
 								<th>#</th>
@@ -23,7 +22,7 @@ function StoreManagementPage( props ) {
 							</tr>
 							</thead>
 							<tbody>
-								{fakeStores.map((store, index) => <StoreTd store={store} index={index}/>)}
+								{stores.map((store, index) => <StoreTd store={store} index={index}/>)}
 							</tbody>
 						</Table>
 					{/*</Jumbotron>*/}
