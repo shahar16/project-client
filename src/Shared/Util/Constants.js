@@ -4,6 +4,9 @@ class Constants {
 		this.productPageStyle = {
 			height: "600px"
 		}
+		this.iconStyle = {
+			"marginRight": "5px"
+		}
 	}
 }
 
