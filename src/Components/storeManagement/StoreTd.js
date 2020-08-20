@@ -1,5 +1,6 @@
 import React from 'react';
 import { DashCircleFill } from "react-bootstrap-icons";
+import StoreService from "../../Services/store.service"
 import Constants from "../../Shared/Util/Constants";
 import ModalForConfirm from "../modals/ModalForConfirm";
 import ModalForEditStore from "../modals/ModalForEditStore";
@@ -10,7 +11,18 @@ function StoreTd( { store, index } ) {
 		variant:       "warning",
 		icon:          <DashCircleFill style={Constants.iconStyle}/>,
 		text:          "Delete Store",
-		handleConfirm: () => {
+		handleConfirm: async () => {
+			const data = {
+				storeID: "15",
+				owner:   "Lior.Afia@gmail.com",
+				name:    "Home Center"
+			};
+
+			try {
+				const response = await StoreService.deleteStore( data );
+			} catch ( e ) {
+				throw e;
+			}
 		}
 	};
 

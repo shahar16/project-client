@@ -40,13 +40,11 @@ function ModalForConfirm( { info } ) {
 				{info.text}
 			</Button>
 			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>
-						{!succeed && <Modal.Body>Are yoe sure?</Modal.Body>}
-						{succeed && <div><CheckCircleFill style={{ "marginRight": "10px" }}/>Action succeed</div>}
-						{error && <h1>Error</h1>}
-					</Modal.Title>
-				</Modal.Header>
+				<Modal.Title>
+					{!succeed && <Modal.Body>Are yoe sure?</Modal.Body>}
+					{succeed && <div><CheckCircleFill style={{ "marginRight": "10px" }}/>Action succeed</div>}
+					{error && <h1>Error</h1>}
+				</Modal.Title>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>
 						Close
