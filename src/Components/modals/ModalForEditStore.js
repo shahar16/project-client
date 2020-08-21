@@ -4,7 +4,7 @@ import { CheckCircleFill, Pencil } from "react-bootstrap-icons";
 import Constants from "../../Shared/Util/Constants";
 import NewStoreForm from "../forms/NewStoreForm";
 
-function ModalForEditStore() {
+function ModalForEditStore( { storeToEdit } ) {
 	const [ show, setShow ] = useState( false );
 	const [ storeEdited, setStoreEdited ] = useState( false );
 
@@ -16,14 +16,30 @@ function ModalForEditStore() {
 		setShow( true );
 	};
 
-	const handleStoreAdded = () => {
+	const handleStoreEdited = () => {
 		setStoreEdited( true );
 		setTimeout( handleClose, 1000 );
-		setTimeout( afterAdded, 1100 );
+		setTimeout( afterEdit, 1100 );
 	};
 
-	const afterAdded = () => {
+	const afterEdit = () => {
 		setStoreEdited( false );
+	};
+
+	const prepareStoreToEdit = ( store ) => {
+		return {
+			storeID:     store.storeID,
+			name:        store.name,
+			desc:        store.desc,
+			email:       store.contact.email,
+			phoneNumber: store.contact.phoneNumber,
+			city:        store.contact.adress.city,
+			street:      store.contact.adress.street,
+			houseNum:    store.contact.adress.houseNum,
+			images:      [ {
+				image: null
+			} ]
+		};
 	};
 
 	return (
@@ -39,7 +55,8 @@ function ModalForEditStore() {
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					{!storeEdited && <NewStoreForm storeAdded={handleStoreAdded}/>}
+					{!storeEdited &&
+					<NewStoreForm storeAdded={handleStoreEdited} storeToEdit={prepareStoreToEdit( storeToEdit )}/>}
 					{storeEdited &&
 					<div><CheckCircleFill style={{ "marginRight": "10px" }}/>Store edited successfully</div>}
 				</Modal.Body>

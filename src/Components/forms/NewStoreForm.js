@@ -1,9 +1,11 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
-import { Col, Row } from "react-bootstrap";
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Row } from "react-bootstrap";
+import { FileEarmarkMinus } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 import StoreService from "../../Services/store.service"
+import Constants from "../../Shared/Util/Constants";
 import * as actions from "../../Store/actions";
 import ImagesFieldArray from "./fieldArray/ImagesFieldArray";
 
@@ -20,8 +22,28 @@ const NewStoreSchema = Yup.object().shape( {
 	houseNum:    Yup.number(),
 } );
 
+const EditStoreSchema = Yup.object().shape( {
+	name:        Yup.string().required( 'Product name is required' ),
+	desc:        Yup.string().required( 'Description is required' ),
+	images:      Yup.array().of( Yup.object().shape( {
+		image: Yup.mixed()
+	} ) ),
+	email:       Yup.string().required( 'Contact email is required ' ).email( "Invalid email" ),
+	phoneNumber: Yup.string().required( "Phone number is required" ),
+	city:        Yup.string(),
+	street:      Yup.string(),
+	houseNum:    Yup.number(),
+} );
+
 function NewStoreForm( props ) {
 	const [ errorMessage, setErrorMessage ] = useState( null );
+	const [ showImagesArray, setShowImagesArray ] = useState( true );
+
+	useEffect( () => {
+		if ( props && props.storeToEdit ) {
+			setShowImagesArray( false );
+		}
+	}, [] )
 
 	const buildContact = ( values ) => {
 		let contact = {};
@@ -39,20 +61,35 @@ function NewStoreForm( props ) {
 	const handleSubmit = async ( values ) => {
 		let formData = new FormData();
 		const contact = buildContact( values );
-		values.images.forEach( ( currentImage ) => formData.append( 'image', currentImage.image ) );
+		if ( showImagesArray ) {
+			values.images.forEach( ( currentImage ) => formData.append( 'image', currentImage.image ) );
+		}
 		formData.append( 'name', values.name );
 		formData.append( 'desc', values.desc );
 		formData.append( 'contact', contact );
-		formData.append( 'owner', 'Koby.Narks@gmail.com' ); // TODO: change to real owner
+		formData.append( 'owner', 'Eyal.Kala@gmail.com' ); // TODO: change to real owner
+		if ( props.storeToEdit ) {
+			formData.append( 'storeID', props.storeToEdit.storeID );
+		}
 
 		props.startAction();
 		try {
-			const response = await StoreService.addStore( formData );
+			let response;
+			if ( props.storeToEdit ) {
+				response = await StoreService.editStore( formData );
+			} else {
+				response = await StoreService.addStore( formData );
+			}
 			props.storeAdded();
 		} catch ( err ) {
-			const errors = await err.response.data.message.split( ":" );
-			const error = errors[errors.length - 1];
-			setErrorMessage( error );
+			if ( props.storeToEdit ) {
+				const error = await err.response.data.message;
+				setErrorMessage( error );
+			} else {
+				const errors = await err.response.data.message.split( ":" );
+				const error = errors[errors.length - 1];
+				setErrorMessage( error );
+			}
 		} finally {
 			props.finishAction();
 		}
@@ -60,7 +97,7 @@ function NewStoreForm( props ) {
 
 	return (
 		<Formik
-			initialValues={{
+			initialValues={props.storeToEdit || {
 				name:        "",
 				desc:        "",
 				images:      [ {
@@ -72,14 +109,15 @@ function NewStoreForm( props ) {
 				street:      "",
 				houseNum:    "",
 			}}
-			validationSchema={NewStoreSchema}
+			validationSchema={showImagesArray ? NewStoreSchema : EditStoreSchema}
 			onSubmit={handleSubmit}>
 			{( { values, setFieldValue } ) => {
 				return (
 					<Form>
 						<div className="form-group">
 							<label>General Information</label>
-							<Field type="text" name="name" className="form-control" placeholder="Store Name"/>
+							<Field type="text" name="name" className="form-control" placeholder="Store Name"
+								   disabled={props.storeToEdit}/>
 							<ErrorMessage name="name" component="div" className="form-validation-alert"/>
 						</div>
 						<div className="form-group">
@@ -118,7 +156,13 @@ function NewStoreForm( props ) {
 						<div className="form-group">
 							<label>Images</label>
 						</div>
-						<ImagesFieldArray values={values} setFieldValue={setFieldValue}/>
+						{showImagesArray && <ImagesFieldArray values={values} setFieldValue={setFieldValue}/>}
+						{!showImagesArray && <div>
+							<Button variant="warning" block onClick={() => setShowImagesArray( true )}>
+								<FileEarmarkMinus style={Constants.iconStyle}/>
+								Remove Images
+							</Button>
+						</div>}
 						<br/>
 						<div className="form-group">
 							<button type="submit" className="btn btn-primary btn-block">Submit</button>

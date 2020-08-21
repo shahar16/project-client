@@ -20,6 +20,12 @@ class ProductService {
 			headers: { 'Content-Type': 'application/json' },
 		} );
 	};
+
+	async editStore( data ) {
+		let res = await axios.post( `${this.url}/editStore`, data, {
+			headers: { 'Content-Type': 'multipart/form-data' },
+		} );
+	};
 }
 
 export default new ProductService();

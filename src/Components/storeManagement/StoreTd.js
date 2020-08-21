@@ -5,7 +5,7 @@ import Constants from "../../Shared/Util/Constants";
 import ModalForConfirm from "../modals/ModalForConfirm";
 import ModalForEditStore from "../modals/ModalForEditStore";
 
-function StoreTd( { store, index } ) {
+function StoreTd( { store, index, handleRemove } ) {
 
 	const infoToModal = {
 		variant:       "warning",
@@ -13,15 +13,19 @@ function StoreTd( { store, index } ) {
 		text:          "Delete Store",
 		handleConfirm: async () => {
 			const data = {
-				storeID: "15",
-				owner:   "Lior.Afia@gmail.com",
-				name:    "Home Center"
+				storeID: store.storeID,
+				owner:   store.owner,
+				name:    store.name
 			};
 
 			try {
 				const response = await StoreService.deleteStore( data );
+				handleRemove( index );
 			} catch ( e ) {
-				throw e;
+				const errors = e.response.data.message.split( ":" )
+				const error = errors[errors.length - 1]
+				const newError = new Error( error );
+				throw newError;
 			}
 		}
 	};
@@ -41,7 +45,7 @@ function StoreTd( { store, index } ) {
 				{store.products.length}
 			</td>
 			<td>
-				<ModalForEditStore/>
+				<ModalForEditStore storeToEdit={store}/>
 			</td>
 			<td>
 				<ModalForConfirm info={infoToModal}/>
