@@ -1,29 +1,64 @@
 const stores = [
 	{
-		name: "ACE",
-		products: [1,2,3,4],
-		storeID: "1"
+		storeID:  "17",
+		name:     "ACE",
+		desc:     "ACE",
+		owner:    "Eyal.Narkis@gmail.com",
+		contact:  {
+			email:       "shaharyig@gmail.com",
+			phoneNumber: "0545340025",
+			adress:      {
+				city:     "Tel Aviv",
+				street:   "Hakovshim",
+				houseNum: 41,
+			}
+		},
+		images:   [
+			"uploads/dummy@email.com-2875-116699550_10159729561322439_4272521058269525974_n.jpg",
+			"uploads/dummy@email.com-5622-117140860_10159729561802439_7743082863726720689_n.jpg"
+		],
+		products: [ 1, 2 ]
 	},
 	{
-		name: "Home Center",
-		products: [1,2,3,4,1,2,3,4],
-		storeID: "12"
+		storeID:  "bb22f0b4-299c-4434-aead-db9945b99854-",
+		name:     "test store - update should fail",
+		desc:     "this is test store",
+		owner:    "Eyal.Kala@gmail.com",
+		contact:  {
+			email:       "shaharyig@gmail.com",
+			phoneNumber: "0545340025",
+			adress:      {
+				city:     "Tel Aviv",
+				street:   "Hakovshim",
+				houseNum: 41,
+			}
+		},
+		images:   [
+			"uploads/dummy@email.com-2875-116699550_10159729561322439_4272521058269525974_n.jpg",
+			"uploads/dummy@email.com-5622-117140860_10159729561802439_7743082863726720689_n.jpg"
+		],
+		products: [ 1, 2, 3 ]
 	},
 	{
-		name: "Shufersal",
-		products: [1,2,3,4,3,4],
-		storeID: "123"
+		storeID:  "",
+		name:     "stam store",
+		desc:     "this is test store",
+		owner:    "Eyal.Kala@gmail.com",
+		contact:  {
+			email:       "shaharyig@gmail.com",
+			phoneNumber: "0545340025",
+			adress:      {
+				city:     "Tel Aviv",
+				street:   "Hakovshim",
+				houseNum: 41,
+			}
+		},
+		images:   [
+			"uploads/dummy@email.com-2875-116699550_10159729561322439_4272521058269525974_n.jpg",
+			"uploads/dummy@email.com-5622-117140860_10159729561802439_7743082863726720689_n.jpg"
+		],
+		products: [ 1, 2, 3, 4 ]
 	},
-	{
-		name: "KSP",
-		products: [1,2,3,4],
-		storeID: "1234"
-	},
-	{
-		name: "Ivory",
-		products: [1,4],
-		storeID: "12345"
-	}
 ]
 
 export default stores;
