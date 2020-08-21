@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Modal } from "react-bootstrap";
 import { CheckCircleFill } from "react-bootstrap-icons";
+import { connect } from "react-redux";
+import * as actions from "../../Store/actions";
 
 /**
  * this component id modal for confirmation. it returns a button to locate in page.
@@ -9,41 +11,51 @@ import { CheckCircleFill } from "react-bootstrap-icons";
  * @param info.icon          - bootstrap icon to locate on button
  * @param info.text          - text on the button
  * @param info.handleConfirm - callback function to handle confirm
+ *
+ * in case of error, should get the right message in err.message
  */
-function ModalForConfirm( { info } ) {
+function ModalForConfirm( props ) {
 	const [ show, setShow ] = useState( false );
 	const [ succeed, setSucceed ] = useState( false );
 	const [ error, setError ] = useState( null );
 
 	const handleClose = () => {
-		setShow( false )
+		setShow( false );
+		setError( null );
+		setSucceed( false );
 	};
 
 	const handleShow = () => {
 		setShow( true );
 	};
 
-	const handleConfirm = () => {
+	const handleConfirm = async () => {
+		props.startAction();
 		try {
-			info.handleConfirm();
+			await props.info.handleConfirm();
 			setSucceed( true );
-			setTimeout( handleClose, 1000 );
 		} catch ( err ) {
-			setError( err );
+			console.log( err.message )
+			setError( err.message );
+		} finally {
+			setTimeout( handleClose, 1000 );
+			props.finishAction();
 		}
 	};
 
 	return (
 		<div>
-			<Button variant={info.variant} onClick={handleShow} className="modal-for-new-object">
-				{info.icon}
-				{info.text}
+			<Button variant={props.info.variant} onClick={handleShow} className="modal-for-new-object">
+				{props.info.icon}
+				{props.info.text}
 			</Button>
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Title>
-					{!succeed && <Modal.Body>Are yoe sure?</Modal.Body>}
+					{!succeed && !error && <Modal.Body>Are yoe sure?</Modal.Body>}
 					{succeed && <div><CheckCircleFill style={{ "marginRight": "10px" }}/>Action succeed</div>}
-					{error && <h1>Error</h1>}
+					{error && <Modal.Body>
+						<div className="alert alert-danger">{error}</div>
+					</Modal.Body>}
 				</Modal.Title>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>
@@ -58,4 +70,12 @@ function ModalForConfirm( { info } ) {
 	);
 }
 
-export default ModalForConfirm;
+
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		startAction:  () => dispatch( actions.startAction() ),
+		finishAction: () => dispatch( actions.finishAction() )
+	}
+};
+
+export default connect( null, mapDispatchToProps )( ModalForConfirm );
