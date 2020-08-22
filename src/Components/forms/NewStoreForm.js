@@ -57,7 +57,7 @@ function NewStoreForm( props ) {
 		return JSON.stringify( contact );
 	};
 
-	//TODO: add real logic and connect to redux
+
 	const handleSubmit = async ( values ) => {
 		let formData = new FormData();
 		const contact = buildContact( values );
@@ -67,7 +67,7 @@ function NewStoreForm( props ) {
 		formData.append( 'name', values.name );
 		formData.append( 'desc', values.desc );
 		formData.append( 'contact', contact );
-		formData.append( 'owner', 'Koby.Kala@gmail.com' ); // TODO: change to real owner
+		formData.append( 'owner', props.user.email );
 		if ( props.storeToEdit ) {
 			formData.append( 'storeID', props.storeToEdit.storeID );
 		}
@@ -75,9 +75,9 @@ function NewStoreForm( props ) {
 		props.startAction();
 		try {
 			if ( props.storeToEdit ) {
-				await StoreService.editStore( formData );
+				await StoreService.editStore( formData, props.token );
 			} else {
-				await StoreService.addStore( formData );
+				await StoreService.addStore( formData, props.token );
 			}
 			props.storeAdded();
 		} catch ( err ) {
@@ -177,6 +177,13 @@ function NewStoreForm( props ) {
 	)
 }
 
+const mapStateToProps = ( state ) => {
+	return {
+		token: state.token,
+		user: state.user
+	}
+}
+
 const mapDispatchToProps = ( dispatch ) => {
 	return {
 		startAction:  () => dispatch( actions.startAction() ),
@@ -184,4 +191,4 @@ const mapDispatchToProps = ( dispatch ) => {
 	}
 };
 
-export default connect( null, mapDispatchToProps )( NewStoreForm );
+export default connect( mapStateToProps, mapDispatchToProps )( NewStoreForm );

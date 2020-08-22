@@ -33,7 +33,7 @@ function NewProductForm( props ) {
 		return JSON.stringify( stock )
 	}
 
-	// TODO: add real logic and connect to redux
+
 	const handleSubmit = async ( values ) => {
 
 		let formData = new FormData();
@@ -44,12 +44,12 @@ function NewProductForm( props ) {
 		formData.append( 'desc', values.desc );
 		formData.append( 'stock', stock );
 		formData.append( 'sn', values.sn );
-		formData.append( 'storeID', '2' ); // TODO: change to real storeID
-		formData.append( 'owner', 'Koby.Golan@gmail.com' ); // TODO: change to real owner
+		formData.append( 'storeID', props.storeID );
+		formData.append( 'owner', props.user.email );
 
 		props.startAction();
 		try {
-			const response = await ProductService.addProduct( formData );
+			await ProductService.addProduct( formData, props.token );
 			props.productAdded();
 		} catch ( err ) {
 			const error = err.response.data.message.split().toString().split( ':' )[3];
@@ -123,6 +123,13 @@ function NewProductForm( props ) {
 	)
 }
 
+const mapStateToProps = ( state ) => {
+	return {
+		token: state.token,
+		user: state.user
+	}
+}
+
 const mapDispatchToProps = ( dispatch ) => {
 	return {
 		startAction:  () => dispatch( actions.startAction() ),
@@ -130,4 +137,4 @@ const mapDispatchToProps = ( dispatch ) => {
 	}
 };
 
-export default connect( null, mapDispatchToProps )( NewProductForm );
+export default connect( mapStateToProps, mapDispatchToProps )( NewProductForm );

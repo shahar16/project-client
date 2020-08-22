@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Modal } from "react-bootstrap";
-import { PlusCircleFill } from "react-bootstrap-icons";
+import { CheckCircleFill, PlusCircleFill } from "react-bootstrap-icons";
 import NewProductForm from "../forms/NewProductForm";
-import {CheckCircleFill} from "react-bootstrap-icons";
 
-function ModalForNewProduct() {
+function ModalForNewProduct( { storeID } ) {
 	const [ show, setShow ] = useState( false );
-	const [productAdded, setProductAdded] = useState(false);
+	const [ productAdded, setProductAdded ] = useState( false );
 
 	const handleClose = () => {
 		setShow( false )
@@ -17,13 +16,13 @@ function ModalForNewProduct() {
 	};
 
 	const handleUpload = () => {
-		setProductAdded(true);
-		setTimeout(handleClose, 1000);
-		setTimeout(afterAdded, 1100);
+		setProductAdded( true );
+		setTimeout( handleClose, 1000 );
+		setTimeout( afterAdded, 1100 );
 	};
 
 	const afterAdded = () => {
-		setProductAdded(false);
+		setProductAdded( false );
 	};
 
 	return (
@@ -39,8 +38,9 @@ function ModalForNewProduct() {
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					{!productAdded && <NewProductForm productAdded={handleUpload}/>}
-					{productAdded && <div><CheckCircleFill style={{ "marginRight": "10px" }}/>Product added successfully</div>}
+					{!productAdded && <NewProductForm productAdded={handleUpload} storeID={storeID}/>}
+					{productAdded &&
+					<div><CheckCircleFill style={{ "marginRight": "10px" }}/>Product added successfully</div>}
 				</Modal.Body>
 			</Modal>
 		</div>
