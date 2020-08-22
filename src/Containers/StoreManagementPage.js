@@ -5,7 +5,6 @@ import ModalForNewStore from "../Components/modals/ModalForNewStore";
 import StoreTd from "../Components/storeManagement/StoreTd";
 import StoreService from "../Services/store.service"
 
-//TODO: get stores from server!!
 function StoreManagementPage( props ) {
 	const [ storesState, setStoresState ] = useState( null );
 

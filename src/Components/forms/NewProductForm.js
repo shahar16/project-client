@@ -33,7 +33,7 @@ function NewProductForm( props ) {
 		return JSON.stringify( stock )
 	}
 
-	// TODO: add real logic and connect to redux
+
 	const handleSubmit = async ( values ) => {
 
 		let formData = new FormData();
@@ -44,7 +44,7 @@ function NewProductForm( props ) {
 		formData.append( 'desc', values.desc );
 		formData.append( 'stock', stock );
 		formData.append( 'sn', values.sn );
-		formData.append( 'storeID', props.storeID ); // TODO: change to real storeID
+		formData.append( 'storeID', props.storeID );
 		formData.append( 'owner', props.user.email );
 
 		props.startAction();

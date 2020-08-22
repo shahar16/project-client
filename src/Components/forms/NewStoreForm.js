@@ -57,7 +57,7 @@ function NewStoreForm( props ) {
 		return JSON.stringify( contact );
 	};
 
-	//TODO: add real logic and connect to redux
+
 	const handleSubmit = async ( values ) => {
 		let formData = new FormData();
 		const contact = buildContact( values );
@@ -67,7 +67,7 @@ function NewStoreForm( props ) {
 		formData.append( 'name', values.name );
 		formData.append( 'desc', values.desc );
 		formData.append( 'contact', contact );
-		formData.append( 'owner', props.user.email ); // TODO: change to real owner
+		formData.append( 'owner', props.user.email );
 		if ( props.storeToEdit ) {
 			formData.append( 'storeID', props.storeToEdit.storeID );
 		}
