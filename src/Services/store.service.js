@@ -1,21 +1,36 @@
-import constants from "../Shared/Util/Constants"
 import axios from '../Axios/axios';
 
 /**
  * This service create a http request to the users api.
  */
 
-class ProductService {
+class StoreService {
 	constructor() {
-		this.url = `/store/addStore`;
+		this.url = `/store`;
 	}
 
 	async addStore( formData ) {
-		// let response = await axios.post(this.url, formData, {
-		// 	headers: { 'Content-Type': 'multipart/form-data' },
-		// });
-		// console.log(response);
+		let res = await axios.post( `${this.url}/addStore`, formData, {
+			headers: { 'Content-Type': 'multipart/form-data' },
+		} );
+	}
+
+	async deleteStore( data ) {
+		let res = await axios.post( `${this.url}/deleteStore`, data, {
+			headers: { 'Content-Type': 'application/json' },
+		} );
+	};
+
+	async editStore( data ) {
+		let res = await axios.post( `${this.url}/editStore`, data, {
+			headers: { 'Content-Type': 'multipart/form-data' },
+		} );
+	};
+
+	async getStoresByUser() {
+		const res = await axios.get(`${this.url}/getStoresByUser`);
+		return res.data;
 	}
 }
 
-export default new ProductService();
+export default new StoreService();

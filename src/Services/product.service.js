@@ -11,10 +11,9 @@ class ProductService {
 	}
 
 	async addProduct( formData ) {
-		let response = await axios.post(this.url, formData, {
+		let res = await axios.post(this.url, formData, {
 			headers: { 'Content-Type': 'multipart/form-data' },
 		});
-		console.log(response);
 	}
 }
 
