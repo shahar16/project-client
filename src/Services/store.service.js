@@ -4,7 +4,7 @@ import axios from '../Axios/axios';
  * This service create a http request to the users api.
  */
 
-class ProductService {
+class StoreService {
 	constructor() {
 		this.url = `/store`;
 	}
@@ -33,4 +33,4 @@ class ProductService {
 	}
 }
 
-export default new ProductService();
+export default new StoreService();
