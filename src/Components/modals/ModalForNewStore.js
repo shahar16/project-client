@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import { CheckCircleFill, PlusCircleFill } from "react-bootstrap-icons";
 import NewStoreForm from "../forms/NewStoreForm";
 
-function ModalForNewProduct() {
+function ModalForNewProduct( props ) {
 	const [ show, setShow ] = useState( false );
 	const [ storeAdded, setStoreAdded ] = useState( false );
 
@@ -16,18 +16,19 @@ function ModalForNewProduct() {
 	};
 
 	const handleStoreAdded = () => {
-		setStoreAdded(true);
-		setTimeout(handleClose, 1000);
-		setTimeout(afterAdded, 1100);
+		setStoreAdded( true );
+		setTimeout( handleClose, 1000 );
+		setTimeout( afterAdded, 1100 );
+		props.onSubmit()
 	};
 
 	const afterAdded = () => {
-		setStoreAdded(false);
+		setStoreAdded( false );
 	};
 
 	return (
 		<div>
-			<Button variant="success" onClick={handleShow} className="modal-for-new-object">
+			<Button variant="primary" onClick={handleShow} className="modal-for-new-object">
 				<PlusCircleFill style={{ "marginRight": "10px" }}/>
 				Add new store
 			</Button>
@@ -39,7 +40,8 @@ function ModalForNewProduct() {
 				</Modal.Header>
 				<Modal.Body>
 					{!storeAdded && <NewStoreForm storeAdded={handleStoreAdded}/>}
-					{storeAdded && <div><CheckCircleFill style={{ "marginRight": "10px" }}/>Store added successfully</div>}
+					{storeAdded &&
+					<div><CheckCircleFill style={{ "marginRight": "10px" }}/>Store added successfully</div>}
 				</Modal.Body>
 			</Modal>
 		</div>

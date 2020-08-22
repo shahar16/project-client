@@ -47,7 +47,7 @@ function NewStoreForm( props ) {
 
 	const buildContact = ( values ) => {
 		let contact = {};
-		contact.eamil = values.email;
+		contact.email = values.email;
 		contact.phoneNumber = values.phoneNumber;
 		contact.adress = {}
 		contact.adress.city = values.city;
@@ -67,18 +67,17 @@ function NewStoreForm( props ) {
 		formData.append( 'name', values.name );
 		formData.append( 'desc', values.desc );
 		formData.append( 'contact', contact );
-		formData.append( 'owner', 'Eyal.Kala@gmail.com' ); // TODO: change to real owner
+		formData.append( 'owner', 'Koby.Kala@gmail.com' ); // TODO: change to real owner
 		if ( props.storeToEdit ) {
 			formData.append( 'storeID', props.storeToEdit.storeID );
 		}
 
 		props.startAction();
 		try {
-			let response;
 			if ( props.storeToEdit ) {
-				response = await StoreService.editStore( formData );
+				await StoreService.editStore( formData );
 			} else {
-				response = await StoreService.addStore( formData );
+				await StoreService.addStore( formData );
 			}
 			props.storeAdded();
 		} catch ( err ) {

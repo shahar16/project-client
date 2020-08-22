@@ -10,25 +10,25 @@ class StoreService {
 	}
 
 	async addStore( formData ) {
-		let res = await axios.post( `${this.url}/addStore`, formData, {
+		await axios.post( `${this.url}/addStore`, formData, {
 			headers: { 'Content-Type': 'multipart/form-data' },
 		} );
 	}
 
 	async deleteStore( data ) {
-		let res = await axios.post( `${this.url}/deleteStore`, data, {
+		await axios.post( `${this.url}/deleteStore`, data, {
 			headers: { 'Content-Type': 'application/json' },
 		} );
 	};
 
 	async editStore( data ) {
-		let res = await axios.post( `${this.url}/editStore`, data, {
+		await axios.post( `${this.url}/editStore`, data, {
 			headers: { 'Content-Type': 'multipart/form-data' },
 		} );
 	};
 
 	async getStoresByUser() {
-		const res = await axios.get(`${this.url}/getStoresByUser`);
+		const res = await axios.get( `${this.url}/getStoresByUser` );
 		return res.data;
 	}
 }
