@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Table } from "react-bootstrap";
+import { Button, Col, Row, Table } from "react-bootstrap";
+import ModalForNewStore from "../Components/modals/ModalForNewStore";
 import StoreTd from "../Components/storeManagement/StoreTd";
+import StoreService from "../Services/store.service"
+import {ClipboardPlus} from "react-bootstrap-icons";
+import Constants from "../Shared/Util/Constants";
 
 //TODO: get stores from server!!
-function StoreManagementPage( { stores } ) {
+function StoreManagementPage() {
 	const [ storesState, setStoresState ] = useState( null );
 
-	useEffect( () => {
-		setStoresState( stores );
-	}, [ stores ] )
+	useEffect( async () => {
+		try {
+			const stores = await StoreService.getStoresByUser();
+			setStoresState( stores );
+		} catch ( err ) {
+		}
+
+	}, [] )
 
 	const handleRemove = ( index ) => {
 		const arrayWithoutElementAtIndex = ( arr, index ) => {
@@ -19,6 +28,14 @@ function StoreManagementPage( { stores } ) {
 		setStoresState( arrayWithoutElementAtIndex( storesState, index ) );
 	};
 
+	const userHaveStores = () => {
+		if(storesState){
+			return storesState.length > 0;
+		} else {
+			return false;
+		}
+	};
+
 	return (
 		<div>
 			<br/>
@@ -26,7 +43,13 @@ function StoreManagementPage( { stores } ) {
 				<Col md={1}></Col>
 				<Col md={10}>
 					{/*<Jumbotron  style={Constants.productPageStyle}>*/}
-					<Table responsive>
+					{!userHaveStores() && <h4>Please add your first store</h4>}
+					<Row>
+						<Col md={10}></Col>
+						<Col md={2}><ModalForNewStore /> </Col>
+						<Col md={1}></Col>
+					</Row>
+					<Table responsive style={{"marginTop": "2px"}}>
 						<thead>
 						<tr>
 							<th>#</th>
@@ -37,7 +60,7 @@ function StoreManagementPage( { stores } ) {
 						</tr>
 						</thead>
 						<tbody>
-						{storesState && storesState.map( ( store, index ) => <StoreTd store={store} index={index}
+						{userHaveStores() && storesState.map( ( store, index ) => <StoreTd store={store} index={index}
 																					  handleRemove={handleRemove}/> )}
 						</tbody>
 					</Table>

@@ -26,6 +26,11 @@ class ProductService {
 			headers: { 'Content-Type': 'multipart/form-data' },
 		} );
 	};
+
+	async getStoresByUser() {
+		const res = await axios.get(`${this.url}/getStoresByUser`);
+		return res.data;
+	}
 }
 
 export default new ProductService();
