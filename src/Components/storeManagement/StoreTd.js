@@ -5,7 +5,7 @@ import Constants from "../../Shared/Util/Constants";
 import ModalForConfirm from "../modals/ModalForConfirm";
 import ModalForEditStore from "../modals/ModalForEditStore";
 
-function StoreTd( { store, index, handleRemove } ) {
+function StoreTd( { store, index, handleRemove, handleUpdate } ) {
 
 	const infoToModal = {
 		variant:       "warning",
@@ -19,7 +19,7 @@ function StoreTd( { store, index, handleRemove } ) {
 			};
 
 			try {
-				const response = await StoreService.deleteStore( data );
+				await StoreService.deleteStore( data );
 				handleRemove( index );
 			} catch ( e ) {
 				const errors = e.response.data.message.split( ":" )
@@ -45,7 +45,7 @@ function StoreTd( { store, index, handleRemove } ) {
 				{store.products.length}
 			</td>
 			<td>
-				<ModalForEditStore storeToEdit={store}/>
+				<ModalForEditStore storeToEdit={store} handleUpdate={handleUpdate}/>
 			</td>
 			<td>
 				<ModalForConfirm info={infoToModal}/>

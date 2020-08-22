@@ -4,7 +4,7 @@ import { CheckCircleFill, Pencil } from "react-bootstrap-icons";
 import Constants from "../../Shared/Util/Constants";
 import NewStoreForm from "../forms/NewStoreForm";
 
-function ModalForEditStore( { storeToEdit } ) {
+function ModalForEditStore( { storeToEdit, handleUpdate } ) {
 	const [ show, setShow ] = useState( false );
 	const [ storeEdited, setStoreEdited ] = useState( false );
 
@@ -20,6 +20,7 @@ function ModalForEditStore( { storeToEdit } ) {
 		setStoreEdited( true );
 		setTimeout( handleClose, 1000 );
 		setTimeout( afterEdit, 1100 );
+		handleUpdate();
 	};
 
 	const afterEdit = () => {
