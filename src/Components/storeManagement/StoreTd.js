@@ -1,11 +1,12 @@
 import React from 'react';
 import { DashCircleFill } from "react-bootstrap-icons";
+import { connect } from "react-redux";
 import StoreService from "../../Services/store.service"
 import Constants from "../../Shared/Util/Constants";
 import ModalForConfirm from "../modals/ModalForConfirm";
 import ModalForEditStore from "../modals/ModalForEditStore";
 
-function StoreTd( { store, index, handleRemove, handleUpdate } ) {
+function StoreTd( { store, index, handleRemove, handleUpdate, token } ) {
 
 	const infoToModal = {
 		variant:       "warning",
@@ -19,7 +20,7 @@ function StoreTd( { store, index, handleRemove, handleUpdate } ) {
 			};
 
 			try {
-				await StoreService.deleteStore( data );
+				await StoreService.deleteStore( data, token );
 				handleRemove( index );
 			} catch ( e ) {
 				const errors = e.response.data.message.split( ":" )
@@ -54,4 +55,10 @@ function StoreTd( { store, index, handleRemove, handleUpdate } ) {
 	);
 }
 
-export default StoreTd;
+const mapStateToProps = ( state ) => {
+	return {
+		token: state.token
+	}
+};
+
+export default connect( mapStateToProps, null )( StoreTd );

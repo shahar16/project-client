@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import { CheckCircleFill, PlusCircleFill } from "react-bootstrap-icons";
 import NewStoreForm from "../forms/NewStoreForm";
 
-function ModalForNewProduct( props ) {
+function ModalForNewStore( props ) {
 	const [ show, setShow ] = useState( false );
 	const [ storeAdded, setStoreAdded ] = useState( false );
 
@@ -48,4 +48,4 @@ function ModalForNewProduct( props ) {
 	);
 }
 
-export default ModalForNewProduct;
+export default ModalForNewStore;
