@@ -10,9 +10,12 @@ class ProductService {
 		this.url = `/store/addProduct`;
 	}
 
-	async addProduct( formData ) {
-		let res = await axios.post(this.url, formData, {
-			headers: { 'Content-Type': 'multipart/form-data' },
+	async addProduct( formData, token ) {
+		await axios.post(this.url, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+				'Authorization': `Bearer ${token}`
+			},
 		});
 	}
 }
