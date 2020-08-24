@@ -50,8 +50,7 @@ function StoreTd( { store, index, handleRemove, handleUpdate, token } ) {
 				<ModalForEditStore storeToEdit={store} handleUpdate={handleUpdate}/>
 			</td>
 			<td>
-				{/*<ModalForConfirm info={infoToModal}/>*/}
-				<ModalForEditProduct storeID={store.storeID} productToEdit={store.products[3]}/>
+				<ModalForConfirm info={infoToModal}/>
 			</td>
 		</tr>
 	);
