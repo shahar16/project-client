@@ -1,4 +1,3 @@
-import constants from "../Shared/Util/Constants"
 import axios from '../Axios/axios';
 
 /**
@@ -7,16 +6,25 @@ import axios from '../Axios/axios';
 
 class ProductService {
 	constructor() {
-		this.url = `/store/addProduct`;
+		this.url = `/store`;
 	}
 
 	async addProduct( formData, token ) {
-		await axios.post(this.url, formData, {
+		await axios.post( `${this.url}/addProduct`, formData, {
 			headers: {
-				'Content-Type': 'multipart/form-data',
+				'Content-Type':  'multipart/form-data',
 				'Authorization': `Bearer ${token}`
 			},
-		});
+		} );
+	}
+
+	async editProduct( formData, token ) {
+		await axios.post( `${this.url}/editProduct`, formData, {
+			headers: {
+				'Content-Type':  'multipart/form-data',
+				'Authorization': `Bearer ${token}`
+			},
+		} );
 	}
 }
 
