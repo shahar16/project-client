@@ -82,6 +82,10 @@ function NewProductForm( props ) {
 					<Form>
 						<div className="form-group">
 							<label>General Information</label>
+							<Field type="text" name="sn" className="form-control" placeholder="Serial Number"/>
+							<ErrorMessage name="sn" component="div" className="form-validation-alert"/>
+						</div>
+						<div className="form-group">
 							<Field type="text" name="name" className="form-control" placeholder="Product Name"/>
 							<ErrorMessage name="name" component="div" className="form-validation-alert"/>
 						</div>
@@ -92,10 +96,6 @@ function NewProductForm( props ) {
 						<div className="form-group">
 							<Field type="text" name="desc" className="form-control" placeholder="Description"/>
 							<ErrorMessage name="desc" component="div" className="form-validation-alert"/>
-						</div>
-						<div className="form-group">
-							<Field type="text" name="sn" className="form-control" placeholder="Serial Number"/>
-							<ErrorMessage name="sn" component="div" className="form-validation-alert"/>
 						</div>
 						<div className="form-group">
 							<label>Quantities</label>
