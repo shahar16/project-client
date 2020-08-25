@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form, FormControl, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { connect } from "react-redux";
 import img from "../resources/images/nav-bar-image.jpeg";
+import logo from "../resources/images/store-line-logo.png"
 
 function NavBar( props ) {
 	let listener = null
@@ -33,7 +34,7 @@ function NavBar( props ) {
 			"backgroundSize": "100%",
 		}
 
-		switch (scrollState ) {
+		switch ( scrollState ) {
 			case "low-opacity":
 				style["opacity"] = "25%";
 				break;
@@ -66,7 +67,13 @@ function NavBar( props ) {
 			<Image src={img} className="shadow" fluid/>
 			<Navbar bg={scrollState === "top" ? "non" : "light"} variant="light" fixed="top"
 					style={getStyle()} className="shadow">
-				<Navbar.Brand href="#home"><h1>Retail-it!</h1></Navbar.Brand>
+				<Navbar.Brand href="#home">
+					<img
+						src={logo}
+						height="70"
+						className="d-inline-block align-top"
+					/>
+				</Navbar.Brand>
 				<Nav className="mr-auto">
 					<Navbar.Collapse className="justify-content-end">
 						<Navbar.Text>
