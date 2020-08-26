@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { connect } from "react-redux";
 
 // TODO: Add logic!!
-const ProductPageForm = ( { item } ) => {
+const ProductPageForm = ( { item, token, user } ) => {
 	const [ selectedOption, setSelectedOption ] = useState( null );
+	const [ isOwner, setIsOwner ] = useState( false );
 
 	useEffect( () => {
 		setSelectedOption( Object.keys( item.stock.quantities )[0] );
+		setIsOwner( user ? item.owner === user.email : false );
 	}, [ item ] )
 
 	const changeSelection = ( e ) => {
@@ -58,8 +61,22 @@ const ProductPageForm = ( { item } ) => {
 					<Button variant="success" block>Buy it now</Button>
 				</Col>
 			</Row>
+			<br/>
+			<Row>
+				<Col>
+					{/*TODO: change to edit*/}
+					{token && isOwner && <Button block>Edit</Button>}
+				</Col>
+			</Row>
 		</Form>
 	);
 };
 
-export default ProductPageForm;
+const mapStateToProps = ( state ) => {
+	return {
+		token: state.token,
+		user:  state.user
+	}
+};
+
+export default connect( mapStateToProps, null )( ProductPageForm );

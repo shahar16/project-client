@@ -16,6 +16,7 @@ function ModalForAuth( { signUp, token, history } ) {
 
 	const onLog = () => {
 		setShow( false );
+		history.goBack();
 	};
 
 	const getTitle = () => {

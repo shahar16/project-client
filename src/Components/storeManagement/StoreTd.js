@@ -1,6 +1,7 @@
 import React from 'react';
 import { DashCircleFill } from "react-bootstrap-icons";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import StoreService from "../../Services/store.service"
 import Constants from "../../Shared/Util/Constants";
 import ModalForConfirm from "../modals/ModalForConfirm";
@@ -38,9 +39,9 @@ function StoreTd( { store, index, handleRemove, handleUpdate, token } ) {
 				{index + 1}
 			</td>
 			<td>
-				<a href={`/stores/${store.storeID}`}>
+				<Link to={`/stores/${store.storeID}/${store.name.replace( /\s+/, '-' )}`}>
 					{store.name}
-				</a>
+				</Link>
 			</td>
 			<td>
 				{store.products.length}

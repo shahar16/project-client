@@ -12,7 +12,7 @@ class StoreService {
 	async addStore( formData, token ) {
 		await axios.post( `${this.url}/addStore`, formData, {
 			headers: {
-				'Content-Type': 'multipart/form-data',
+				'Content-Type':  'multipart/form-data',
 				'Authorization': `Bearer ${token}`
 			},
 		} );
@@ -21,7 +21,7 @@ class StoreService {
 	async deleteStore( data, token ) {
 		await axios.post( `${this.url}/deleteStore`, data, {
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type':  'application/json',
 				'Authorization': `Bearer ${token}`
 			},
 		} );
@@ -30,7 +30,7 @@ class StoreService {
 	async editStore( data, token ) {
 		await axios.post( `${this.url}/editStore`, data, {
 			headers: {
-				'Content-Type': 'multipart/form-data',
+				'Content-Type':  'multipart/form-data',
 				'Authorization': `Bearer ${token}`
 			},
 		} );
@@ -40,6 +40,11 @@ class StoreService {
 		const res = await axios.get( `${this.url}/getStoresByUser`, {
 			headers: { 'Authorization': `Bearer ${token}` }
 		} );
+		return res.data;
+	}
+
+	async getOwner( storeID ) {
+		const res = await axios.get( `${this.url}/getOwner?storeID=${storeID}` );
 		return res.data;
 	}
 }
