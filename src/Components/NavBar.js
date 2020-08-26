@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, FormControl, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import img from "../resources/images/nav-bar-image.jpeg";
 import logo from "../resources/images/store-line-logo.png"
 
@@ -57,7 +58,7 @@ function NavBar( props ) {
 			return `Hi ${props.user.firstName} ${props.user.lastName}`;
 		} else {
 			return <div>
-				Hi, please <a href="/login">Log in</a> or <a href="/signup">Sign Up</a>
+				Hi, please <Link to="/login">Log in</Link> or <Link to="/signup">Sign Up</Link>
 			</div>
 		}
 	}

@@ -4,13 +4,14 @@ import { connect } from "react-redux";
 import Login from "../forms/Login";
 import SignUp from "../forms/SignUp";
 
-function ModalForAuth( { signUp, token } ) {
+function ModalForAuth( { signUp, token, history } ) {
 	const [ show, setShow ] = useState( true );
 	const [ needToSignUp, setNeedToSignUp ] = useState( signUp );
 
 	const handleClose = () => {
 		setNeedToSignUp( false );
 		setShow( false )
+		history.goBack();
 	};
 
 	const onLog = () => {
