@@ -10,11 +10,11 @@ function StoreManagementPage( props ) {
 
 	useEffect( () => {
 		fetchStores();
-	}, [props.token] )
+	}, [ props.token ] )
 
 	const fetchStores = async () => {
 		try {
-			console.log(props.token)
+			console.log( props.token )
 			const stores = await StoreService.getStoresByUser( props.token );
 			setStoresState( stores );
 		} catch ( err ) {

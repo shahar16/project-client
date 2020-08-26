@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import Error from "../Components/Error";
 import ModalForAuth from "../Components/modals/ModalForAuth";
 import ModalForNewProduct from "../Components/modals/ModalForNewProduct";
 import NavBar from "../Components/NavBar";
@@ -18,27 +19,49 @@ function HomePage( props ) {
 		<BrowserRouter>
 			<NavBar/>
 			<div className="under-nav-bar">
-				<Route exact
-					   path="/login"
-					   render={( props ) => (
-						   <ModalForAuth {...props} signUp={false}/>
-					   )}
-				/>
-				<Route exact
-					   path="/signup"
-					   render={( props ) => (
-						   <ModalForAuth {...props} signUp={true}/>
-					   )}
-				/>
-				<Route exact
-					   path="/products/:storeID/:sn"
-					   component={ProductPage}
-				/>
-				{/*<ProductPage item={fakeProduct}/>*/}
+				<Switch>
+					{/*http://localhost:3000/login*/}
+					<Route exact
+						   path="/"
+						   render={( props ) => (
+							   <h1>Home Page</h1>
+						   )}
+					/>
+					<Route exact
+						   path="/login"
+						   render={( props ) => (
+							   <ModalForAuth {...props} signUp={false}/>
+						   )}
+					/>
+					{/*http://localhost:3000/signUp*/}
+					<Route exact
+						   path="/signup"
+						   render={( props ) => (
+							   <ModalForAuth {...props} signUp={true}/>
+						   )}
+					/>
+					{/*http://localhost:3000/products/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601/123456*/}
+					<Route exact
+						   path="/products/:storeID/:sn"
+						   component={ProductPage}
+					/>
+					{/*http://localhost:3000/my-stores*/}
+					<Route exact
+						   path="/my-stores"
+						   component={StoreManagementPage}
+					/>
+					{/*TODO: Should be the lat path!!!*/}
+					<Route path="*" component={Error} />
+				</Switch>
+				{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
+				{/*<Route exact*/}
+				{/*	   path="/stores/:storeID"*/}
+				{/*	   component={StorePage}*/}
+				{/*/>*/}
+
 				{/*<ProductsGalleryView/>*/}
-				{/*<ModalForNewStore />*/}
 				{/*<ModalForNewProduct storeID={"e3725de0-bd33-4d2a-a05e-dd6c7cbd5601"}/>*/}
-				{/*<StoreManagementPage/>*/}
+
 				<br/>
 				<br/><br/><br/><br/><br/><br/><br/>
 				<br/><br/><br/><br/><br/><br/><br/>

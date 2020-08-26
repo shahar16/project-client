@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, FormControl, Image, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Button, Form, FormControl, Image, Nav, Navbar } from "react-bootstrap";
+import { Cart4, House, Shop, Search, Person } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import img from "../resources/images/nav-bar-image.jpeg";
 import logo from "../resources/images/store-line-logo.png"
+import Constants from "../Shared/Util/Constants";
 
 function NavBar( props ) {
 	let listener = null
 	const [ scrollState, setScrollState ] = useState( "top" )
+
+	const linkStyle = {
+		"marginRight": "20px"
+	}
 
 	useEffect( () => {
 		listener = document.addEventListener( "scroll", e => {
@@ -82,20 +88,14 @@ function NavBar( props ) {
 						</Navbar.Text>
 					</Navbar.Collapse>
 				</Nav>
-				<Nav.Link href="/">Home</Nav.Link>
-				<Nav.Link href="#features">Features</Nav.Link>
-				<Nav.Link href="#pricing">Pricing</Nav.Link>
-				<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-					<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-					<NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-					<NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-					<NavDropdown.Divider/>
-					<NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-				</NavDropdown>
+				<Link to="/" style={linkStyle}><House style={Constants.iconStyle}/>Home</Link>
+				<Link to="/my-stores" style={linkStyle}><Shop style={Constants.iconStyle}/>My Stores</Link>
+				<Link to="/my-cart" style={linkStyle}><Cart4 style={Constants.iconStyle}/>My Cart</Link>
+				<Link to="/edit-profile" style={linkStyle}><Person style={Constants.iconStyle}/>Edit Profile</Link>
 
 				<Form inline>
 					<FormControl type="text" placeholder="Search" className="mr-sm-2"/>
-					<Button variant="outline-primary">Search</Button>
+					<Button variant="outline-primary"><Search style={Constants.iconStyle}/>Search</Button>
 				</Form>
 			</Navbar>
 		</div>

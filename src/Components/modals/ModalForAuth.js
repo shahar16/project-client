@@ -41,6 +41,7 @@ function ModalForAuth( { signUp, token, history } ) {
 				</Modal.Body>
 			</Modal>
 			}
+			{token && handleClose()}
 		</div>
 	);
 }
