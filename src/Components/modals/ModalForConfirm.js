@@ -38,7 +38,7 @@ function ModalForConfirm( props ) {
 			console.log( err.message )
 			setError( err.message );
 		} finally {
-			setTimeout( handleClose, 1000 );
+			setTimeout( handleClose, 1500 );
 			props.finishAction();
 		}
 	};

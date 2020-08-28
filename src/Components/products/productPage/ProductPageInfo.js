@@ -6,7 +6,6 @@ import ProductPageForm from "../../forms/ProductPageForm";
 function ProductPageInfo( { item } ) {
 	return (
 		<Jumbotron style={Constants.productPageStyle}>
-			<br/>
 			<Row>
 				<Col>
 					<h2>{item.name}</h2>

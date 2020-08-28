@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Row, Table } from "react-bootstrap";
+import { Col, Row, Table } from "react-bootstrap";
+import { connect } from "react-redux";
 import ModalForNewStore from "../Components/modals/ModalForNewStore";
 import StoreTd from "../Components/storeManagement/StoreTd";
 import StoreService from "../Services/store.service"
-import {ClipboardPlus} from "react-bootstrap-icons";
-import Constants from "../Shared/Util/Constants";
 
-//TODO: get stores from server!!
-function StoreManagementPage() {
+function StoreManagementPage( props ) {
 	const [ storesState, setStoresState ] = useState( null );
 
-	useEffect( async () => {
+	useEffect( () => {
+		fetchStores();
+	}, [ props.token ] )
+
+	const fetchStores = async () => {
 		try {
-			const stores = await StoreService.getStoresByUser();
+			console.log( props.token )
+			const stores = await StoreService.getStoresByUser( props.token );
 			setStoresState( stores );
 		} catch ( err ) {
 		}
-
-	}, [] )
+	};
 
 	const handleRemove = ( index ) => {
 		const arrayWithoutElementAtIndex = ( arr, index ) => {
@@ -29,7 +31,7 @@ function StoreManagementPage() {
 	};
 
 	const userHaveStores = () => {
-		if(storesState){
+		if ( storesState ) {
 			return storesState.length > 0;
 		} else {
 			return false;
@@ -39,17 +41,17 @@ function StoreManagementPage() {
 	return (
 		<div>
 			<br/>
-			<Row>
+			{props.token && <Row>
 				<Col md={1}></Col>
 				<Col md={10}>
 					{/*<Jumbotron  style={Constants.productPageStyle}>*/}
 					{!userHaveStores() && <h4>Please add your first store</h4>}
 					<Row>
 						<Col md={10}></Col>
-						<Col md={2}><ModalForNewStore /> </Col>
+						<Col md={2}><ModalForNewStore onSubmit={fetchStores}/> </Col>
 						<Col md={1}></Col>
 					</Row>
-					<Table responsive style={{"marginTop": "2px"}}>
+					<Table responsive style={{ "marginTop": "2px" }}>
 						<thead>
 						<tr>
 							<th>#</th>
@@ -61,15 +63,24 @@ function StoreManagementPage() {
 						</thead>
 						<tbody>
 						{userHaveStores() && storesState.map( ( store, index ) => <StoreTd store={store} index={index}
-																					  handleRemove={handleRemove}/> )}
+																						   handleRemove={handleRemove}
+																						   key={store.storeID}
+																						   handleUpdate={fetchStores}/> )}
 						</tbody>
 					</Table>
 					{/*</Jumbotron>*/}
 				</Col>
 				<Col md={1}></Col>
-			</Row>
+			</Row>}
+			{!props.token && <h1>You need to login first</h1>}
 		</div>
 	);
 }
 
-export default StoreManagementPage;
+const mapStateToProps = ( state ) => {
+	return {
+		token: state.token
+	}
+}
+
+export default connect( mapStateToProps, null )( StoreManagementPage );

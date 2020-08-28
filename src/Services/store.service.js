@@ -9,26 +9,42 @@ class StoreService {
 		this.url = `/store`;
 	}
 
-	async addStore( formData ) {
-		let res = await axios.post( `${this.url}/addStore`, formData, {
-			headers: { 'Content-Type': 'multipart/form-data' },
+	async addStore( formData, token ) {
+		await axios.post( `${this.url}/addStore`, formData, {
+			headers: {
+				'Content-Type':  'multipart/form-data',
+				'Authorization': `Bearer ${token}`
+			},
 		} );
 	}
 
-	async deleteStore( data ) {
-		let res = await axios.post( `${this.url}/deleteStore`, data, {
-			headers: { 'Content-Type': 'application/json' },
+	async deleteStore( data, token ) {
+		await axios.post( `${this.url}/deleteStore`, data, {
+			headers: {
+				'Content-Type':  'application/json',
+				'Authorization': `Bearer ${token}`
+			},
 		} );
 	};
 
-	async editStore( data ) {
-		let res = await axios.post( `${this.url}/editStore`, data, {
-			headers: { 'Content-Type': 'multipart/form-data' },
+	async editStore( data, token ) {
+		await axios.post( `${this.url}/editStore`, data, {
+			headers: {
+				'Content-Type':  'multipart/form-data',
+				'Authorization': `Bearer ${token}`
+			},
 		} );
 	};
 
-	async getStoresByUser() {
-		const res = await axios.get(`${this.url}/getStoresByUser`);
+	async getStoresByUser( token ) {
+		const res = await axios.get( `${this.url}/getStoresByUser`, {
+			headers: { 'Authorization': `Bearer ${token}` }
+		} );
+		return res.data;
+	}
+
+	async getOwner( storeID ) {
+		const res = await axios.get( `${this.url}/getOwner?storeID=${storeID}` );
 		return res.data;
 	}
 	async getStore(storeID) {

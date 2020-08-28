@@ -1,11 +1,14 @@
 import React from 'react';
 import { DashCircleFill } from "react-bootstrap-icons";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import StoreService from "../../Services/store.service"
 import Constants from "../../Shared/Util/Constants";
 import ModalForConfirm from "../modals/ModalForConfirm";
+import ModalForEditProduct from "../modals/ModalForEditProduct";
 import ModalForEditStore from "../modals/ModalForEditStore";
 
-function StoreTd( { store, index, handleRemove } ) {
+function StoreTd( { store, index, handleRemove, handleUpdate, token } ) {
 
 	const infoToModal = {
 		variant:       "warning",
@@ -19,7 +22,7 @@ function StoreTd( { store, index, handleRemove } ) {
 			};
 
 			try {
-				const response = await StoreService.deleteStore( data );
+				await StoreService.deleteStore( data, token );
 				handleRemove( index );
 			} catch ( e ) {
 				const errors = e.response.data.message.split( ":" )
@@ -37,15 +40,15 @@ function StoreTd( { store, index, handleRemove } ) {
 				{index + 1}
 			</td>
 			<td>
-				<a href={`/stores/${store.storeID}`}>
+				<Link to={`/stores/${store.storeID}/${store.name.replace( /\s+/, '-' )}`}>
 					{store.name}
-				</a>
+				</Link>
 			</td>
 			<td>
 				{store.products.length}
 			</td>
 			<td>
-				<ModalForEditStore storeToEdit={store}/>
+				<ModalForEditStore storeToEdit={store} handleUpdate={handleUpdate}/>
 			</td>
 			<td>
 				<ModalForConfirm info={infoToModal}/>
@@ -54,4 +57,10 @@ function StoreTd( { store, index, handleRemove } ) {
 	);
 }
 
-export default StoreTd;
+const mapStateToProps = ( state ) => {
+	return {
+		token: state.token
+	}
+};
+
+export default connect( mapStateToProps, null )( StoreTd );
