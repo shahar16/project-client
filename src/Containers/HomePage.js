@@ -6,34 +6,43 @@ import NavBar from "../Components/NavBar";
 import * as actions from "../Store/actions";
 import ProductPage from "./ProductPage";
 import fakeProduct from "../Shared/Util/fakeProduct";
+import fakeStores from "../Shared/Util/fakeStores";
+import StorePage from './StorePage';
+import ProductsGalleryView from "../Components/products/galleryView/ProductsGalleryView";
+import ProductService from "../Services/product.test.service";
 
-function HomePage( props ) {
+function HomePage(props) {
 
-	useEffect( () => {
+	useEffect(() => {
 		props.checkAuth();
-	}, [ props ] );
+	}, [props]);
+
+	const getHomePageProducts = async (init) => {
+		return await ProductService.getHomePageProducts(init);
+	}
 
 	return (
 		<BrowserRouter>
 			<Route exact path="/login">
-				<ModalForAuth signUp={false}/>
+				<ModalForAuth signUp={false} />
 			</Route>
 			<Route exact path="/signup">
-				<ModalForAuth signUp={true}/>
+				<ModalForAuth signUp={true} />
 			</Route>
-			<NavBar/>
+			<NavBar />
 			<div className="under-nav-bar">
-				<ProductPage item={fakeProduct}/>
-				{/*<ProductsGalleryView/>*/}
+				{/* <ProductPage item={fakeProduct} /> */}
+				<ProductsGalleryView fetchService={getHomePageProducts} />
 			</div>
+			{/* <StorePage storeItem={fakeStores[0]} /> */}
 		</BrowserRouter>
 	);
 }
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapDispatchToProps = (dispatch) => {
 	return {
-		checkAuth: () => dispatch( actions.checkState() )
+		checkAuth: () => dispatch(actions.checkState())
 	}
 };
 
-export default connect( null, mapDispatchToProps )( HomePage );
+export default connect(null, mapDispatchToProps)(HomePage);

@@ -31,6 +31,11 @@ class StoreService {
 		const res = await axios.get(`${this.url}/getStoresByUser`);
 		return res.data;
 	}
+	async getStore(storeID) {
+		const res = await axios.get(`${this.url}/getStore/?storeID=${storeID}`);
+		console.log(res);
+		return res.data.products;
+	}
 }
 
 export default new StoreService();
