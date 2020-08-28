@@ -22,6 +22,15 @@ class ProductService {
 	async getProduct( { sn, storeID } ) {
 		const res = await axios.get( `${this.productUrl}/getProduct?sn=${sn}&storeID=${storeID}` );
 		return res.data;
+  }
+                     
+	async editProduct( formData, token ) {
+		await axios.post( `${this.storeUrl}/editProduct`, formData, {
+			headers: {
+				'Content-Type':  'multipart/form-data',
+				'Authorization': `Bearer ${token}`
+			},
+		} );
 	}
 }
 

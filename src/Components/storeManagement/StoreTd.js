@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import StoreService from "../../Services/store.service"
 import Constants from "../../Shared/Util/Constants";
 import ModalForConfirm from "../modals/ModalForConfirm";
+import ModalForEditProduct from "../modals/ModalForEditProduct";
 import ModalForEditStore from "../modals/ModalForEditStore";
 
 function StoreTd( { store, index, handleRemove, handleUpdate, token } ) {

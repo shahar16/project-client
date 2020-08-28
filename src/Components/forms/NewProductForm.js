@@ -1,8 +1,11 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Button } from "react-bootstrap";
+import { FileEarmarkMinus } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 import ProductService from "../../Services/product.service"
+import Constants from "../../Shared/Util/Constants";
 import * as actions from "../../Store/actions";
 import ImagesFieldArray from "./fieldArray/ImagesFieldArray";
 import QuantitiesFielArray from "./fieldArray/QuantitiesFielArray";
@@ -21,8 +24,29 @@ const NewProductSchema = Yup.object().shape( {
 	} ) ).min( 1 )
 } );
 
+const EditProductSchema = Yup.object().shape( {
+	name:       Yup.string().required( 'Product name is required' ),
+	price:      Yup.number().required( 'Price is required' ),
+	desc:       Yup.string().required( 'Description is required' ),
+	type:       Yup.string().required( 'Type is required' ),
+	images:     Yup.array().of( Yup.object().shape( {
+		image: Yup.mixed()
+	} ) ),
+	quantities: Yup.array().of( Yup.object().shape( {
+		name:     Yup.string().required( 'Name is required' ),
+		quantity: Yup.number().min( 1 ).required( 'Quantity is required' )
+	} ) ).min( 1 )
+} );
+
 function NewProductForm( props ) {
 	const [ errorMessage, setErrorMessage ] = useState( null );
+	const [ showImagesArray, setShowImagesArray ] = useState( true );
+
+	useEffect( () => {
+		if ( props && props.productToEdit ) {
+			setShowImagesArray( false );
+		}
+	}, [] )
 
 	const buildStock = ( values ) => {
 		let stock = { "type": values.type }
@@ -49,11 +73,19 @@ function NewProductForm( props ) {
 
 		props.startAction();
 		try {
-			await ProductService.addProduct( formData, props.token );
+			if ( props.productToEdit ) {
+				await ProductService.editProduct( formData, props.token );
+			} else {
+				await ProductService.addProduct( formData, props.token );
+			}
 			props.productAdded();
 		} catch ( err ) {
-			const error = err.response.data.message.split().toString().split( ':' )[3];
-			setErrorMessage( error );
+			if ( props.productToEdit ) {
+
+			} else {
+				const error = err.response.data.message.split().toString().split( ':' )[3];
+				setErrorMessage( error );
+			}
 		} finally {
 			props.finishAction();
 		}
@@ -61,7 +93,7 @@ function NewProductForm( props ) {
 
 	return (
 		<Formik
-			initialValues={{
+			initialValues={props.productToEdit || {
 				name:       "",
 				price:      "",
 				desc:       "",
@@ -75,13 +107,17 @@ function NewProductForm( props ) {
 					image: null
 				} ]
 			}}
-			validationSchema={NewProductSchema}
+			validationSchema={showImagesArray ? NewProductSchema : EditProductSchema}
 			onSubmit={handleSubmit}>
 			{( { values, setFieldValue } ) => {
 				return (
 					<Form>
 						<div className="form-group">
 							<label>General Information</label>
+							<Field type="text" name="sn" className="form-control" placeholder="Serial Number" disabled={props.productToEdit}/>
+							<ErrorMessage name="sn" component="div" className="form-validation-alert"/>
+						</div>
+						<div className="form-group">
 							<Field type="text" name="name" className="form-control" placeholder="Product Name"/>
 							<ErrorMessage name="name" component="div" className="form-validation-alert"/>
 						</div>
@@ -94,10 +130,6 @@ function NewProductForm( props ) {
 							<ErrorMessage name="desc" component="div" className="form-validation-alert"/>
 						</div>
 						<div className="form-group">
-							<Field type="text" name="sn" className="form-control" placeholder="Serial Number"/>
-							<ErrorMessage name="sn" component="div" className="form-validation-alert"/>
-						</div>
-						<div className="form-group">
 							<label>Quantities</label>
 							<Field type="text" name="type" className="form-control" placeholder="Option Type"/>
 							<ErrorMessage name="type" component="div" className="form-validation-alert"/>
@@ -107,7 +139,13 @@ function NewProductForm( props ) {
 						<div className="form-group">
 							<label>Images</label>
 						</div>
-						<ImagesFieldArray values={values} setFieldValue={setFieldValue}/>
+						{showImagesArray && <ImagesFieldArray values={values} setFieldValue={setFieldValue}/>}
+						{!showImagesArray && <div>
+							<Button variant="warning" block onClick={() => setShowImagesArray( true )}>
+								<FileEarmarkMinus style={Constants.iconStyle}/>
+								Remove Images
+							</Button>
+						</div>}
 						<br/>
 						<div className="form-group">
 							<button type="submit" className="btn btn-primary btn-block">Submit</button>
@@ -126,7 +164,7 @@ function NewProductForm( props ) {
 const mapStateToProps = ( state ) => {
 	return {
 		token: state.token,
-		user: state.user
+		user:  state.user
 	}
 }
 
