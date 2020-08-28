@@ -7,33 +7,44 @@ import constants from "../Shared/Util/Constants"
 class ProductService {
 	constructor() {
 		this.url = `${constants.serverUrl}/products/getTestProduct?sn=`;
+		this.homePageUrl = `${constants.serverUrl}/products/getHomePageProducts?init=`;
 	}
 
-	getProduct = ( sn ) => {
-		return fetch( `${this.url}${sn}`, {
-			method:  "get",
+	getProduct = (sn) => {
+		console.log("rendering Store Gallery...");
+		return fetch(`${this.url}${sn}`, {
+			method: "get",
 			headers: {
 				"Content-Type": "application/json"
 			},
-		} ).then( ( res ) => {
-			if ( res.status >= 300 || res.status < 200 ) {
+		}).then((res) => {
+			if (res.status >= 300 || res.status < 200) {
 				const requestFailed = new Error();
 				requestFailed.response = res;
 				throw requestFailed;
 			}
 			// console.log(res);
 			return res.json();
-		} )
+		})
 	}
 
-	getProducts = async () => {
-		let products = []
-		let item = await this.getProduct( 12345678 );
-		for ( let i = 0; i < 20; i++ ) {
-			products.push( item );
-		}
-
-		return products;
+	getHomePageProducts = async (init) => {
+		console.log(`${this.homePageUrl}${init}`);
+		return fetch(`${this.homePageUrl}${init}`, {
+			method: "get",
+			headers: {
+				"Content-Type": "application/json"
+			},
+		}).then((res) => {
+			if (res.status >= 300 || res.status < 200) {
+				const requestFailed = new Error();
+				requestFailed.response = res;
+				throw requestFailed;
+			}
+			console.log("res: ");
+			console.log(res);
+			return res.json();
+		})
 	}
 }
 

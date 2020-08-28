@@ -2,13 +2,13 @@ import React from 'react';
 import { Col, Row } from "react-bootstrap";
 import ProductItem from "./ProductItem";
 
-function ProductsGroup( { items } ) {
+function ProductsGroup({ items, renderStore }) {
 
 	return (
 		<div>
-			<br/>
+			<br />
 			<Row className="justify-content-md-center">
-				{items && items.map( ( item ) => <Col md={2}><ProductItem item={item} key={item.id}/></Col> )}
+				{items && items.map((item) => <Col md={renderStore ? 3 : 2}><ProductItem item={item} key={item.id} /></Col>)}
 			</Row>
 		</div>
 	);
