@@ -42,6 +42,7 @@ function ProductsGalleryView({ fetchService, storeItem, renderStore }) {
 			setInit(0);
 			console.log("changing init value... " + init);
 		}
+		//TODO: handler for more then 20 products in store
 		if (storeItem) {
 			setEndOfProducts(true);
 		}
