@@ -7,7 +7,7 @@ function ProductItem({ item }) {
 		<Card style={{ width: '15rem', height: '20rem' }}>
 			<Card.Img variant="top" src={`${constants.serverUrl}/${item.image[0]}`} />
 			<Card.Body>
-				<div className={"d-flex mb-2 justify-content-between"} style={{ marginBottom: "10%" }}>
+				<div className={"d-flex mb-2 justify-content-between"} >
 					<Card.Title as={"h4"} className={"mb-0"}>{item.name}</Card.Title>
 					<Badge pill className={"mb-1"} variant={"warning"}>{item.price} ₪</Badge>
 				</div>
