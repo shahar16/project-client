@@ -45,10 +45,4 @@ function StorePage(props) {
     );
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        checkAuth: () => dispatch(actions.checkState())
-    }
-};
-
-export default connect(null, mapDispatchToProps)(StorePage);
+export default StorePage;
