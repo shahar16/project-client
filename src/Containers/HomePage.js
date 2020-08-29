@@ -26,56 +26,56 @@ function HomePage(props) {
 
 	return (
 		<BrowserRouter>
-			<NavBar/>
+			<NavBar />
 			<div className="under-nav-bar">
 				<Switch>
 					{/*http://localhost:3000/login*/}
 					<Route exact
-						   path="/"
-						   render={( props ) => (
-							 <ProductsGalleryView {...props} fetchService={getHomePageProducts} />
-						   )}
+						path="/"
+						render={(props) => (
+							<ProductsGalleryView {...props} fetchService={getHomePageProducts} />
+						)}
 					/>
 					<Route exact
-						   path="/login"
-						   render={( props ) => (
-							   <ModalForAuth {...props} signUp={false}/>
-						   )}
+						path="/login"
+						render={(props) => (
+							<ModalForAuth {...props} signUp={false} />
+						)}
 					/>
 					{/*http://localhost:3000/signUp*/}
 					<Route exact
-						   path="/signup"
-						   render={( props ) => (
-							   <ModalForAuth {...props} signUp={true}/>
-						   )}
+						path="/signup"
+						render={(props) => (
+							<ModalForAuth {...props} signUp={true} />
+						)}
 					/>
 					{/*http://localhost:3000/products/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601/123456*/}
 					<Route exact
-						   path="/products/:storeID/:sn"
-						   component={ProductPage}
+						path="/products/:storeID/:sn"
+						component={ProductPage}
 					/>
 					{/*http://localhost:3000/my-stores*/}
 					<Route exact
-						   path="/my-stores"
-						   component={StoreManagementPage}
+						path="/my-stores"
+						component={StoreManagementPage}
 					/>
 					{/*TODO: Should be the lat path!!!*/}
-					<Route path="*" component={Error} />
+					{/* <Route path="*" component={Error} /> */}
+				http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601
+				<Route exact
+						path="/stores/:storeID"
+						component={StorePage}
+					/>
 				</Switch>
-				{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
-				{/*<Route exact*/}
-				{/*	   path="/stores/:storeID"*/}
-				{/*	   component={StorePage}*/}
-				{/*/>*/}
 
 				{/*<ProductsGalleryView/>*/}
 				{/*<ModalForNewProduct storeID={"e3725de0-bd33-4d2a-a05e-dd6c7cbd5601"}/>*/}
 
-				<br/>
-				<br/><br/><br/><br/><br/><br/><br/>
-				<br/><br/><br/><br/><br/><br/><br/>
-				<br/><br/><br/><br/><br/><br/><br/>
-				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				<br />
+				<br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 				<h1>dfsd</h1>
 			</div>
 			{/* <StorePage storeItem={fakeStores[0]} /> */}
