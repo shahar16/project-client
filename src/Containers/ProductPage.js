@@ -14,7 +14,14 @@ function ProductPage( props ) {
 				const productItem = await ProductService.getProduct( props.match.params );
 				const owner = await StoreService.getOwner( productItem.storeID );
 				productItem.owner = owner.owner;
-				productItem.stock = JSON.parse( productItem.stock );
+				console.log(productItem.stock)
+				let tempStock;
+				try {
+				 	tempStock = JSON.parse( productItem.stock );
+				} catch ( err ) {
+					tempStock = productItem.stock;
+				}
+				productItem.stock = tempStock;
 				console.log( productItem )
 				setItem( productItem );
 			} catch ( err ) {
