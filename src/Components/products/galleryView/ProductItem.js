@@ -16,8 +16,8 @@ function ProductItem( { item, renderStore, token, user } ) {
 		const findOwner = async () => {
 			const owner = await StoreService.getOwner( item.storeID );
 			setShowDelete(
-				user.email === owner.owner &&
 				token &&
+				user.email === owner.owner &&
 				renderStore );
 		}
 		findOwner();
