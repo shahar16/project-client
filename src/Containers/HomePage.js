@@ -71,12 +71,6 @@ function HomePage(props) {
 				{/*<ProductsGalleryView/>*/}
 				{/*<ModalForNewProduct storeID={"e3725de0-bd33-4d2a-a05e-dd6c7cbd5601"}/>*/}
 
-				<br />
-				<br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br />
-				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-				<h1>dfsd</h1>
 			</div>
 			{/* <StorePage storeItem={fakeStores[0]} /> */}
 		</BrowserRouter>
