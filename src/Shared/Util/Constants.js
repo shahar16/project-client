@@ -13,7 +13,6 @@ class Constants {
 		this.deleteStyle = {
 			variant:       "warning",
 			icon:          <DashCircleFill style={this.iconStyle}/>,
-			text:          "Delete Store",
 		}
 	}
 }
