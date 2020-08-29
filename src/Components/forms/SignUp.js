@@ -1,9 +1,10 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
+import { Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as Yup from 'yup';
-import UserService from '../../Services/user.service'
 import * as actions from "../../Store/actions";
+import UserService from "../../Services/user.service"
 
 const SignUpSchema = Yup.object().shape( {
 	firstName:       Yup.string()
@@ -16,7 +17,10 @@ const SignUpSchema = Yup.object().shape( {
 						 .required( 'Password is required' ).min( 6 ),
 	confirmPassword: Yup.string()
 						 .oneOf( [ Yup.ref( "password" ), null ], "Password must match" )
-						 .required( "Confirm password is required" )
+						 .required( "Confirm password is required" ),
+	city:            Yup.string(),
+	street:          Yup.string(),
+	houseNum:        Yup.number()
 } )
 
 function SignUp( props ) {
@@ -45,7 +49,10 @@ function SignUp( props ) {
 				lastName:        "",
 				email:           "",
 				password:        "",
-				confirmPassword: ""
+				confirmPassword: "",
+				city:            "",
+				street:          "",
+				houseNum:        ""
 			}}
 			validationSchema={SignUpSchema}
 			onSubmit={register}>
@@ -73,6 +80,27 @@ function SignUp( props ) {
 								   placeholder="Confirm Password"/>
 							<ErrorMessage name="confirmPassword" component="div" className="form-validation-alert"/>
 						</div>
+						<div className="form-group">
+							<label>Default shipping address (optional)</label>
+						</div>
+						<div className="form-group">
+							<Field type="text" name="city" className="form-control" placeholder="City"/>
+							<ErrorMessage name="city" component="div" className="form-validation-alert"/>
+						</div>
+						<Row>
+							<Col md="8">
+								<div className="form-group">
+									<Field type="text" name="street" className="form-control" placeholder="Street"/>
+									<ErrorMessage name="street" component="div" className="form-validation-alert"/>
+								</div>
+							</Col>
+							<Col md="4">
+								<div className="form-group">
+									<Field type="number" name="houseNum" className="form-control" placeholder="Number"/>
+									<ErrorMessage name="houseNum" component="div" className="form-validation-alert"/>
+								</div>
+							</Col>
+						</Row>
 						<div className="form-group">
 							<button type="submit" className="btn btn-primary btn-block">Sign Up</button>
 						</div>
