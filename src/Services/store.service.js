@@ -9,48 +9,53 @@ class StoreService {
 		this.url = `/store`;
 	}
 
-	async addStore( formData, token ) {
-		await axios.post( `${this.url}/addStore`, formData, {
+	async addStore(formData, token) {
+		await axios.post(`${this.url}/addStore`, formData, {
 			headers: {
-				'Content-Type':  'multipart/form-data',
+				'Content-Type': 'multipart/form-data',
 				'Authorization': `Bearer ${token}`
 			},
-		} );
+		});
 	}
 
-	async deleteStore( data, token ) {
-		await axios.post( `${this.url}/deleteStore`, data, {
+	async deleteStore(data, token) {
+		await axios.post(`${this.url}/deleteStore`, data, {
 			headers: {
-				'Content-Type':  'application/json',
+				'Content-Type': 'application/json',
 				'Authorization': `Bearer ${token}`
 			},
-		} );
+		});
 	};
 
-	async editStore( data, token ) {
-		await axios.post( `${this.url}/editStore`, data, {
+	async editStore(data, token) {
+		await axios.post(`${this.url}/editStore`, data, {
 			headers: {
-				'Content-Type':  'multipart/form-data',
+				'Content-Type': 'multipart/form-data',
 				'Authorization': `Bearer ${token}`
 			},
-		} );
+		});
 	};
 
-	async getStoresByUser( token ) {
-		const res = await axios.get( `${this.url}/getStoresByUser`, {
+	async getStoresByUser(token) {
+		const res = await axios.get(`${this.url}/getStoresByUser`, {
 			headers: { 'Authorization': `Bearer ${token}` }
-		} );
+		});
 		return res.data;
 	}
 
-	async getOwner( storeID ) {
-		const res = await axios.get( `${this.url}/getOwner?storeID=${storeID}` );
+	async getOwner(storeID) {
+		const res = await axios.get(`${this.url}/getOwner?storeID=${storeID}`);
 		return res.data;
 	}
-	async getStore(storeID) {
+	async getStoreProducts({ storeID }) {
 		const res = await axios.get(`${this.url}/getStore/?storeID=${storeID}`);
 		console.log(res);
 		return res.data.products;
+	}
+	async getStore({ storeID }) {
+		const res = await axios.get(`${this.url}/getStore/?storeID=${storeID}`);
+		console.log(res);
+		return res.data;
 	}
 }
 
