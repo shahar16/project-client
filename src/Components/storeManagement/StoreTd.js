@@ -11,9 +11,7 @@ import ModalForEditStore from "../modals/ModalForEditStore";
 function StoreTd( { store, index, handleRemove, handleUpdate, token } ) {
 
 	const infoToModal = {
-		variant:       "warning",
-		icon:          <DashCircleFill style={Constants.iconStyle}/>,
-		text:          "Delete Store",
+		...Constants.deleteStyle,
 		handleConfirm: async () => {
 			const data = {
 				storeID: store.storeID,
