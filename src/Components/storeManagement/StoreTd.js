@@ -40,7 +40,7 @@ function StoreTd( { store, index, handleRemove, handleUpdate, token } ) {
 				{index + 1}
 			</td>
 			<td>
-				<Link to={`/stores/${store.storeID}/${store.name.replace( /\s+/, '-' )}`}>
+				<Link to={`/stores/${store.storeID}`}>
 					{store.name}
 				</Link>
 			</td>
