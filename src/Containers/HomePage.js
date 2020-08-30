@@ -60,19 +60,15 @@ function HomePage(props) {
 						component={StoreManagementPage}
 					/>
 					{/*TODO: Should be the lat path!!!*/}
-					{/* <Route path="*" component={Error} /> */}
-				http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601
-				<Route exact
+					{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
+					<Route exact
 						path="/stores/:storeID"
 						component={StorePage}
 					/>
+					 <Route path="*" component={Error} />
 				</Switch>
-
-				{/*<ProductsGalleryView/>*/}
-				{/*<ModalForNewProduct storeID={"e3725de0-bd33-4d2a-a05e-dd6c7cbd5601"}/>*/}
-
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 			</div>
-			{/* <StorePage storeItem={fakeStores[0]} /> */}
 		</BrowserRouter>
 	);
 }
