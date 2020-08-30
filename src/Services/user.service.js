@@ -1,3 +1,4 @@
+import axios from "../Axios/axios";
 import constants from "../Shared/Util/Constants"
 
 /**
@@ -49,6 +50,15 @@ class UserService {
 		localStorage.setItem( "expirationDate", expirationDate.toLocaleString() );
 		localStorage.setItem( "user", JSON.stringify( user ) );
 	}
+
+	async addToCart(data, token) {
+		await axios.post(`${this.url}addtocart`, data, {
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+		});
+	};
 }
 
 export default new UserService();
