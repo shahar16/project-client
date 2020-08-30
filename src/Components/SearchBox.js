@@ -8,7 +8,7 @@ import { Button, Form } from "react-bootstrap";
 import { Search } from "react-bootstrap-icons";
 import ProductService from "../Services/product.service";
 
-export default function SearchBox() {
+export default function SearchBox( { history } ) {
 	const [ productsList, setProductsList ] = useState( null );
 	const [ selection, setSelection ] = useState( "" );
 	const [ error, setError ] = useState( null );
@@ -29,13 +29,7 @@ export default function SearchBox() {
 		}
 		setError( null );
 
-		try {
-			const res = await ProductService.search( selection );
-			console.log( res )
-		} catch ( err ) {
-			const error = await err.response.data.message;
-			setError( error );
-		}
+		history.push( `/search/${selection}` );
 	};
 
 	return (

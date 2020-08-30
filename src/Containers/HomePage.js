@@ -8,6 +8,7 @@ import SearchTow from "../Components/SearchBox";
 import ProductService from "../Services/product.test.service";
 import * as actions from "../Store/actions";
 import ProductPage from "./ProductPage";
+import SearchResults from "./SearchResults";
 import StoreManagementPage from "./StoreManagementPage";
 import StorePage from './StorePage';
 
@@ -23,7 +24,7 @@ function HomePage( props ) {
 
 	return (
 		<BrowserRouter>
-			<NavBar/>
+			<Route component={NavBar} />
 			<div className="under-nav-bar">
 				<Switch>
 					{/*http://localhost:3000/login*/}
@@ -58,10 +59,14 @@ function HomePage( props ) {
 					/>
 					{/*TODO: Should be the lat path!!!*/}
 					{/* <Route path="*" component={Error} /> */}
-					http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601
+					{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
 					<Route exact
 						   path="/stores/:storeID"
 						   component={StorePage}
+					/>
+					<Route exact
+						   path="/search/:query"
+						   component={SearchResults}
 					/>
 				</Switch>
 

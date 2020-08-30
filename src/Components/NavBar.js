@@ -94,11 +94,7 @@ function NavBar( props ) {
 				<Link to="/my-cart" style={linkStyle}><Cart4 style={Constants.iconStyle}/>My Cart</Link>
 				<Link to="/edit-profile" style={linkStyle}><Person style={Constants.iconStyle}/>Edit Profile</Link>
 
-				{/*<Form inline>*/}
-				{/*	<FormControl type="text" placeholder="Search" className="mr-sm-2"/>*/}
-				{/*	<Button variant="outline-primary"><Search style={Constants.iconStyle}/>Search</Button>*/}
-				{/*</Form>*/}
-				<SearchBox/>
+				<SearchBox history={props.history}/>
 			</Navbar>
 		</div>
 	);
