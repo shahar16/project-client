@@ -7,7 +7,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form } from "react-bootstrap";
 import { Search } from "react-bootstrap-icons";
 import ProductService from "../Services/product.service";
-import Constants from "../Shared/Util/Constants";
 
 export default function SearchBox() {
 	const [ productsList, setProductsList ] = useState( null );
@@ -23,13 +22,20 @@ export default function SearchBox() {
 		fetchList();
 	}, [] )
 
-	const handleSearch = () => {
+	const handleSearch = async () => {
 		if ( !selection ) {
 			setError( "Please enter a search query." );
 			return;
 		}
-		setError(null);
-		console.log( selection )
+		setError( null );
+
+		try {
+			const res = await ProductService.search( selection );
+			console.log( res )
+		} catch ( err ) {
+			const error = await err.response.data.message;
+			setError( error );
+		}
 	};
 
 	return (
@@ -45,6 +51,15 @@ export default function SearchBox() {
 					onChange={( event, value, reason ) => {
 						if ( reason === "select-option" ) {
 							setSelection( value.title );
+						} else if ( reason === "clear" ) {
+							setSelection( "" );
+						}
+					}}
+					onInputChange={( event, value, reason ) => {
+						if ( reason === "input" ) {
+							setSelection( value );
+						} else if ( reason === "clear" ) {
+							setSelection( "" );
 						}
 					}}
 					getOptionLabel={( option ) => option.title}

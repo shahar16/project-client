@@ -42,8 +42,13 @@ class ProductService {
 		} );
 	}
 
-	async getProductsNamesList(){
+	async getProductsNamesList() {
 		const res = await axios.get( `${this.productUrl}/getProductsList` );
+		return res.data;
+	}
+
+	async search( query ) {
+		const res = await axios.get( `${this.productUrl}/search?searchQuery=${query}` );
 		return res.data;
 	}
 }
