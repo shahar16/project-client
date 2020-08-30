@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import img from "../resources/images/nav-bar-image.jpeg";
 import logo from "../resources/images/store-line-logo.png"
 import Constants from "../Shared/Util/Constants";
+import SearchBox from "./SearchBox";
 
 function NavBar( props ) {
 	let listener = null
@@ -71,7 +72,7 @@ function NavBar( props ) {
 
 	return (
 		<div>
-			<Image src={img} className="shadow" fluid/>
+			{/*<Image src={img} className="shadow" fluid/>*/}
 			<Navbar bg={scrollState === "top" ? "non" : "light"} variant="light" fixed="top"
 					style={getStyle()} className="shadow">
 				<Navbar.Brand href="#home">
@@ -93,10 +94,11 @@ function NavBar( props ) {
 				<Link to="/my-cart" style={linkStyle}><Cart4 style={Constants.iconStyle}/>My Cart</Link>
 				<Link to="/edit-profile" style={linkStyle}><Person style={Constants.iconStyle}/>Edit Profile</Link>
 
-				<Form inline>
-					<FormControl type="text" placeholder="Search" className="mr-sm-2"/>
-					<Button variant="outline-primary"><Search style={Constants.iconStyle}/>Search</Button>
-				</Form>
+				{/*<Form inline>*/}
+				{/*	<FormControl type="text" placeholder="Search" className="mr-sm-2"/>*/}
+				{/*	<Button variant="outline-primary"><Search style={Constants.iconStyle}/>Search</Button>*/}
+				{/*</Form>*/}
+				<SearchBox/>
 			</Navbar>
 		</div>
 	);
