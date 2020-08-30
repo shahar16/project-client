@@ -3,7 +3,7 @@ import { Button, Form, FormControl, Image, Nav, Navbar } from "react-bootstrap";
 import { Cart4, House, Shop, Search, Person } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import img from "../resources/images/nav-bar-image.jpeg";
+import img from "../resources/images/nav-bar-image.jpg";
 import logo from "../resources/images/store-line-logo.png"
 import Constants from "../Shared/Util/Constants";
 import SearchBox from "./SearchBox";
@@ -19,13 +19,13 @@ function NavBar( props ) {
 	useEffect( () => {
 		listener = document.addEventListener( "scroll", e => {
 			let scrolled = document.scrollingElement.scrollTop
-			if ( scrolled >= 780 ) {
+			if ( scrolled >= 375 ) {
 				setScrollState( "full-opacity" )
-			} else if ( scrolled >= 600 ) {
+			} else if ( scrolled >= 300 ) {
 				setScrollState( "high-opacity" )
-			} else if ( scrolled >= 400 ) {
-				setScrollState( "mid-opacity" )
 			} else if ( scrolled >= 200 ) {
+				setScrollState( "mid-opacity" )
+			} else if ( scrolled >= 100 ) {
 				setScrollState( "low-opacity" )
 			} else {
 				setScrollState( "top" )
@@ -38,7 +38,6 @@ function NavBar( props ) {
 
 	const getStyle = () => {
 		let style = {
-			// "backgroundImage": `url(${img2})`,
 			"backgroundSize": "100%",
 		}
 
@@ -72,7 +71,7 @@ function NavBar( props ) {
 
 	return (
 		<div>
-			{/*<Image src={img} className="shadow" fluid/>*/}
+			<Image src={img} className="shadow" fluid/>
 			<Navbar bg={scrollState === "top" ? "non" : "light"} variant="light" fixed="top"
 					style={getStyle()} className="shadow">
 				<Navbar.Brand href="#home">

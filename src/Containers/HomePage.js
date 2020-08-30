@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Error from "../Components/Error";
 import ModalForAuth from "../Components/modals/ModalForAuth";
 import ModalForEditUser from "../Components/modals/ModalForEditUser";
-import ModalForNewProduct from "../Components/modals/ModalForNewProduct";
 import NavBar from "../Components/NavBar";
 import ProductsGalleryView from "../Components/products/galleryView/ProductsGalleryView";
-import SearchTow from "../Components/SearchBox";
 import ProductService from "../Services/product.test.service";
 import * as actions from "../Store/actions";
 import ProductPage from "./ProductPage";
@@ -26,7 +25,7 @@ function HomePage( props ) {
 
 	return (
 		<BrowserRouter>
-			<Route component={NavBar} />
+			<Route component={NavBar}/>
 			<div className="under-nav-bar">
 				<Switch>
 					{/*http://localhost:3000/login*/}
@@ -64,7 +63,6 @@ function HomePage( props ) {
 						   component={StoreManagementPage}
 					/>
 					{/*TODO: Should be the lat path!!!*/}
-					{/* <Route path="*" component={Error} /> */}
 					{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
 					<Route exact
 						   path="/stores/:storeID"
@@ -74,13 +72,9 @@ function HomePage( props ) {
 						   path="/search/:query"
 						   component={SearchResults}
 					/>
+					<Route path="*" component={Error}/>
 				</Switch>
-
-				{/*<ProductsGalleryView/>*/}
-				{/*<ModalForNewProduct storeID={"e3725de0-bd33-4d2a-a05e-dd6c7cbd5601"}/>*/}
-
 			</div>
-			{/* <StorePage storeItem={fakeStores[0]} /> */}
 		</BrowserRouter>
 	);
 }
