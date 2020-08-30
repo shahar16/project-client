@@ -89,7 +89,11 @@ const ProductPageForm = ( { item, token, user } ) => {
 								>Add to cart</Button>
 							</Col>
 							<Col>
-								<Button variant="success" block>Buy it now</Button>
+								<Button
+									variant="success"
+									block
+									disabled={values.categoryType === `Choose ${item.stock.type}` || values.quantity === 'Choose quantity'}
+								>Buy it now</Button>
 							</Col>
 						</Row>
 						<br/>
