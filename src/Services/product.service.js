@@ -41,6 +41,11 @@ class ProductService {
 			},
 		} );
 	}
+
+	async getProductsNamesList(){
+		const res = await axios.get( `${this.productUrl}/getProductsList` );
+		return res.data;
+	}
 }
 
 export default new ProductService();
