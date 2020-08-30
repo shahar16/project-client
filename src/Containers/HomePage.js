@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ModalForAuth from "../Components/modals/ModalForAuth";
+import ModalForEditUser from "../Components/modals/ModalForEditUser";
+import ModalForNewProduct from "../Components/modals/ModalForNewProduct";
 import NavBar from "../Components/NavBar";
 import ProductsGalleryView from "../Components/products/galleryView/ProductsGalleryView";
 import SearchTow from "../Components/SearchBox";
@@ -39,6 +41,10 @@ function HomePage( props ) {
 						   render={( props ) => (
 							   <ModalForAuth {...props} signUp={false}/>
 						   )}
+					/>
+					<Route exact
+						   path="/edit-profile"
+						   component={ModalForEditUser}
 					/>
 					{/*http://localhost:3000/signUp*/}
 					<Route exact

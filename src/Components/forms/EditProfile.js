@@ -1,10 +1,10 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as Yup from 'yup';
-import * as actions from "../../Store/actions";
 import UserService from "../../Services/user.service"
+import * as actions from "../../Store/actions";
 
 const SignUpSchema = Yup.object().shape( {
 	firstName:       Yup.string()
@@ -13,11 +13,9 @@ const SignUpSchema = Yup.object().shape( {
 						 .required( 'Last name is required' ),
 	email:           Yup.string()
 						 .required( 'Email is required' ).email( "Invalid email" ),
-	password:        Yup.string()
-						 .required( 'Password is required' ).min( 6 ),
+	password:        Yup.string().min( 6 ),
 	confirmPassword: Yup.string()
-						 .oneOf( [ Yup.ref( "password" ), null ], "Password must match" )
-						 .required( "Confirm password is required" ),
+						 .oneOf( [ Yup.ref( "password" ), null ], "Password must match" ),
 	city:            Yup.string(),
 	street:          Yup.string(),
 	houseNum:        Yup.number()
@@ -25,40 +23,36 @@ const SignUpSchema = Yup.object().shape( {
 
 function SignUp( props ) {
 	const [ errorMessage, setErrorMessage ] = useState( null );
+	const [ showPassword, setShowPassword ] = useState( false );
 
-	const register = async ( values ) => {
+	const edit = async ( values ) => {
+		console.log( values )
 		props.startAction();
 		try {
-			const { token, expiresTimeInMiliseconds, user } = await UserService.register( values );
-			UserService.writeToLocalStorage( token, expiresTimeInMiliseconds, user );
-			props.setAuthincationTimeOut( expiresTimeInMiliseconds );
+			const user = await UserService.updateUser( values, props.token )
 			props.setUser( user );
-			props.authSuccess( token );
 			props.onLog();
 		} catch ( err ) {
-			const error = await err.response.json();
-			setErrorMessage( error.message );
-			props.authFail( error.message );
+			const error = err.response.data;
+			setErrorMessage( error );
+		} finally {
+			props.finishAction();
 		}
 	}
 
 	return (
 		<Formik
-			initialValues={{
-				firstName:       "",
-				lastName:        "",
-				email:           "",
-				password:        "",
-				confirmPassword: "",
-				city:            "",
-				street:          "",
-				houseNum:        ""
-			}}
+			initialValues={props.user}
 			validationSchema={SignUpSchema}
-			onSubmit={register}>
+			onSubmit={edit}>
 			{() => {
 				return (
 					<Form>
+						<div className="form-group">
+							<Field type="email" name="email" className="form-control" placeholder="Email"
+								   disabled={props.user}/>
+							<ErrorMessage name="email" component="div" className="form-validation-alert"/>
+						</div>
 						<div className="form-group">
 							<Field type="text" name="firstName" className="form-control" placeholder="First name"/>
 							<ErrorMessage name="firstName" component="div" className="form-validation-alert"/>
@@ -67,19 +61,18 @@ function SignUp( props ) {
 							<Field type="text" name="lastName" className="form-control" placeholder="Last name"/>
 							<ErrorMessage name="lastName" component="div" className="form-validation-alert"/>
 						</div>
-						<div className="form-group">
-							<Field type="email" name="email" className="form-control" placeholder="Email"/>
-							<ErrorMessage name="email" component="div" className="form-validation-alert"/>
-						</div>
-						<div className="form-group">
+						{showPassword && <div className="form-group">
 							<Field type="password" name="password" className="form-control" placeholder="Password"/>
 							<ErrorMessage name="password" component="div" className="form-validation-alert"/>
-						</div>
-						<div className="form-group">
+						</div>}
+						{showPassword && <div className="form-group">
 							<Field type="password" name="confirmPassword" className="form-control"
 								   placeholder="Confirm Password"/>
 							<ErrorMessage name="confirmPassword" component="div" className="form-validation-alert"/>
-						</div>
+						</div>}
+						{!showPassword &&
+						<Button variant="outline-success" block onClick={() => setShowPassword( true )}>Change
+							password</Button>}
 						<div className="form-group">
 							<label>Default shipping address (optional)</label>
 						</div>
@@ -102,7 +95,7 @@ function SignUp( props ) {
 							</Col>
 						</Row>
 						<div className="form-group">
-							<button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+							<button type="submit" className="btn btn-primary btn-block">Submit</button>
 						</div>
 						{errorMessage &&
 						<div className="alert alert-danger">{errorMessage}</div>
@@ -115,14 +108,18 @@ function SignUp( props ) {
 	)
 }
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapStateToProps = ( state ) => {
 	return {
-		authSuccess:            ( token ) => dispatch( actions.authSuccess( token ) ),
-		authFail:               ( err ) => dispatch( actions.authFail( err ) ),
-		startAction:            () => dispatch( actions.startAction() ),
-		setAuthincationTimeOut: ( expiresTimeInMiliseconds ) => dispatch( actions.setAuthincationTimeOut( expiresTimeInMiliseconds ) ),
-		setUser:                ( user ) => dispatch( actions.setUser( user ) )
+		token: state.token
 	}
 };
 
-export default connect( null, mapDispatchToProps )( SignUp );
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		startAction:  () => dispatch( actions.startAction() ),
+		setUser:      ( user ) => dispatch( actions.setUser( user ) ),
+		finishAction: () => dispatch( actions.finishAction() )
+	}
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( SignUp );

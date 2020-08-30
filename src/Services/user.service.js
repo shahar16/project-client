@@ -1,3 +1,4 @@
+import axios from "../Axios/axios";
 import constants from "../Shared/Util/Constants"
 
 /**
@@ -48,6 +49,17 @@ class UserService {
 		localStorage.setItem( "token", token );
 		localStorage.setItem( "expirationDate", expirationDate.toLocaleString() );
 		localStorage.setItem( "user", JSON.stringify( user ) );
+	}
+
+	async updateUser( data, token ) {
+		const res = await axios.post( `${this.url}/editUser`, data, {
+			headers: {
+				'Content-Type':  'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+		} );
+
+		return res.data;
 	}
 }
 
