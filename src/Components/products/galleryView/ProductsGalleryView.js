@@ -3,7 +3,7 @@ import { useId } from "react-id-generator"
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductsGroup from "./ProductsGroup";
 
-function ProductsGalleryView({ fetchService, storeItem, renderStore }) {
+function ProductsGalleryView({ fetchService, renderStore }) {
 	const numOfCardInRaw = 5;
 	const [endOfProducts, setEndOfProducts] = useState(false);
 	const [productsList, setProductsList] = useState(null);
@@ -16,7 +16,7 @@ function ProductsGalleryView({ fetchService, storeItem, renderStore }) {
 
 	const fetchMoreData = async (init) => {
 		console.log("fetch data");
-		const list = storeItem ? await fetchService(storeItem.storeID) : await fetchService(init === 1);
+		const list = renderStore ? await fetchService() : await fetchService(init === 1);
 		list.length > 0 ? setEndOfProducts(false) : setEndOfProducts(true);
 		const groupList = getGroupList(list);
 		if (productsList) {
@@ -38,12 +38,12 @@ function ProductsGalleryView({ fetchService, storeItem, renderStore }) {
 		}
 
 		console.log("init value: ..................... " + init);
-		if (init && !storeItem) {
+		if (init && !renderStore) {
 			setInit(0);
 			console.log("changing init value... " + init);
 		}
 		//TODO: handler for more then 20 products in store
-		if (storeItem) {
+		if (renderStore) {
 			setEndOfProducts(true);
 		}
 		return returnValue;

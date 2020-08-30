@@ -1,40 +1,39 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import Error from "../Components/Error";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ModalForAuth from "../Components/modals/ModalForAuth";
 import ModalForEditUser from "../Components/modals/ModalForEditUser";
 import ModalForNewProduct from "../Components/modals/ModalForNewProduct";
 import NavBar from "../Components/NavBar";
+import ProductsGalleryView from "../Components/products/galleryView/ProductsGalleryView";
+import SearchTow from "../Components/SearchBox";
+import ProductService from "../Services/product.test.service";
 import * as actions from "../Store/actions";
 import ProductPage from "./ProductPage";
-import fakeProduct from "../Shared/Util/fakeProduct";
-import fakeStores from "../Shared/Util/fakeStores";
-import StorePage from './StorePage';
-import ProductsGalleryView from "../Components/products/galleryView/ProductsGalleryView";
-import ProductService from "../Services/product.test.service";
+import SearchResults from "./SearchResults";
 import StoreManagementPage from "./StoreManagementPage";
+import StorePage from './StorePage';
 
-function HomePage(props) {
+function HomePage( props ) {
 
-	useEffect(() => {
+	useEffect( () => {
 		props.checkAuth();
-	}, [props]);
+	}, [ props ] );
 
-	const getHomePageProducts = async (init) => {
-		return await ProductService.getHomePageProducts(init);
+	const getHomePageProducts = async ( init ) => {
+		return await ProductService.getHomePageProducts( init );
 	}
 
 	return (
 		<BrowserRouter>
-			<NavBar/>
+			<Route component={NavBar} />
 			<div className="under-nav-bar">
 				<Switch>
 					{/*http://localhost:3000/login*/}
 					<Route exact
 						   path="/"
 						   render={( props ) => (
-							 <ProductsGalleryView {...props} fetchService={getHomePageProducts} />
+							   <ProductsGalleryView {...props} fetchService={getHomePageProducts}/>
 						   )}
 					/>
 					<Route exact
@@ -65,33 +64,31 @@ function HomePage(props) {
 						   component={StoreManagementPage}
 					/>
 					{/*TODO: Should be the lat path!!!*/}
-					<Route path="*" component={Error} />
+					{/* <Route path="*" component={Error} /> */}
+					{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
+					<Route exact
+						   path="/stores/:storeID"
+						   component={StorePage}
+					/>
+					<Route exact
+						   path="/search/:query"
+						   component={SearchResults}
+					/>
 				</Switch>
-				{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
-				{/*<Route exact*/}
-				{/*	   path="/stores/:storeID"*/}
-				{/*	   component={StorePage}*/}
-				{/*/>*/}
 
 				{/*<ProductsGalleryView/>*/}
 				{/*<ModalForNewProduct storeID={"e3725de0-bd33-4d2a-a05e-dd6c7cbd5601"}/>*/}
 
-				{/*<br/>*/}
-				{/*<br/><br/><br/><br/><br/><br/><br/>*/}
-				{/*<br/><br/><br/><br/><br/><br/><br/>*/}
-				{/*<br/><br/><br/><br/><br/><br/><br/>*/}
-				{/*<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>*/}
-				{/*<h1>dfsd</h1>*/}
 			</div>
 			{/* <StorePage storeItem={fakeStores[0]} /> */}
 		</BrowserRouter>
 	);
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = ( dispatch ) => {
 	return {
-		checkAuth: () => dispatch(actions.checkState())
+		checkAuth: () => dispatch( actions.checkState() )
 	}
 };
 
-export default connect(null, mapDispatchToProps)(HomePage);
+export default connect( null, mapDispatchToProps )( HomePage );
