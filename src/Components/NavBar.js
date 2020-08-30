@@ -18,13 +18,13 @@ function NavBar( props ) {
 	useEffect( () => {
 		listener = document.addEventListener( "scroll", e => {
 			let scrolled = document.scrollingElement.scrollTop
-			if ( scrolled >= 780 ) {
+			if ( scrolled >= 375 ) {
 				setScrollState( "full-opacity" )
-			} else if ( scrolled >= 600 ) {
+			} else if ( scrolled >= 300 ) {
 				setScrollState( "high-opacity" )
-			} else if ( scrolled >= 400 ) {
-				setScrollState( "mid-opacity" )
 			} else if ( scrolled >= 200 ) {
+				setScrollState( "mid-opacity" )
+			} else if ( scrolled >= 100 ) {
 				setScrollState( "low-opacity" )
 			} else {
 				setScrollState( "top" )
