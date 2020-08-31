@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Button, Col, Jumbotron, Row } from "react-bootstrap";
+import { Badge, Col, Jumbotron, Row } from "react-bootstrap";
 import Constants from "../../../Shared/Util/Constants";
 import ProductPageForm from "../../forms/ProductPageForm";
 
