@@ -4,7 +4,7 @@ import ProductService from "../../Services/product.service"
 import Constants from "../../Shared/Util/Constants";
 import ModalForConfirm from "../modals/ModalForConfirm";
 
-function DeleteProduct( { token, product } ) {
+function DeleteProduct( { token, product, afterDelete } ) {
 	const infoToModal = {
 		...Constants.deleteStyle,
 		text:          "Delete product",
@@ -17,6 +17,8 @@ function DeleteProduct( { token, product } ) {
 			//TODO: connect to item
 			try {
 				await ProductService.deleteProduct( data, token );
+				setTimeout(afterDelete, 1000);
+				// afterDelete();
 			} catch ( e ) {
 				const newError = new Error( "Cant delete product" );
 				throw newError;

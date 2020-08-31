@@ -3,7 +3,7 @@ import { useId } from "react-id-generator"
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductsGroup from "./ProductsGroup";
 
-function ProductsGalleryView({ fetchService, renderStore }) {
+function ProductsGalleryView({ fetchService, renderStore, editMode, afterDelete }) {
 	const numOfCardInRaw = 5;
 	const [endOfProducts, setEndOfProducts] = useState(false);
 	const [productsList, setProductsList] = useState(null);
@@ -64,7 +64,7 @@ function ProductsGalleryView({ fetchService, renderStore }) {
 						</div>}
 
 				>
-					{productsList.map((items, index) => <ProductsGroup items={items} key={`${componentId}:${index}`} renderStore={renderStore} />)}
+					{productsList.map((items, index) => <ProductsGroup items={items} key={`${componentId}:${index}`} renderStore={renderStore} editMode={editMode} afterDelete={afterDelete}/>)}
 				</InfiniteScroll>
 			}
 		</div >
