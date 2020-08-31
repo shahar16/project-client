@@ -4,7 +4,7 @@ import { CheckCircleFill, Pencil } from "react-bootstrap-icons";
 import Constants from "../../Shared/Util/Constants";
 import NewProductForm from "../forms/NewProductForm";
 
-function ModalForNewProduct( { storeID, productToEdit } ) {
+function ModalForNewProduct( { storeID, productToEdit, afterEdit } ) {
 	const [ show, setShow ] = useState( false );
 	const [ productEdited, setProductEdited ] = useState( false );
 
@@ -20,7 +20,7 @@ function ModalForNewProduct( { storeID, productToEdit } ) {
 		setProductEdited( true );
 		setTimeout( handleClose, 1000 );
 		setTimeout( afterAdded, 1100 );
-		//TODO: handle updated - refresh view.
+		setTimeout( afterEdit, 1100 );
 	};
 
 	const afterAdded = () => {
@@ -28,23 +28,28 @@ function ModalForNewProduct( { storeID, productToEdit } ) {
 	};
 
 	const prepareProductToEdit = ( product ) => {
-		const stock = JSON.parse(product.stock);
+		let stock;
+		try {
+			stock = JSON.parse( product.stock );
+		} catch ( err ) {
+			stock = product.stock;
+		}
 		const quantities = [];
-		for(let key in stock.quantities) {
-			quantities.push({
-				name: key,
+		for ( let key in stock.quantities ) {
+			quantities.push( {
+				name:     key,
 				quantity: stock.quantities[key]
-			});
+			} );
 		}
 
 		return {
-			name:        product.name,
-			desc:        product.desc,
-			price: product.price,
-			type: stock.type,
-			sn: product.sn,
+			name:       product.name,
+			desc:       product.desc,
+			price:      product.price,
+			type:       stock.type,
+			sn:         product.sn,
 			quantities: quantities,
-			images:      [ {
+			images:     [ {
 				image: null
 			} ]
 		};
@@ -52,7 +57,7 @@ function ModalForNewProduct( { storeID, productToEdit } ) {
 
 	return (
 		<div>
-			<Button variant="success" onClick={handleShow} className="modal-for-new-object">
+			<Button variant="success" onClick={handleShow} block>
 				<Pencil style={Constants.iconStyle}/>
 				Edit product
 			</Button>

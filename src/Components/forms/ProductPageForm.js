@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import UserService from "../../Services/user.service"
+import ModalForEditProduct from "../modals/ModalForEditProduct";
 
 // TODO: Add logic!!
-const ProductPageForm = ( { item, token, user } ) => {
+const ProductPageForm = ( { item, token, user, afterEdit } ) => {
 	const [ isOwner, setIsOwner ] = useState( false );
 	const [ errorMessage, setErrorMessage ] = useState( null );
 
@@ -112,7 +113,7 @@ const ProductPageForm = ( { item, token, user } ) => {
 						<Row>
 							<Col>
 								{/*TODO: change to edit*/}
-								{token && isOwner && <Button block>Edit</Button>}
+								{token && isOwner && <ModalForEditProduct productToEdit={item} storeID={item.storeID} afterEdit={afterEdit} />}
 							</Col>
 						</Row>
 					</Form>

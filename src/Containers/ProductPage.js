@@ -14,10 +14,10 @@ function ProductPage( props ) {
 				const productItem = await ProductService.getProduct( props.match.params );
 				const owner = await StoreService.getOwner( productItem.storeID );
 				productItem.owner = owner.owner;
-				console.log(productItem.stock)
+				console.log( productItem.stock )
 				let tempStock;
 				try {
-				 	tempStock = JSON.parse( productItem.stock );
+					tempStock = JSON.parse( productItem.stock );
 				} catch ( err ) {
 					tempStock = productItem.stock;
 				}
@@ -30,7 +30,11 @@ function ProductPage( props ) {
 			}
 		};
 		fetchProduct();
-	}, [ props.match.params ] );
+	}, [ props.match.params, item ] );
+
+	const afterEdit = () => {
+		setItem( null );
+	};
 
 	return (
 		<div>
@@ -41,7 +45,7 @@ function ProductPage( props ) {
 					{item && <ProductPageCarousel item={item}/>}
 				</Col>
 				<Col>
-					{item && <ProductPageInfo item={item}/>}
+					{item && <ProductPageInfo item={item} afterEdit={afterEdit} />}
 				</Col>
 				<Col md={1}></Col>
 			</Row>

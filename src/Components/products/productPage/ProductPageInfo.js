@@ -3,7 +3,7 @@ import { Badge, Col, Jumbotron, Row } from "react-bootstrap";
 import Constants from "../../../Shared/Util/Constants";
 import ProductPageForm from "../../forms/ProductPageForm";
 
-function ProductPageInfo( { item } ) {
+function ProductPageInfo( { item, afterEdit } ) {
 	return (
 		<Jumbotron style={Constants.productPageStyle}>
 			<Row>
@@ -20,7 +20,7 @@ function ProductPageInfo( { item } ) {
 				</Col>
 			</Row>
 			<hr/>
-			<ProductPageForm item={item}/>
+			<ProductPageForm item={item} afterEdit={afterEdit}/>
 		</Jumbotron>
 	);
 }
