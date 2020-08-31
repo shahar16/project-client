@@ -25,7 +25,10 @@ function StorePage( props ) {
 	}
 
 	const getStore = async () => {
+		await setItem(null);
+		console.log( "getStore" );
 		const storeItem = await StoreService.getStore( props.match.params );
+		console.log( storeItem )
 		setItem( storeItem );
 	}
 
@@ -49,11 +52,11 @@ function StorePage( props ) {
 		return (
 			<Row>
 				<Col md={4}></Col>
-				<Col md={2}><ModalForNewProduct storeID={item.storeID}/></Col>
+				<Col md={2}><ModalForNewProduct storeID={item.storeID} callback={getStore}/></Col>
 				<Col md={2}>
 					<Button variant="warning" style={{ width: "190px" }} onClick={() => setEditMode( !editMode )}>
 						<DashCircleFill style={Constants.iconStyle}/>
-						{editMode && "Finish Edit"}
+						{editMode && "Finish Remove"}
 						{!editMode && "Remove Products"}
 					</Button>
 				</Col>
@@ -65,7 +68,7 @@ function StorePage( props ) {
 	return (
 		// <div className="under-nav-bar">
 		<div id="storePage">
-			{item && <div class="jumbotron text-center" id="jshadow">
+			{item && <div className="jumbotron text-center" id="jshadow">
 				<h1>Welcome to {item.name}</h1>
 				<br/>
 				<Row>
@@ -87,9 +90,7 @@ function StorePage( props ) {
 			</div>}
 			{item && props.token && enableEditingStore() && renderNewProductModal()}
 			<br/>
-			{( item &&
-				< ProductsGalleryView fetchService={getStoreProducts} renderStore={true} editMode={editMode}/> ) ||
-			<Error/>}
+			{ item && < ProductsGalleryView fetchService={getStoreProducts} renderStore={true} editMode={editMode}/>  }
 		</div>
 	);
 }

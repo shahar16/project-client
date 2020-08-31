@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import { CheckCircleFill, PlusCircleFill } from "react-bootstrap-icons";
 import NewProductForm from "../forms/NewProductForm";
 
-function ModalForNewProduct( { storeID } ) {
+function ModalForNewProduct( { storeID, callback } ) {
 	const [ show, setShow ] = useState( false );
 	const [ productAdded, setProductAdded ] = useState( false );
 
@@ -17,6 +17,7 @@ function ModalForNewProduct( { storeID } ) {
 
 	const handleUpload = () => {
 		setProductAdded( true );
+		callback();
 		setTimeout( handleClose, 1000 );
 		setTimeout( afterAdded, 1100 );
 	};
