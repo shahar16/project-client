@@ -6,7 +6,7 @@ import StoreService from "../../../Services/store.service"
 import constants from "../../../Shared/Util/Constants"
 import DeleteProduct from "../deleteProduct";
 
-function ProductItem( { item, renderStore, token, user } ) {
+function ProductItem( { item, renderStore, token, user, editMode } ) {
 	const [ showDelete, setShowDelete ] = useState( false );
 
 	const styleWithoutDelete = { width: '15rem', height: '20rem' };
@@ -18,7 +18,8 @@ function ProductItem( { item, renderStore, token, user } ) {
 			setShowDelete(
 				token &&
 				user.email === owner.owner &&
-				renderStore );
+				renderStore &&
+				editMode );
 		}
 		findOwner();
 	} )
