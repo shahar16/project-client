@@ -7,7 +7,7 @@ function ProductPageInfo( { item } ) {
 	return (
 		<Jumbotron style={Constants.productPageStyle}>
 			<Row>
-				<Col>
+				<Col md={8}>
 					<h2>{item.name}</h2>
 					<p>
 						{item.desc}

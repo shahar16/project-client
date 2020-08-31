@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import UserService from "../../Services/user.service"
-import { authLogout } from "../../Store/actions";
 
 // TODO: Add logic!!
 const ProductPageForm = ( { item, token, user } ) => {
@@ -15,6 +14,11 @@ const ProductPageForm = ( { item, token, user } ) => {
 	}, [ item ] )
 
 	const handleSubmit = async ( values ) => {
+		if ( token ) {
+			setErrorMessage( "You need to login first" );
+			return;
+		}
+
 		const data = {
 			sn:           item.sn,
 			storeID:      item.storeID,
@@ -25,8 +29,8 @@ const ProductPageForm = ( { item, token, user } ) => {
 		try {
 			await UserService.addToCart( data, token );
 		} catch ( e ) {
-			await console.log(e)
-			setErrorMessage(e.message);
+			await console.log( e )
+			setErrorMessage( e.message );
 		}
 	};
 
