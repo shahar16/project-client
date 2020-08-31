@@ -1,13 +1,13 @@
 import React from 'react';
-import { Badge, Button, Col, Jumbotron, Row } from "react-bootstrap";
+import { Badge, Col, Jumbotron, Row } from "react-bootstrap";
 import Constants from "../../../Shared/Util/Constants";
 import ProductPageForm from "../../forms/ProductPageForm";
 
-function ProductPageInfo( { item } ) {
+function ProductPageInfo( { item, afterEdit } ) {
 	return (
 		<Jumbotron style={Constants.productPageStyle}>
 			<Row>
-				<Col>
+				<Col md={8}>
 					<h2>{item.name}</h2>
 					<p>
 						{item.desc}
@@ -20,7 +20,7 @@ function ProductPageInfo( { item } ) {
 				</Col>
 			</Row>
 			<hr/>
-			<ProductPageForm item={item}/>
+			<ProductPageForm item={item} afterEdit={afterEdit}/>
 		</Jumbotron>
 	);
 }

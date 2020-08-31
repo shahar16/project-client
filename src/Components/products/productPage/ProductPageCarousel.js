@@ -7,7 +7,7 @@ const ProductPageCarousel = ( {item} ) => {
 		<div>
 			<Carousel>
 				{
-					item.image.map( (imag) => <Carousel.Item>
+					item.image.map( (imag) => <Carousel.Item key={`${item.sn}/${imag}`}>
 						<img
 							className="d-block w-100"
 							src={`${Constants.serverUrl}/${imag}`}

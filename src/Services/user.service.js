@@ -61,6 +61,16 @@ class UserService {
 
 		return res.data;
 	}
+
+	async addToCart(data, token) {
+		await axios.post(`${this.url}addtocart`, data, {
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+		});
+	};
+
 }
 
 export default new UserService();
