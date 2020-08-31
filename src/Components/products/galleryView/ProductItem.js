@@ -6,7 +6,7 @@ import StoreService from "../../../Services/store.service"
 import constants from "../../../Shared/Util/Constants"
 import DeleteProduct from "../deleteProduct";
 
-function ProductItem( { item, renderStore, token, user, editMode } ) {
+function ProductItem( { item, renderStore, token, user, editMode, afterDelete } ) {
 	const [ showDelete, setShowDelete ] = useState( false );
 
 	const styleWithoutDelete = { width: '15rem', height: '20rem' };
@@ -40,7 +40,7 @@ function ProductItem( { item, renderStore, token, user, editMode } ) {
 			{showDelete && <Card.Footer>
 				{/*TODO: add delete button*/}
 				<div className={"d-flex mb-0 mt-0 justify-content-between"}>
-					<DeleteProduct product={item}/>
+					<DeleteProduct product={item} afterDelete={afterDelete}/>
 				</div>
 			</Card.Footer>}
 		</Card>

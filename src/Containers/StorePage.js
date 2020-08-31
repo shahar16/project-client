@@ -90,7 +90,7 @@ function StorePage( props ) {
 			</div>}
 			{item && props.token && enableEditingStore() && renderNewProductModal()}
 			<br/>
-			{ item && < ProductsGalleryView fetchService={getStoreProducts} renderStore={true} editMode={editMode}/>  }
+			{ item && < ProductsGalleryView fetchService={getStoreProducts} renderStore={true} editMode={editMode} afterDelete={getStore}/>  }
 		</div>
 	);
 }
