@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Error from "../Components/Error";
+import Footer from "../Components/Footer";
 import ModalForAuth from "../Components/modals/ModalForAuth";
 import ModalForEditUser from "../Components/modals/ModalForEditUser";
 import NavBar from "../Components/NavBar";
@@ -79,6 +80,7 @@ function HomePage( props ) {
 					/>
 					<Route path="*" component={Error}/>
 				</Switch>
+				<Footer/>
 			</div>
 		</BrowserRouter>
 	);
