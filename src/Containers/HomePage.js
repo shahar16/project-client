@@ -8,6 +8,7 @@ import NavBar from "../Components/NavBar";
 import ProductsGalleryView from "../Components/products/galleryView/ProductsGalleryView";
 import ProductService from "../Services/product.test.service";
 import * as actions from "../Store/actions";
+import MyCart from "./MyCart";
 import ProductPage from "./ProductPage";
 import SearchResults from "./SearchResults";
 import StoreManagementPage from "./StoreManagementPage";
@@ -61,6 +62,10 @@ function HomePage( props ) {
 					<Route exact
 						   path="/my-stores"
 						   component={StoreManagementPage}
+					/>
+					<Route exact
+						   path="/my-cart"
+						   component={MyCart}
 					/>
 					{/*TODO: Should be the lat path!!!*/}
 					{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
