@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Row, Table } from "react-bootstrap";
+import { Button, Col, Jumbotron, Row, Table } from "react-bootstrap";
 import { BagCheck } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import CartTd from "../Components/Cart/CartTd";
+import OrderSummary from "../Components/Cart/OrderSummary";
 import CartService from "../Services/cart.service"
 import Constants from "../Shared/Util/Constants";
 
 function MyCart( props ) {
 	const [ cart, setCart ] = useState( null );
 	const [ forceRender, setForceRender ] = useState( false );
-	const [ showCheckout, setShowCheckout ] = useState( false );
 
 	useEffect( () => {
 		const fetchCart = async () => {
@@ -34,18 +34,8 @@ function MyCart( props ) {
 			<br/>
 			{props.token && <Row>
 				<Col md={1}></Col>
-				<Col md={10}>
+				<Col md={8}>
 					{cart && cart.products.length === 0 && <h4>Please add your first store</h4>}
-					<Row>
-						<Col md={10}></Col>
-						<Col md={2}>
-							<Button onSubmit={() => setShowCheckout( true )}>
-								<BagCheck style={Constants.iconStyle}/>
-								Checkout
-							</Button>
-						</Col>
-						<Col md={1}></Col>
-					</Row>
 					<Table responsive hover style={{ "marginTop": "2px" }}>
 						<thead>
 						<tr>
@@ -66,7 +56,10 @@ function MyCart( props ) {
 						</tbody>
 					</Table>
 				</Col>
-				<Col md={1}></Col>
+				<Col md={3}>
+					{cart && <OrderSummary cart={cart}/>}
+				</Col>
+				{/*<Col md={1}></Col>*/}
 			</Row>}
 			{!props.token && <h1>You need to login first</h1>}
 		</div>
