@@ -27,6 +27,15 @@ class StoreService {
 			},
 		} );
 	}
+
+	async placeOrder( data, token ) {
+		await axios.post( `${this.url}/placeorder`, data, {
+			headers: {
+				'Content-Type':  'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+		} );
+	}
 }
 
 export default new StoreService();

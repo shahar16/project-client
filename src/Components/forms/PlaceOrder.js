@@ -4,7 +4,7 @@ import { Button, Col, Row } from "react-bootstrap";
 import { Cart4 } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import * as Yup from 'yup';
-import UserService from "../../Services/user.service"
+import CartService from "../../Services/cart.service"
 import Constants from "../../Shared/Util/Constants";
 import * as actions from "../../Store/actions";
 
@@ -22,20 +22,28 @@ function PlaceOrder( props ) {
 	const [ defaultAddressPressed, setDefaultAddressPressed ] = useState( false );
 
 	const placeOrder = async ( values ) => {
-		console.log(values)
-		// props.startAction();
-		// try {
-		// 	const { token, expiresTimeInMiliseconds, user } = await UserService.register( values );
-		// 	UserService.writeToLocalStorage( token, expiresTimeInMiliseconds, user );
-		// 	props.setAuthincationTimeOut( expiresTimeInMiliseconds );
-		// 	props.setUser( user );
-		// 	props.authSuccess( token );
-		// 	props.onLog();
-		// } catch ( err ) {
-		// 	const error = await err.response.json();
-		// 	setErrorMessage( error.message );
-		// 	props.authFail( error.message );
-		// }
+		const data = {
+			shippingAddress: {
+				city:     values.city,
+				street:   values.street,
+				houseNum: values.houseNum
+			},
+			paymentMethod:   {
+				creditCardNumber: values.creditCardNumber,
+				cvv:              values.cvv,
+				date:             values.date
+			},
+			id:              props.cartID
+		}
+
+		props.startAction();
+		try {
+			await CartService.placeOrder( data, props.token );
+		} catch ( err ) {
+			setErrorMessage( "Payment failed!" );
+		} finally {
+			props.finishAction();
+		}
 	}
 
 	return (
@@ -44,8 +52,8 @@ function PlaceOrder( props ) {
 				city:             "",
 				street:           "",
 				houseNum:         "",
-				creditCardNumber: "",
-				cvv:              "",
+				creditCardNumber: "1234567891234567",
+				cvv:              "123",
 				date:             "2020-09"
 			}}
 			validationSchema={PlaceOrderSchema}
@@ -142,11 +150,8 @@ const mapStateToProps = ( state ) => {
 
 const mapDispatchToProps = ( dispatch ) => {
 	return {
-		authSuccess:            ( token ) => dispatch( actions.authSuccess( token ) ),
-		authFail:               ( err ) => dispatch( actions.authFail( err ) ),
-		startAction:            () => dispatch( actions.startAction() ),
-		setAuthincationTimeOut: ( expiresTimeInMiliseconds ) => dispatch( actions.setAuthincationTimeOut( expiresTimeInMiliseconds ) ),
-		setUser:                ( user ) => dispatch( actions.setUser( user ) )
+		finishAction: () => dispatch( actions.finishAction() ),
+		startAction:  () => dispatch( actions.startAction() ),
 	}
 };
 

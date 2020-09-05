@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Jumbotron, Row, Table } from "react-bootstrap";
-import { BagCheck } from "react-bootstrap-icons";
+import { Col, Image, Row, Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import CartTd from "../Components/Cart/CartTd";
 import OrderSummary from "../Components/Cart/OrderSummary";
+import cartEmpty from "../resources/images/shopping-cart-empty.png"
 import CartService from "../Services/cart.service"
-import Constants from "../Shared/Util/Constants";
 
 function MyCart( props ) {
 	const [ cart, setCart ] = useState( null );
@@ -17,7 +16,7 @@ function MyCart( props ) {
 				const res = await CartService.getCart( props.token );
 				setCart( res );
 			} catch ( e ) {
-				console.log( "errrrr" )
+				setCart( null );
 			}
 		}
 
@@ -32,7 +31,7 @@ function MyCart( props ) {
 	return (
 		<div>
 			<br/>
-			{props.token && <Row>
+			{props.token && cart && <Row>
 				<Col md={1}></Col>
 				<Col md={8}>
 					{cart && cart.products.length === 0 && <h4>Please add your first store</h4>}
@@ -62,13 +61,16 @@ function MyCart( props ) {
 				{/*<Col md={1}></Col>*/}
 			</Row>}
 			{!props.token && <h1>You need to login first</h1>}
+			{props.token && !cart &&
+			<Image src={cartEmpty}/>
+			}
 		</div>
 	);
 }
 
 const mapStateToProps = ( state ) => {
 	return {
-		token: state.token
+		token: state.token,
 	}
 }
 

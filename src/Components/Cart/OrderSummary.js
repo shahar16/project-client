@@ -14,7 +14,7 @@ function OrderSummary( { cart } ) {
 			totalPrice += currentProduct.price * currentProduct.quantity;
 		}
 
-		return String(totalPrice);
+		return String( totalPrice );
 	};
 
 	return (
@@ -28,7 +28,7 @@ function OrderSummary( { cart } ) {
 					Checkout
 				</Button>}
 				{showCheckout &&
-					<PlaceOrder/>
+				<PlaceOrder cartID={cart.id}/>
 				}
 			</Jumbotron>
 		</div>
