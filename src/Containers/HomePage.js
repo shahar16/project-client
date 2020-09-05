@@ -16,84 +16,84 @@ import StoreManagementPage from "./StoreManagementPage";
 import UserOrdersPage from "./UserOrdersPage";
 import StorePage from './StorePage';
 
-function HomePage( props ) {
+function HomePage(props) {
 
-	useEffect( () => {
+	useEffect(() => {
 		props.checkAuth();
-	}, [ props ] );
+	}, [props]);
 
-	const getHomePageProducts = async ( init ) => {
-		return await ProductService.getHomePageProducts( init );
+	const getHomePageProducts = async (init) => {
+		return await ProductService.getHomePageProducts(init);
 	}
 
 	return (
 		<BrowserRouter>
-			<Route component={NavBar}/>
+			<Route component={NavBar} />
 			<div className="under-nav-bar">
 				<Switch>
 					{/*http://localhost:3000/login*/}
 					<Route exact
-						   path="/"
-						   render={( props ) => (
-							   <ProductsGalleryView {...props} fetchService={getHomePageProducts}/>
-						   )}
+						path="/"
+						render={(props) => (
+							<ProductsGalleryView {...props} fetchService={getHomePageProducts} />
+						)}
 					/>
 					<Route exact
-						   path="/login"
-						   render={( props ) => (
-							   <ModalForAuth {...props} signUp={false}/>
-						   )}
+						path="/login"
+						render={(props) => (
+							<ModalForAuth {...props} signUp={false} />
+						)}
 					/>
 					<Route exact
-						   path="/edit-profile"
-						   component={ModalForEditUser}
+						path="/edit-profile"
+						component={ModalForEditUser}
 					/>
 					{/*http://localhost:3000/signUp*/}
 					<Route exact
-						   path="/signup"
-						   render={( props ) => (
-							   <ModalForAuth {...props} signUp={true}/>
-						   )}
+						path="/signup"
+						render={(props) => (
+							<ModalForAuth {...props} signUp={true} />
+						)}
 					/>
 					{/*http://localhost:3000/products/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601/123456*/}
 					<Route exact
-						   path="/products/:storeID/:sn"
-						   component={ProductPage}
+						path="/products/:storeID/:sn"
+						component={ProductPage}
 					/>
 					{/*http://localhost:3000/my-stores*/}
 					<Route exact
-						   path="/my-stores"
-						   component={StoreManagementPage}
+						path="/my-stores"
+						component={StoreManagementPage}
 					/>
 					<Route exact
-						   path="/my-cart"
-						   component={MyCart}
+						path="/my-cart"
+						component={MyCart}
 					/>
 					{/*TODO: Should be the lat path!!!*/}
 					{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
-					{/* <Route exact
-						   path="/stores/:storeID"
-						   component={StorePage}
+					<Route exact
+						path="/stores/:storeID"
+						component={StorePage}
 					/>
 					<Route exact
-						   path="/search/:query"
-						   component={SearchResults}
-					/> */}
+						path="/search/:query"
+						component={SearchResults}
+					/>
 					<Route exact
 						path="/my-orders"
 						component={UserOrdersPage}
 					/>
 					<Route path="*" component={Error} />
 				</Switch>
-				<Footer/>
+				<Footer />
 			</div>
 		</BrowserRouter>
 	);
 }
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapDispatchToProps = (dispatch) => {
 	return {
-		checkAuth: () => dispatch( actions.checkState() )
+		checkAuth: () => dispatch(actions.checkState())
 	}
 };
 

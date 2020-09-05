@@ -30,7 +30,7 @@ function ProductPage( props ) {
 			}
 		};
 		fetchProduct();
-	}, [ props.match.params, item ] );
+	}, [props.match.params]);
 
 	const afterEdit = () => {
 		setItem( null );
