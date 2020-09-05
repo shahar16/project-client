@@ -29,7 +29,7 @@ function CartTd( { product, index, callBack } ) {
 				<Quantity quantity={product.quantity} product={product} callBack={callBack}/>
 			</td>
 			<td>
-				{`${product.quantity} X ${product.price} = ${product.quantity * product.price}`}
+				{`${product.quantity} X ${product.price} = ${product.quantity * product.price} ₪`}
 			</td>
 		</tr>
 	);

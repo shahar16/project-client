@@ -14,7 +14,7 @@ function OrderSummary( { cart, afterPay } ) {
 			totalPrice += currentProduct.price * currentProduct.quantity;
 		}
 
-		return String( totalPrice );
+		return (String( totalPrice ) + ' ₪');
 	};
 
 	return (
