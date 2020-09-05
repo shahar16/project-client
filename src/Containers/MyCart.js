@@ -38,7 +38,7 @@ function MyCart( props ) {
 			{props.token && cart && <Row>
 				<Col md={1}></Col>
 				<Col md={8}>
-					{cart && cart.products.length === 0 && <h4>Please add your first store</h4>}
+					{cart && cart.products.length === 0 && <h4>Please add your first product</h4>}
 					<Table responsive hover style={{ "marginTop": "2px" }}>
 						<thead>
 						<tr>

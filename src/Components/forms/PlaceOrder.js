@@ -20,10 +20,10 @@ const PlaceOrderSchema = Yup.object().shape( {
 function PlaceOrder( props ) {
 	const [ errorMessage, setErrorMessage ] = useState( null );
 	const [ defaultAddressPressed, setDefaultAddressPressed ] = useState( false );
-	const [ show, setShow ] = useState( false );
+	const [ showModal, setShowModal ] = useState( false );
 
 	const handleClose = () => {
-		setShow( false );
+		setShowModal( false );
 		setErrorMessage( null );
 	};
 
@@ -45,7 +45,7 @@ function PlaceOrder( props ) {
 		props.startAction();
 		try {
 			await CartService.placeOrder( data, props.token );
-			setShow( true );
+			setShowModal( true );
 			setTimeout( props.afterPay, 1500 )
 		} catch ( err ) {
 			setErrorMessage( "Payment failed!" );
@@ -61,8 +61,8 @@ function PlaceOrder( props ) {
 					city:             "",
 					street:           "",
 					houseNum:         "",
-					creditCardNumber: "1234567891234567",
-					cvv:              "123",
+					creditCardNumber: "",
+					cvv:              "",
 					date:             "2020-09"
 				}}
 				validationSchema={PlaceOrderSchema}
@@ -151,7 +151,7 @@ function PlaceOrder( props ) {
 				}
 				}
 			</Formik>
-			<Modal show={show} onHide={handleClose}>
+			<Modal show={showModal} onHide={handleClose}>
 				<Modal.Title>
 					<div><CheckCircleFill style={{ "marginRight": "10px" }}/>Payed successfully</div>
 				</Modal.Title>
