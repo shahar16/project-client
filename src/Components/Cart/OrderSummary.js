@@ -4,7 +4,7 @@ import { BagCheck } from "react-bootstrap-icons";
 import Constants from "../../Shared/Util/Constants";
 import PlaceOrder from "../forms/PlaceOrder";
 
-function OrderSummary( { cart } ) {
+function OrderSummary( { cart, afterPay } ) {
 	const [ showCheckout, setShowCheckout ] = useState( false );
 
 	const getTotalPrice = () => {
@@ -28,7 +28,7 @@ function OrderSummary( { cart } ) {
 					Checkout
 				</Button>}
 				{showCheckout &&
-				<PlaceOrder cartID={cart.id}/>
+				<PlaceOrder cartID={cart.id} afterPay={afterPay}/>
 				}
 			</Jumbotron>
 		</div>

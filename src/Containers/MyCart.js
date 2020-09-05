@@ -28,6 +28,10 @@ function MyCart( props ) {
 		setCart( null );
 	};
 
+	const afterPay = () => {
+		props.history.push( "/" );
+	};
+
 	return (
 		<div>
 			<br/>
@@ -56,7 +60,7 @@ function MyCart( props ) {
 					</Table>
 				</Col>
 				<Col md={3}>
-					{cart && <OrderSummary cart={cart}/>}
+					{cart && <OrderSummary cart={cart} afterPay={afterPay}/>}
 				</Col>
 				{/*<Col md={1}></Col>*/}
 			</Row>}
