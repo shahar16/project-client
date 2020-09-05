@@ -11,6 +11,7 @@ import * as actions from "../Store/actions";
 import ProductPage from "./ProductPage";
 import SearchResults from "./SearchResults";
 import StoreManagementPage from "./StoreManagementPage";
+import UserOrdersPage from "./UserOrdersPage";
 import StorePage from './StorePage';
 
 function HomePage( props ) {
@@ -64,15 +65,19 @@ function HomePage( props ) {
 					/>
 					{/*TODO: Should be the lat path!!!*/}
 					{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
-					<Route exact
+					{/* <Route exact
 						   path="/stores/:storeID"
 						   component={StorePage}
 					/>
 					<Route exact
 						   path="/search/:query"
 						   component={SearchResults}
+					/> */}
+					<Route exact
+						path="/my-orders"
+						component={UserOrdersPage}
 					/>
-					<Route path="*" component={Error}/>
+					<Route path="*" component={Error} />
 				</Switch>
 			</div>
 		</BrowserRouter>
@@ -85,4 +90,4 @@ const mapDispatchToProps = ( dispatch ) => {
 	}
 };
 
-export default connect( null, mapDispatchToProps )( HomePage );
+export default connect(null, mapDispatchToProps)(HomePage);
