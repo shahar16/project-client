@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Error from "../Components/Error";
+import Footer from "../Components/Footer";
 import ModalForAuth from "../Components/modals/ModalForAuth";
 import ModalForEditUser from "../Components/modals/ModalForEditUser";
 import NavBar from "../Components/NavBar";
 import ProductsGalleryView from "../Components/products/galleryView/ProductsGalleryView";
 import ProductService from "../Services/product.test.service";
 import * as actions from "../Store/actions";
+import MyCart from "./MyCart";
 import ProductPage from "./ProductPage";
 import SearchResults from "./SearchResults";
 import StoreManagementPage from "./StoreManagementPage";
@@ -63,6 +65,10 @@ function HomePage( props ) {
 						   path="/my-stores"
 						   component={StoreManagementPage}
 					/>
+					<Route exact
+						   path="/my-cart"
+						   component={MyCart}
+					/>
 					{/*TODO: Should be the lat path!!!*/}
 					{/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
 					{/* <Route exact
@@ -79,6 +85,7 @@ function HomePage( props ) {
 					/>
 					<Route path="*" component={Error} />
 				</Switch>
+				<Footer/>
 			</div>
 		</BrowserRouter>
 	);
