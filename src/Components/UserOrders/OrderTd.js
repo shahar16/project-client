@@ -30,7 +30,7 @@ function OrderTd({ order, index }) {
                 {order.orderDate.date}
             </td>
             <td>
-                {}
+                {order.estimatedShipping.date}
             </td>
         </tr>
     )
