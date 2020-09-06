@@ -1,128 +1,128 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
-import { Col, Row } from "react-bootstrap";
-import { connect } from "react-redux";
-import * as Yup from 'yup';
-import * as actions from "../../Store/actions";
-import UserService from "../../Services/user.service"
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import React, { useState } from 'react'
+import { Col, Row } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import * as Yup from 'yup'
+import UserService from '../../Services/user.service'
+import * as actions from '../../Store/actions'
 
-const SignUpSchema = Yup.object().shape( {
-	firstName:       Yup.string()
-						 .required( 'First name is required' ),
-	lastName:        Yup.string()
-						 .required( 'Last name is required' ),
-	email:           Yup.string()
-						 .required( 'Email is required' ).email( "Invalid email" ),
-	password:        Yup.string()
-						 .required( 'Password is required' ).min( 6 ),
-	confirmPassword: Yup.string()
-						 .oneOf( [ Yup.ref( "password" ), null ], "Password must match" )
-						 .required( "Confirm password is required" ),
-	city:            Yup.string(),
-	street:          Yup.string(),
-	houseNum:        Yup.number()
-} )
+const SignUpSchema = Yup.object().shape({
+  firstName:       Yup.string()
+                     .required('First name is required'),
+  lastName:        Yup.string()
+                     .required('Last name is required'),
+  email:           Yup.string()
+                     .required('Email is required').email('Invalid email'),
+  password:        Yup.string()
+                     .required('Password is required').min(6),
+  confirmPassword: Yup.string()
+                     .oneOf([Yup.ref('password'), null], 'Password must match')
+                     .required('Confirm password is required'),
+  city:            Yup.string(),
+  street:          Yup.string(),
+  houseNum:        Yup.number()
+})
 
-function SignUp( props ) {
-	const [ errorMessage, setErrorMessage ] = useState( null );
+function SignUp (props) {
+  const [errorMessage, setErrorMessage] = useState(null)
 
-	const register = async ( values ) => {
-		props.startAction();
-		try {
-			const { token, expiresTimeInMiliseconds, user } = await UserService.register( values );
-			UserService.writeToLocalStorage( token, expiresTimeInMiliseconds, user );
-			props.setAuthincationTimeOut( expiresTimeInMiliseconds );
-			props.setUser( user );
-			props.authSuccess( token );
-			props.onLog();
-		} catch ( err ) {
-			const error = await err.response.json();
-			setErrorMessage( error.message );
-			props.authFail( error.message );
-		}
-	}
+  const register = async (values) => {
+    props.startAction()
+    try {
+      const { token, expiresTimeInMiliseconds, user } = await UserService.register(values)
+      UserService.writeToLocalStorage(token, expiresTimeInMiliseconds, user)
+      props.setAuthincationTimeOut(expiresTimeInMiliseconds)
+      props.setUser(user)
+      props.authSuccess(token)
+      props.onLog()
+    } catch (err) {
+      const error = await err.response.json()
+      setErrorMessage(error.message)
+      props.authFail(error.message)
+    }
+  }
 
-	return (
-		<Formik
-			initialValues={{
-				firstName:       "",
-				lastName:        "",
-				email:           "",
-				password:        "",
-				confirmPassword: "",
-				city:            "",
-				street:          "",
-				houseNum:        ""
-			}}
-			validationSchema={SignUpSchema}
-			onSubmit={register}>
-			{() => {
-				return (
-					<Form>
-						<div className="form-group">
-							<Field type="text" name="firstName" className="form-control" placeholder="First name"/>
-							<ErrorMessage name="firstName" component="div" className="form-validation-alert"/>
-						</div>
-						<div className="form-group">
-							<Field type="text" name="lastName" className="form-control" placeholder="Last name"/>
-							<ErrorMessage name="lastName" component="div" className="form-validation-alert"/>
-						</div>
-						<div className="form-group">
-							<Field type="email" name="email" className="form-control" placeholder="Email"/>
-							<ErrorMessage name="email" component="div" className="form-validation-alert"/>
-						</div>
-						<div className="form-group">
-							<Field type="password" name="password" className="form-control" placeholder="Password"/>
-							<ErrorMessage name="password" component="div" className="form-validation-alert"/>
-						</div>
-						<div className="form-group">
-							<Field type="password" name="confirmPassword" className="form-control"
-								   placeholder="Confirm Password"/>
-							<ErrorMessage name="confirmPassword" component="div" className="form-validation-alert"/>
-						</div>
-						<div className="form-group">
-							<label>Default shipping address (optional)</label>
-						</div>
-						<div className="form-group">
-							<Field type="text" name="city" className="form-control" placeholder="City"/>
-							<ErrorMessage name="city" component="div" className="form-validation-alert"/>
-						</div>
-						<Row>
-							<Col md="8">
-								<div className="form-group">
-									<Field type="text" name="street" className="form-control" placeholder="Street"/>
-									<ErrorMessage name="street" component="div" className="form-validation-alert"/>
-								</div>
-							</Col>
-							<Col md="4">
-								<div className="form-group">
-									<Field type="number" name="houseNum" className="form-control" placeholder="Number" min="1"/>
-									<ErrorMessage name="houseNum" component="div" className="form-validation-alert"/>
-								</div>
-							</Col>
-						</Row>
-						<div className="form-group">
-							<button type="submit" className="btn btn-primary btn-block">Sign Up</button>
-						</div>
-						{errorMessage &&
-						<div className="alert alert-danger">{errorMessage}</div>
-						}
-					</Form>
-				)
-			}
-			}
-		</Formik>
-	)
+  return (
+    <Formik
+      initialValues={{
+        firstName:       '',
+        lastName:        '',
+        email:           '',
+        password:        '',
+        confirmPassword: '',
+        city:            '',
+        street:          '',
+        houseNum:        ''
+      }}
+      validationSchema={SignUpSchema}
+      onSubmit={register}>
+      {() => {
+        return (
+          <Form>
+            <div className="form-group">
+              <Field type="text" name="firstName" className="form-control" placeholder="First name"/>
+              <ErrorMessage name="firstName" component="div" className="form-validation-alert"/>
+            </div>
+            <div className="form-group">
+              <Field type="text" name="lastName" className="form-control" placeholder="Last name"/>
+              <ErrorMessage name="lastName" component="div" className="form-validation-alert"/>
+            </div>
+            <div className="form-group">
+              <Field type="email" name="email" className="form-control" placeholder="Email"/>
+              <ErrorMessage name="email" component="div" className="form-validation-alert"/>
+            </div>
+            <div className="form-group">
+              <Field type="password" name="password" className="form-control" placeholder="Password"/>
+              <ErrorMessage name="password" component="div" className="form-validation-alert"/>
+            </div>
+            <div className="form-group">
+              <Field type="password" name="confirmPassword" className="form-control"
+                     placeholder="Confirm Password"/>
+              <ErrorMessage name="confirmPassword" component="div" className="form-validation-alert"/>
+            </div>
+            <div className="form-group">
+              <label>Default shipping address (optional)</label>
+            </div>
+            <div className="form-group">
+              <Field type="text" name="city" className="form-control" placeholder="City"/>
+              <ErrorMessage name="city" component="div" className="form-validation-alert"/>
+            </div>
+            <Row>
+              <Col md="8">
+                <div className="form-group">
+                  <Field type="text" name="street" className="form-control" placeholder="Street"/>
+                  <ErrorMessage name="street" component="div" className="form-validation-alert"/>
+                </div>
+              </Col>
+              <Col md="4">
+                <div className="form-group">
+                  <Field type="number" name="houseNum" className="form-control" placeholder="Number" min="1"/>
+                  <ErrorMessage name="houseNum" component="div" className="form-validation-alert"/>
+                </div>
+              </Col>
+            </Row>
+            <div className="form-group">
+              <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+            </div>
+            {errorMessage &&
+            <div className="alert alert-danger">{errorMessage}</div>
+            }
+          </Form>
+        )
+      }
+      }
+    </Formik>
+  )
 }
 
-const mapDispatchToProps = ( dispatch ) => {
-	return {
-		authSuccess:            ( token ) => dispatch( actions.authSuccess( token ) ),
-		authFail:               ( err ) => dispatch( actions.authFail( err ) ),
-		startAction:            () => dispatch( actions.startAction() ),
-		setAuthincationTimeOut: ( expiresTimeInMiliseconds ) => dispatch( actions.setAuthincationTimeOut( expiresTimeInMiliseconds ) ),
-		setUser:                ( user ) => dispatch( actions.setUser( user ) )
-	}
-};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    authSuccess:            (token) => dispatch(actions.authSuccess(token)),
+    authFail:               (err) => dispatch(actions.authFail(err)),
+    startAction:            () => dispatch(actions.startAction()),
+    setAuthincationTimeOut: (expiresTimeInMiliseconds) => dispatch(actions.setAuthincationTimeOut(expiresTimeInMiliseconds)),
+    setUser:                (user) => dispatch(actions.setUser(user))
+  }
+}
 
-export default connect( null, mapDispatchToProps )( SignUp );
+export default connect(null, mapDispatchToProps)(SignUp)

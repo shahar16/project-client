@@ -1,13 +1,11 @@
-import React from 'react';
-import { Navbar } from "react-bootstrap";
-import logo from "../resources/images/store-line-logo.png";
+import React from 'react'
 
-function Footer( props ) {
-	return (
-		<div>
-			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-		</div>
-	);
+function Footer (props) {
+  return (
+    <div>
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+  )
 }
 
-export default Footer;
+export default Footer

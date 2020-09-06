@@ -1,5 +1,5 @@
-1. Order UI component                   ----- done
-2. Order Summary UI button: user->orders ----- done
+1. SingleOrder UI component                   ----- done
+2. SingleOrder Summary UI button: user->orders ----- done
 3. link to product Store from product    ------ done
 4. deployment
 6. fix homepage bug in login time       ------- done
@@ -10,6 +10,7 @@
 11. disable "remove products" button when store is empty  ------- done
 13. remove itrm from cart     ------- done
 14. BY IT NOW!                 ------- done
+15. title
 
 kirsh:
 1. classified price by category type or split to different products

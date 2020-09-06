@@ -2,10 +2,8 @@ import React from 'react'
 import { Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Constants from '../../Shared/Util/Constants'
-import Quantity from './Quantity'
-import RemoveItem from './RemoveItem'
 
-function CartTd ({ product, index, callBack }) {
+function ProductInOrder ({ product, index, callBack }) {
   return (
     <tr>
       <td>
@@ -27,16 +25,13 @@ function CartTd ({ product, index, callBack }) {
         </Link>
       </td>
       <td>
-        <Quantity quantity={product.quantity} product={product} callBack={callBack}/>
+        {product.quantity}
       </td>
       <td>
         {`${product.quantity} X ${product.price} = ${product.quantity * product.price} ₪`}
-      </td>
-      <td>
-        <RemoveItem item={product} callBack={callBack}/>
       </td>
     </tr>
   )
 }
 
-export default CartTd
+export default ProductInOrder
