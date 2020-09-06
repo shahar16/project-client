@@ -1,19 +1,4 @@
 import * as actionsTypes from './actionTypes'
-//TODO : remove - only for practice
-export const shahar = (name) => {
-  return {
-    type:          actionsTypes.SHAHAR_TEST,
-    shaharMessage: name
-  }
-}
-
-//TODO : remove - only for practice
-export const test = () => {
-  return {
-    type:    actionsTypes.TEST,
-    message: 'Hello World....'
-  }
-}
 
 export const startAction = () => {
   return {

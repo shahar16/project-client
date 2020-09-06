@@ -14,11 +14,10 @@ function DeleteProduct ({ token, product, afterDelete }) {
         sn:      product.sn
       }
 
-      //TODO: connect to item
       try {
         await ProductService.deleteProduct(data, token)
         setTimeout(afterDelete, 1000)
-        // afterDelete();
+        afterDelete();
       } catch (e) {
         const newError = new Error('Cant delete product')
         throw newError

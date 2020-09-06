@@ -7,7 +7,4 @@ export {
   authFail,
   setUser,
   setAuthincationTimeOut,
-  //TODO : remove - only for practice
-  test,
-  shahar
 } from './app'

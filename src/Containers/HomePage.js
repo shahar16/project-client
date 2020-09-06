@@ -56,7 +56,6 @@ function HomePage (props) {
                  path="/my-cart"
                  component={MyCart}
           />
-          {/*TODO: Should be the lat path!!!*/}
           {/*http://localhost:3000/stores/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601*/}
           <Route exact
                  path="/stores/:storeID"

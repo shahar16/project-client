@@ -38,7 +38,6 @@ function ProductItem ({ item, renderStore, token, user, editMode, afterDelete })
         </Card.Body>
       </Link>
       {showDelete && <Card.Footer>
-        {/*TODO: add delete button*/}
         <div className={'d-flex mb-0 mt-0 justify-content-between'}>
           <DeleteProduct product={item} afterDelete={afterDelete}/>
         </div>
