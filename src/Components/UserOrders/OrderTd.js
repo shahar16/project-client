@@ -4,6 +4,18 @@ import { Link } from "react-router-dom";
 import Constants from "../../Shared/Util/Constants";
 
 function OrderTd({ order, index }) {
+
+    const getMostExpProduct = () => {
+        let index = 0
+        for ( let i = 0; i < order.products.length; i++ ) {
+            if(order.products[index].price < order.products[i].price) {
+                index = i;
+            }
+        }
+
+        return order.products[index];
+    };
+
     return (
         <tr>
             <td>
@@ -12,7 +24,7 @@ function OrderTd({ order, index }) {
             <td>
                 <Image
                     className="d-block w-100"
-                    src={`${Constants.serverUrl}/${order.products[0].image[0]}`}
+                    src={`${Constants.serverUrl}/${getMostExpProduct().image[0]}`}
                     alt={order.id}
                     style={{ maxWidth: "100px", maxHeight: "100px" }}
                 />

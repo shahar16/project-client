@@ -55,7 +55,7 @@ function StoreManagementPage( props ) {
 						<thead>
 						<tr>
 							<th>#</th>
-							<th>Store Name</th>
+							<th>Link to store</th>
 							<th>Amount of products</th>
 							<th>Edit store info</th>
 							<th>Delete store</th>
