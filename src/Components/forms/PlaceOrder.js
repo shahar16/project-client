@@ -84,7 +84,7 @@ function PlaceOrder( props ) {
 								</Col>
 								<Col md="4">
 									<div className="form-group">
-										<Field type="number" name="houseNum" className="form-control"
+										<Field min="1" type="number" name="houseNum" className="form-control"
 											   placeholder="Num"/>
 										<ErrorMessage name="houseNum" component="div"
 													  className="form-validation-alert"/>
@@ -122,13 +122,13 @@ function PlaceOrder( props ) {
 								<label>Credit Card</label>
 							</div>
 							<div className="form-group">
-								<Field type="number" name="creditCardNumber" className="form-control"
+								<Field min="1" type="number" name="creditCardNumber" className="form-control"
 									   placeholder="Credit Card Number"/>
 								<ErrorMessage name="creditCardNumber" component="div"
 											  className="form-validation-alert"/>
 							</div>
 							<div className="form-group">
-								<Field type="number" name="cvv" className="form-control" placeholder="cvv"/>
+								<Field min="1" type="number" name="cvv" className="form-control" placeholder="cvv"/>
 								<ErrorMessage name="cvv" component="div" className="form-validation-alert"/>
 							</div>
 							<div className="form-group">

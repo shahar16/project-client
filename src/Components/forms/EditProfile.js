@@ -89,7 +89,7 @@ function SignUp( props ) {
 							</Col>
 							<Col md="4">
 								<div className="form-group">
-									<Field type="number" name="houseNum" className="form-control" placeholder="Number"/>
+									<Field min="1" type="number" name="houseNum" className="form-control" placeholder="Number"/>
 									<ErrorMessage name="houseNum" component="div" className="form-validation-alert"/>
 								</div>
 							</Col>
