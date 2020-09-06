@@ -1,8 +1,10 @@
 import React from 'react';
-import { Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Constants from "../../Shared/Util/Constants";
 import Quantity from "./Quantity";
+import {DashCircle} from "react-bootstrap-icons";
+import RemoveItem from "./RemoveItem";
 
 function CartTd( { product, index, callBack } ) {
 	return (
@@ -30,6 +32,9 @@ function CartTd( { product, index, callBack } ) {
 			</td>
 			<td>
 				{`${product.quantity} X ${product.price} = ${product.quantity * product.price} ₪`}
+			</td>
+			<td>
+				<RemoveItem item={product} callBack={callBack}/>
 			</td>
 		</tr>
 	);

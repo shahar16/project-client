@@ -47,6 +47,7 @@ function MyCart( props ) {
 							<th>Product Name</th>
 							<th>Quantity</th>
 							<th>Price</th>
+							<th>Remove</th>
 						</tr>
 						</thead>
 						<tbody>

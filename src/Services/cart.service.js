@@ -36,6 +36,15 @@ class StoreService {
 			},
 		} );
 	}
+
+	async removerItem( data, token ) {
+		await axios.post( `${this.url}/removefromcart`, data, {
+			headers: {
+				'Content-Type':  'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+		} );
+	}
 }
 
 export default new StoreService();
