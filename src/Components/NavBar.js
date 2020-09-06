@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Image, Nav, Navbar } from "react-bootstrap";
-import { Cart4, House, Person, PersonDash, Shop } from "react-bootstrap-icons";
+import { Cart4, House, Person, PersonDash, Shop, CartCheck } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import img from "../resources/images/nav-bar-image.jpg";
@@ -95,6 +95,7 @@ function NavBar( props ) {
 				<Link to="/" style={linkStyle}><House style={Constants.iconStyle}/>Home</Link>
 				<Link to="/my-stores" style={linkStyle}><Shop style={Constants.iconStyle}/>My Stores</Link>
 				<Link to="/my-cart" style={linkStyle}><Cart4 style={Constants.iconStyle}/>My Cart</Link>
+				<Link to="/my-orders" style={linkStyle}><CartCheck style={Constants.iconStyle}/>My Orders</Link>
 				{props.token &&
 				<Link to="/edit-profile" style={linkStyle}><Person style={Constants.iconStyle}/>Edit Profile</Link>}
 				{props.token &&
