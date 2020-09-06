@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import img from "../resources/images/nav-bar-image.jpg";
 import logo from "../resources/images/store-line-logo.png"
 import Constants from "../Shared/Util/Constants";
+import ModalForAuth from "./modals/ModalForAuth";
 import SearchBox from "./SearchBox";
 
 function NavBar( props ) {
@@ -64,7 +65,7 @@ function NavBar( props ) {
 			return `Hi ${props.user.firstName} ${props.user.lastName}`;
 		} else {
 			return <div>
-				Hi, please <Link to="/login">Log in</Link> or <Link to="/signup">Sign Up</Link>
+				Hi, please <ModalForAuth signUp={false} text="Log In" /> or <ModalForAuth signUp={true} text="Sign Up" />
 			</div>
 		}
 	}

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import Login from "../forms/Login";
 import SignUp from "../forms/SignUp";
 
-function ModalForAuth( { signUp, token, history } ) {
-	const [ show, setShow ] = useState( true );
+function ModalForAuth( { signUp, token, history, text } ) {
+	const [ show, setShow ] = useState( false );
 	const [ needToSignUp, setNeedToSignUp ] = useState( signUp );
 
 	const handleClose = () => {
@@ -29,6 +30,7 @@ function ModalForAuth( { signUp, token, history } ) {
 
 	return (
 		<div>
+			<Link onClick={()=> setShow(true)}>{text}</Link>
 			{!token &&
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
