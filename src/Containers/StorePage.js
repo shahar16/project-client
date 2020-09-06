@@ -52,14 +52,14 @@ function StorePage( props ) {
 		return (
 			<Row>
 				<Col md={4}></Col>
-				<Col md={2}><ModalForNewProduct storeID={item.storeID} callback={getStore}/></Col>
-				<Col md={2}>
+				<Col md={item.products.length > 0 ? 2: 4}><ModalForNewProduct storeID={item.storeID} callback={getStore}/></Col>
+				{item.products.length > 0 && <Col md={2}>
 					<Button variant="warning" style={{ width: "190px" }} onClick={() => setEditMode( !editMode )}>
 						<DashCircleFill style={Constants.iconStyle}/>
 						{editMode && "Finish Remove"}
 						{!editMode && "Remove Products"}
 					</Button>
-				</Col>
+				</Col>}
 				<Col md={4}></Col>
 			</Row>
 		)
