@@ -23,16 +23,16 @@ function AfterOrderSummary( { order } ) {
 				<h6>Order id</h6>
 				<p>{order.id}</p>
 				<hr/>
-				<h6>Total price</h6>
+				<h6>Total Price</h6>
 				<p>{order && getTotalPrice()}{!order && "0"}</p>
 				<hr/>
-				<h6>address:</h6>
+				<h6>Address</h6>
 				<p>{order.shippingAddress.street} {order.shippingAddress.houseNum}, {order.shippingAddress.city}</p>
 				<hr/>
 				<h6>Order Date</h6>
 				<p>{order.orderDate.date}, {order.orderDate.hour}</p>
 				<hr/>
-				<h6>Estimated Shipping date</h6>
+				<h6>Estimated Shipping Date</h6>
 				<p>{order.estimatedShipping.date}</p>
 			</Jumbotron>
 		</div>
