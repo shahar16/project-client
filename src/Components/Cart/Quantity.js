@@ -44,6 +44,7 @@ function Quantity( { quantity, product, token, callBack } ) {
 											   name="quantity"
 											   className="form-control"
 											   style={{ width: "70px" }}
+											   min="1"
 											   onChange={( v ) => {
 												   setFieldValue( "quantity", v.target.value )
 												   if ( parseInt( v.target.value ) === quantity ) {

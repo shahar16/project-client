@@ -31,6 +31,7 @@ function QuantitiesFielArray( { values } ) {
 										className="form-control"
 										placeholder="Quantity"
 										type="number"
+										min="0"
 									/>
 									<ErrorMessage
 										name={`quantities.${index}.quantity`}

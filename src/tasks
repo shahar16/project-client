@@ -1,14 +1,15 @@
 1. Order UI component
 2. Order Summary UI button: user->orders ----- done
-3. link to product Store from product
+3. link to product Store from product    ------ done
 4. deployment
 6. fix homepage bug in login time       ------- done
 7. generate shorter ID for order
-8. disable negative quantity in cart page & new product form
+8. disable negative quantity in cart page & new product form ----- done
 9. fix shipping date
 10. my-cart error
 11. disable "remove products" button when store is empty
 12. disable choosing product category type option when there's only one type
+13. remove itrm from cart
 
 kirsh:
 1. classified price by category type or split to different products
