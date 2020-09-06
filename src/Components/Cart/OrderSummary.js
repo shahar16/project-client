@@ -23,7 +23,9 @@ function OrderSummary( { cart, afterPay } ) {
 				<h4>Order Summary</h4>
 				<p>Total Price: {cart && getTotalPrice()}{!cart && "0"}</p>
 				<hr/>
-				{!showCheckout && <Button block onClick={() => setShowCheckout( true )}>
+				{!showCheckout && <Button block
+										  onClick={() => setShowCheckout( true )}
+										  disabled={cart.products.length === 0}>
 					<BagCheck style={Constants.iconStyle}/>
 					Checkout
 				</Button>}
