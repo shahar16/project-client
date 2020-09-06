@@ -1,0 +1,20 @@
+1. Order UI component
+2. Order Summary UI button: user->orders
+3. link to product Store from product
+4. deployment
+5. add example stores
+6. fix homepage bug in login time
+7. generate shorter ID for order
+8. disable negative quantity in cart page & new product form
+9. fix shipping date
+10. my-cart error
+11. disable "remove products" button when store is empty
+12. disable choosing product category type option when there's only one type
+
+kirsh:
+1. classified price by category type or split to different products
+2. my-stores: edit products button
+3. add cart icon to notify that new product was added
+4. add cb to store owner when stock has changed
+5. change order pic to a relevant one
+6. product you may interest in: write an algorithm that count clicks or identify common properties and suggest them to the buyer
