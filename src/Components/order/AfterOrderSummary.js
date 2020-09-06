@@ -1,0 +1,42 @@
+import React, { useState } from 'react';
+import { Button, Jumbotron } from "react-bootstrap";
+import { BagCheck } from "react-bootstrap-icons";
+import Constants from "../../Shared/Util/Constants";
+import PlaceOrder from "../forms/PlaceOrder";
+
+function AfterOrderSummary( { order } ) {
+
+	const getTotalPrice = () => {
+		let totalPrice = 0;
+		for ( let i = 0; i < order.products.length; i++ ) {
+			const currentProduct = order.products[i]
+			totalPrice += currentProduct.price * currentProduct.quantity;
+		}
+
+		return (String( totalPrice ) + ' ₪');
+	};
+
+	return (
+		<div>
+			<Jumbotron>
+				<h4>Order Summary</h4>
+				<h6>Order id</h6>
+				<p>{order.id}</p>
+				<hr/>
+				<h6>Total price</h6>
+				<p>{order && getTotalPrice()}{!order && "0"}</p>
+				<hr/>
+				<h6>address:</h6>
+				<p>{order.shippingAddress.street} {order.shippingAddress.houseNum}, {order.shippingAddress.city}</p>
+				<hr/>
+				<h6>Order Date</h6>
+				<p>{order.orderDate.date}, {order.orderDate.hour}</p>
+				<hr/>
+				<h6>Estimated Shipping date</h6>
+				<p>{order.estimatedShipping.date}</p>
+			</Jumbotron>
+		</div>
+	);
+}
+
+export default AfterOrderSummary;

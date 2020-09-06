@@ -5,7 +5,7 @@ class Constants {
 	constructor() {
 		this.serverUrl = "http://localhost:3001";
 		this.productPageStyle = {
-			height: "600px"
+			height: "800px"
 		}
 		this.iconStyle = {
 			"marginRight": "5px"

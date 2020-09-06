@@ -21,7 +21,6 @@ function OrderTd({ order, index }) {
                 <Link to={`/orders/${order.id}`}>
                     {order.id}
                 </Link>
-                {order.id}
             </td>
             <td>
                 {order.totalSum + " ILS"}

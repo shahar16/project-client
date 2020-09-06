@@ -10,6 +10,7 @@ import ProductsGalleryView from "../Components/products/galleryView/ProductsGall
 import ProductService from "../Services/product.test.service";
 import * as actions from "../Store/actions";
 import MyCart from "./MyCart";
+import Order from "./Order";
 import ProductPage from "./ProductPage";
 import SearchResults from "./SearchResults";
 import StoreManagementPage from "./StoreManagementPage";
@@ -67,8 +68,12 @@ function HomePage(props) {
 						component={SearchResults}
 					/>
 					<Route exact
-						path="/my-orders"
-						component={UserOrdersPage}
+						   path="/my-orders"
+						   component={UserOrdersPage}
+					/>
+					<Route exact
+						   path="/orders/:orderID"
+						   component={Order}
 					/>
 					<Route path="*" component={Error} />
 				</Switch>
