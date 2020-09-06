@@ -39,21 +39,8 @@ function HomePage(props) {
 						)}
 					/>
 					<Route exact
-						path="/login"
-						render={(props) => (
-							<ModalForAuth {...props} signUp={false} />
-						)}
-					/>
-					<Route exact
 						path="/edit-profile"
 						component={ModalForEditUser}
-					/>
-					{/*http://localhost:3000/signUp*/}
-					<Route exact
-						path="/signup"
-						render={(props) => (
-							<ModalForAuth {...props} signUp={true} />
-						)}
 					/>
 					{/*http://localhost:3000/products/e3725de0-bd33-4d2a-a05e-dd6c7cbd5601/123456*/}
 					<Route exact

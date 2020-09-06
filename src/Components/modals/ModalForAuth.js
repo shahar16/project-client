@@ -12,12 +12,10 @@ function ModalForAuth( { signUp, token, history, text } ) {
 	const handleClose = () => {
 		setNeedToSignUp( false );
 		setShow( false )
-		history.goBack();
 	};
 
 	const onLog = () => {
 		setShow( false );
-		history.goBack();
 	};
 
 	const getTitle = () => {

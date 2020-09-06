@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, FormControl, Image, Nav, Navbar } from "react-bootstrap";
-import { Cart4, House, Shop, Search, Person } from "react-bootstrap-icons";
+import { Image, Nav, Navbar } from "react-bootstrap";
+import { Cart4, House, Person, PersonDash, Shop } from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import img from "../resources/images/nav-bar-image.jpg";
 import logo from "../resources/images/store-line-logo.png"
 import Constants from "../Shared/Util/Constants";
+import * as actions from "../Store/actions";
 import ModalForAuth from "./modals/ModalForAuth";
 import SearchBox from "./SearchBox";
 
@@ -61,11 +62,13 @@ function NavBar( props ) {
 
 
 	const getUserMessage = () => {
-		if ( props.user ) {
+		if ( props.token ) {
 			return `Hi ${props.user.firstName} ${props.user.lastName}`;
 		} else {
-			return <div>
-				Hi, please <ModalForAuth signUp={false} text="Log In" /> or <ModalForAuth signUp={true} text="Sign Up" />
+			return <div style={{ display: "inline-flex" }}>
+				<span style={{ marginRight: "10px" }}>Hi, please </span><ModalForAuth signUp={false} text="Log In"/>
+				<span style={{ marginRight: "7px", marginLeft: "7px" }}>or</span> <ModalForAuth signUp={true}
+																								text="Sign Up"/>
 			</div>
 		}
 	}
@@ -92,7 +95,11 @@ function NavBar( props ) {
 				<Link to="/" style={linkStyle}><House style={Constants.iconStyle}/>Home</Link>
 				<Link to="/my-stores" style={linkStyle}><Shop style={Constants.iconStyle}/>My Stores</Link>
 				<Link to="/my-cart" style={linkStyle}><Cart4 style={Constants.iconStyle}/>My Cart</Link>
-				<Link to="/edit-profile" style={linkStyle}><Person style={Constants.iconStyle}/>Edit Profile</Link>
+				{props.token &&
+				<Link to="/edit-profile" style={linkStyle}><Person style={Constants.iconStyle}/>Edit Profile</Link>}
+				{props.token &&
+				<Link onClick={() => props.authLogout()} style={linkStyle}><PersonDash style={Constants.iconStyle}/>Log
+					Out</Link>}
 
 				<SearchBox history={props.history}/>
 			</Navbar>
@@ -102,8 +109,15 @@ function NavBar( props ) {
 
 const mapStateToProps = ( state ) => {
 	return {
-		user: state.user
+		user:  state.user,
+		token: state.token
 	}
 };
 
-export default connect( mapStateToProps, null )( NavBar );
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		authLogout: () => dispatch( actions.authLogout() )
+	}
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( NavBar );
