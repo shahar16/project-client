@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Modal, Row } from "react-bootstrap";
 import { CheckCircleFill } from "react-bootstrap-icons";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import UserService from "../../Services/user.service"
 import ModalForEditProduct from "../modals/ModalForEditProduct";
 
@@ -11,6 +12,7 @@ const ProductPageForm = ( { item, token, user, afterEdit } ) => {
 	const [ isOwner, setIsOwner ] = useState( false );
 	const [ errorMessage, setErrorMessage ] = useState( null );
 	const [ show, setShow ] = useState( false );
+	let history = useHistory();
 
 	useEffect( () => {
 		setIsOwner( user ? item.owner === user.email : false );
@@ -106,6 +108,12 @@ const ProductPageForm = ( { item, token, user, afterEdit } ) => {
 								<Col>
 									<Button
 										variant="success"
+										type="submit"
+										onClick={() => {
+											setTimeout( () => {
+												history.push( "/my-cart" )
+											}, 1000 )
+										}}
 										block
 										disabled={values.categoryType === `Choose ${item.stock.type}` || values.quantity === 'Choose quantity'}
 									>Buy it now</Button>

@@ -5,12 +5,12 @@
 6. fix homepage bug in login time       ------- done
 7. generate shorter ID for order
 8. disable negative quantity in cart page & new product form ----- done
-9. fix shipping date
+9. fix shipping date                  ------- done
 10. my-cart error
 11. disable "remove products" button when store is empty
 12. disable choosing product category type option when there's only one type
 13. remove itrm from cart     ------- done
-14. BY IT NOW!
+14. BY IT NOW!                 ------- done
 
 kirsh:
 1. classified price by category type or split to different products
