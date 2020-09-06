@@ -1,5 +1,6 @@
 import React from 'react';
 import { Badge, Col, Jumbotron, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Constants from "../../../Shared/Util/Constants";
 import ProductPageForm from "../../forms/ProductPageForm";
 
@@ -21,6 +22,7 @@ function ProductPageInfo( { item, afterEdit } ) {
 			</Row>
 			<hr/>
 			<ProductPageForm item={item} afterEdit={afterEdit}/>
+			<Link to={`/stores/${item.storeID}`}>Go to store</Link>
 		</Jumbotron>
 	);
 }
