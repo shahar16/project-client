@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class Routes extends Component {
-	render() {
-		return (
-			<div>
+  render () {
+    return (
+      <div>
 
-			</div>
-		);
-	}
+      </div>
+    )
+  }
 }
 
-export default Routes;
+export default Routes

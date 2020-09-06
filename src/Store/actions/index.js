@@ -1,13 +1,10 @@
 export {
-	startAction,
-	finishAction,
-	authLogout,
-	checkState,
-	authSuccess,
-	authFail,
-	setUser,
-	setAuthincationTimeOut,
-	//TODO : remove - only for practice
-	test,
-	shahar
+  startAction,
+  finishAction,
+  authLogout,
+  checkState,
+  authSuccess,
+  authFail,
+  setUser,
+  setAuthincationTimeOut,
 } from './app'

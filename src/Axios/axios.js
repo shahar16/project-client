@@ -1,9 +1,9 @@
-import axios from 'axios';
-import Constants from "../Shared/Util/Constants";
+import axios from 'axios'
+import Constants from '../Shared/Util/Constants'
 
-const instance = axios.create( {
-	baseURL: Constants.serverUrl
-} );
+const instance = axios.create({
+  baseURL: Constants.serverUrl
+})
 
-export default instance;
+export default instance
 
