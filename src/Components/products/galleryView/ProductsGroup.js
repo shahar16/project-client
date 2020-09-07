@@ -8,7 +8,7 @@ function ProductsGroup ({ items, renderStore, editMode, afterDelete }) {
     <div>
       <br/>
       <Row className="justify-content-md-center">
-        {items && items.map((item) => <Col md={2}><ProductItem item={item} key={item.id} renderStore={renderStore}
+        {items && items.map((item) => <Col key={`${item.storeID}/${item.sn}`} md={2}><ProductItem item={item} renderStore={renderStore}
                                                                editMode={editMode} afterDelete={afterDelete}/></Col>)}
       </Row>
     </div>

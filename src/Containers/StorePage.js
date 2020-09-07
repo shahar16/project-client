@@ -9,13 +9,11 @@ import StoreService from '../Services/store.service'
 import Constants from '../Shared/Util/Constants'
 
 function StorePage (props) {
-  const [show, setShow] = useState(false)
   const [item, setItem] = useState(null)
   const [editMode, setEditMode] = useState(false)
 
   useEffect(() => {
     console.log('rendering StorePage')
-    setShow(true)
     getStore()
   }, [props.match.params])
 

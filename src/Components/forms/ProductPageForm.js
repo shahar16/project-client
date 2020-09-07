@@ -82,7 +82,8 @@ const ProductPageForm = ({ item, token, user, afterEdit, setCart }) => {
                       {Object.keys(item.stock.quantities).map((key, index) => <option
                         disabled={item.stock.quantities[key] <= 0}
                         value={key}
-                        selected={index === 0}>{key}</option>)}
+                        key={`keys-${index}`}
+                        >{key}</option>)}
                     </Field>
                   </div>
                 </Col>
@@ -96,7 +97,7 @@ const ProductPageForm = ({ item, token, user, afterEdit, setCart }) => {
                       <option value='Choose quantity' defaultValue>Choose quantity</option>
                       {
                         item.stock.quantities[values.categoryType] > 0 && Array.apply(null, Array(item.stock.quantities[values.categoryType])).map((_, index) =>
-                          <option>{index + 1}</option>)
+                          <option key={`values-${index}`}>{index + 1}</option>)
                       }
                       {
                         item.stock.quantities[values.categoryType] <= 0 &&

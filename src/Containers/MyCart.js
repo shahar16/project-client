@@ -62,6 +62,7 @@ function MyCart (props) {
               <CartTd
                 product={product}
                 index={index}
+                key={`${product.id}`}
                 callBack={afterUpdate}
               />)}
             </tbody>

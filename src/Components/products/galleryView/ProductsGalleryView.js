@@ -32,7 +32,7 @@ function ProductsGalleryView ({ fetchService, renderStore, editMode, afterDelete
     let group = []
     for (let i = 0; i < list.length; i++) {
       group.push(list[i])
-      if (( i == list.length - 1 ) || ( i % numOfCardInRaw === numOfCardInRaw - 1 )) {
+      if (( i === list.length - 1 ) || ( i % numOfCardInRaw === numOfCardInRaw - 1 )) {
         returnValue.push(group)
         group = []
       }
