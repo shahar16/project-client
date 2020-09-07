@@ -42,10 +42,9 @@ function MyCart (props) {
         <title>My Cart</title>
       </Helmet>
       <br/>
-      {props.token && cart && <Row>
+      {props.token && cart && cart.products.length > 0 && <Row>
         <Col md={1}></Col>
         <Col md={8}>
-          {cart && cart.products.length === 0 && <h4>Please add your first product</h4>}
           <Table responsive hover style={{ 'marginTop': '2px' }}>
             <thead>
             <tr>
@@ -77,6 +76,7 @@ function MyCart (props) {
       {props.token && !cart &&
       <Image src={cartEmpty}/>
       }
+      {props.token && cart && cart.products.length === 0 && <Image src={cartEmpty}/>}
     </div>
   )
 }
