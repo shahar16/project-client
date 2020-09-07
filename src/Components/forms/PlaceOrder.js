@@ -46,6 +46,7 @@ function PlaceOrder (props) {
     try {
       await CartService.placeOrder(data, props.token)
       setShowModal(true)
+      props.setCart(null)
       setTimeout(props.afterPay, 1500)
     } catch (err) {
       setErrorMessage('Payment failed!')
@@ -67,7 +68,7 @@ function PlaceOrder (props) {
         }}
         validationSchema={PlaceOrderSchema}
         onSubmit={placeOrder}>
-        {({ setFieldValue, values }) => {
+        {({ setFieldValue }) => {
           return (
             <Form>
               <div className="form-group">
@@ -176,6 +177,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     finishAction: () => dispatch(actions.finishAction()),
     startAction:  () => dispatch(actions.startAction()),
+    setCart:      (cart) => dispatch(actions.setCart(cart))
   }
 }
 

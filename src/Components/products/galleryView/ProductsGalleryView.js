@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useId } from 'react-id-generator'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ProductsGroup from './ProductsGroup'
@@ -31,7 +32,7 @@ function ProductsGalleryView ({ fetchService, renderStore, editMode, afterDelete
     let group = []
     for (let i = 0; i < list.length; i++) {
       group.push(list[i])
-      if (( i == list.length - 1 ) || ( i % numOfCardInRaw === numOfCardInRaw - 1 )) {
+      if (( i === list.length - 1 ) || ( i % numOfCardInRaw === numOfCardInRaw - 1 )) {
         returnValue.push(group)
         group = []
       }
@@ -50,18 +51,16 @@ function ProductsGalleryView ({ fetchService, renderStore, editMode, afterDelete
 
   return (
     <div>
+      {!renderStore && <Helmet>
+        <title>Store-line</title>
+      </Helmet>}
       {productsList &&
       <InfiniteScroll
+        style={{ overflowX: 'hidden', overflowY: 'hidden' }}
         dataLength={productsList.length}
         next={fetchMoreData}
         hasMore={!endOfProducts}
         loader={<h4>Loading...</h4>}
-        endMessage={
-          <div>
-            <br/>
-            <h4>No More Products :-(</h4>
-          </div>}
-
       >
         {productsList.map((items, index) => <ProductsGroup items={items} key={`${componentId}:${index}`}
                                                            renderStore={renderStore} editMode={editMode}

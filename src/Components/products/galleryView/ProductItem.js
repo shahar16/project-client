@@ -28,11 +28,11 @@ function ProductItem ({ item, renderStore, token, user, editMode, afterDelete })
     <Card style={showDelete ? styleWithDelete : styleWithoutDelete}>
       <Link to={`/products/${item.storeID}/${item.sn}`}>
         <div style={{ height: '16rem' }}>
-          <Card.Img class="mh-100 mw-100" variant="top" src={`${constants.serverUrl}/${item.image[0]}`}/>
+          <Card.Img className="mh-100 mw-100" variant="top" src={`${constants.serverUrl}/${item.image[0]}`}/>
         </div>
         <Card.Body>
           <div className={'d-flex mb-0 justify-content-between'}>
-            <Card.Title as={'h4'} className={'mb-0'}>{item.name}</Card.Title>
+            <Card.Title as={'h5'} className={'mb-0'}>{item.name}</Card.Title>
             <Badge pill className={'mb-1'} variant={'warning'}>{item.price} ₪</Badge>
           </div>
         </Card.Body>

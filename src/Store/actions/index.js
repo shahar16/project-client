@@ -7,4 +7,5 @@ export {
   authFail,
   setUser,
   setAuthincationTimeOut,
+  setCart,
 } from './app'

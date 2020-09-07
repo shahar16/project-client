@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image, Nav, Navbar } from 'react-bootstrap'
+import { Badge, Image, Nav, Navbar } from 'react-bootstrap'
 import { Cart4, CartCheck, House, Person, PersonDash, Shop } from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -56,6 +56,8 @@ function NavBar (props) {
       case 'full-opacity':
         style['opacity'] = '100%'
         break
+      default:
+        style['opacity'] = '100%'
     }
     return style
   }
@@ -81,6 +83,7 @@ function NavBar (props) {
           <img
             src={logo}
             height="70"
+            alt="image"
             className="d-inline-block align-top"
           />
         </Navbar.Brand>
@@ -93,7 +96,11 @@ function NavBar (props) {
         </Nav>
         <Link to="/" style={linkStyle}><House style={Constants.iconStyle}/>Home</Link>
         <Link to="/my-stores" style={linkStyle}><Shop style={Constants.iconStyle}/>My Stores</Link>
-        <Link to="/my-cart" style={linkStyle}><Cart4 style={Constants.iconStyle}/>My Cart</Link>
+        {props.cart && props.cart.products.length <= 0  && <Link to="/my-cart" style={linkStyle}><Cart4 style={Constants.iconStyle}/>My Cart</Link>}
+        {!props.cart &&  <Link to="/my-cart" style={linkStyle}><Cart4 style={Constants.iconStyle}/>My Cart</Link>}
+        {props.cart && props.cart.products.length > 0 && <Link to="/my-cart" style={linkStyle}><Badge pill variant="danger"
+                                                                                                      style={Constants.iconStyle}>{props.cart.products.length}</Badge><Cart4 style={Constants.iconStyle}/>My
+          Cart</Link>}
         <Link to="/my-orders" style={linkStyle}><CartCheck style={Constants.iconStyle}/>My Orders</Link>
         {props.token &&
         <Link to="/edit-profile" style={linkStyle}><Person style={Constants.iconStyle}/>Edit Profile</Link>}
@@ -110,7 +117,8 @@ function NavBar (props) {
 const mapStateToProps = (state) => {
   return {
     user:  state.user,
-    token: state.token
+    token: state.token,
+    cart:  state.cart
   }
 }
 

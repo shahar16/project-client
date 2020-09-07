@@ -6,12 +6,13 @@ import Footer from '../Components/Footer'
 import ModalForEditUser from '../Components/modals/ModalForEditUser'
 import NavBar from '../Components/NavBar'
 import ProductsGalleryView from '../Components/products/galleryView/ProductsGalleryView'
+import CartService from '../Services/cart.service'
 import ProductService from '../Services/product.test.service'
 import * as actions from '../Store/actions'
 import MyCart from './MyCart'
-import SingleOrder from './SingleOrder'
 import ProductPage from './ProductPage'
 import SearchResults from './SearchResults'
+import SingleOrder from './SingleOrder'
 import StoreManagementPage from './StoreManagementPage'
 import StorePage from './StorePage'
 import UserOrdersPage from './UserOrdersPage'
@@ -20,10 +21,20 @@ function HomePage (props) {
 
   useEffect(() => {
     props.checkAuth()
+    fetchCart()
   }, [props])
 
   const getHomePageProducts = async (init) => {
     return await ProductService.getHomePageProducts(init)
+  }
+
+  const fetchCart = async () => {
+    try {
+      const res = await CartService.getCart(props.token)
+      props.setCart(res)
+    } catch (e) {
+      props.setCart(null)
+    }
   }
 
   return (
@@ -81,10 +92,17 @@ function HomePage (props) {
   )
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    checkAuth: () => dispatch(actions.checkState())
+    token: state.token,
   }
 }
 
-export default connect(null, mapDispatchToProps)(HomePage)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    checkAuth: () => dispatch(actions.checkState()),
+    setCart:   (cart) => dispatch(actions.setCart(cart))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

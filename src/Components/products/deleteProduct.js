@@ -19,8 +19,7 @@ function DeleteProduct ({ token, product, afterDelete }) {
         setTimeout(afterDelete, 1000)
         afterDelete();
       } catch (e) {
-        const newError = new Error('Cant delete product')
-        throw newError
+        throw new Error('Cant delete product')
       }
     }
   }

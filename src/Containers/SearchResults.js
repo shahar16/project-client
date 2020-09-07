@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useId } from 'react-id-generator'
 import ProductsGroup from '../Components/products/galleryView/ProductsGroup'
 import ProductService from '../Services/product.service'
@@ -28,7 +29,7 @@ function SearchResults (props) {
     let group = []
     for (let i = 0; i < list.length; i++) {
       group.push(list[i])
-      if (( i == list.length - 1 ) || ( i % numOfCardInRaw === numOfCardInRaw - 1 )) {
+      if (( i === list.length - 1 ) || ( i % numOfCardInRaw === numOfCardInRaw - 1 )) {
         returnValue.push(group)
         group = []
       }
@@ -39,6 +40,9 @@ function SearchResults (props) {
 
   return (
     <div>
+      {props.match.params.query && <Helmet>
+        <title>Search for: {props.match.params.query}</title>
+      </Helmet>}
       <h4>Your search results for '{props.match.params.query}':</h4>
       <br/>
       {productsList && productsList.map((items, index) => <ProductsGroup items={items}

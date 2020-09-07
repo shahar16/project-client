@@ -2,20 +2,21 @@ import { updateObject } from '../../Shared/Util/Util'
 import * as actionTypes from '../actions/actionTypes'
 
 const initialState = {
-  token:         null,
-  error:         null,
-  loading:       null,
-  user:          null,
+  token:   null,
+  error:   null,
+  loading: null,
+  user:    null,
+  cart:    null
 }
 
-const startAction = (state, action) => {
+const startAction = (state) => {
   return updateObject(state, {
     error:   null,
     loading: true
   })
 }
 
-const finishAction = (state, action) => {
+const finishAction = (state) => {
   return updateObject(state, {
     error:   null,
     loading: false
@@ -37,7 +38,7 @@ const authFail = (state, action) => {
   })
 }
 
-const authLogout = (state, action) => {
+const authLogout = (state) => {
   return updateObject(state, {
     token:   null,
     error:   null,
@@ -48,6 +49,12 @@ const authLogout = (state, action) => {
 const setUser = (state, action) => {
   return updateObject(state, {
     user: action.user
+  })
+}
+
+const setCart = (state, action) => {
+  return updateObject(state, {
+    cart: action.cart
   })
 }
 
@@ -65,6 +72,8 @@ const reducer = (state = initialState, action) => {
       return authLogout(state, action)
     case actionTypes.SET_USER:
       return setUser(state, action)
+    case actionTypes.SET_CART:
+      return setCart(state, action)
     default:
       return state
   }

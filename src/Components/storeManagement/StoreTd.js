@@ -24,8 +24,7 @@ function StoreTd ({ store, index, handleRemove, handleUpdate, token }) {
       } catch (e) {
         const errors = e.response.data.message.split(':')
         const error = errors[errors.length - 1]
-        const newError = new Error(error)
-        throw newError
+        throw new Error(error)
       }
     }
   }

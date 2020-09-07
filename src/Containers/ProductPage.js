@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
+import { Helmet } from 'react-helmet'
 import ProductPageCarousel from '../Components/products/productPage/ProductPageCarousel'
 import ProductPageInfo from '../Components/products/productPage/ProductPageInfo'
 import ProductService from '../Services/product.service'
@@ -38,6 +39,9 @@ function ProductPage (props) {
 
   return (
     <div>
+      {item && <Helmet>
+        <title>{item.name}</title>
+      </Helmet>}
       <br/>
       <Row>
         <Col md={1}></Col>

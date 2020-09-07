@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Login from '../forms/Login'
 import SignUp from '../forms/SignUp'
 
-function ModalForAuth ({ signUp, token, history, text }) {
+function ModalForAuth ({ signUp, token, text }) {
   const [show, setShow] = useState(false)
   const [needToSignUp, setNeedToSignUp] = useState(signUp)
 

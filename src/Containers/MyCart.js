@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Image, Row, Table } from 'react-bootstrap'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import CartTd from '../Components/Cart/CartTd'
 import OrderSummary from '../Components/Cart/OrderSummary'
 import cartEmpty from '../resources/images/shopping-cart-empty.png'
 import CartService from '../Services/cart.service'
+import * as actions from '../Store/actions'
 
 function MyCart (props) {
   const [cart, setCart] = useState(null)
@@ -15,8 +17,10 @@ function MyCart (props) {
       try {
         const res = await CartService.getCart(props.token)
         setCart(res)
+        props.setCart(res)
       } catch (e) {
         setCart(null)
+        props.setCart(null)
       }
     }
 
@@ -34,11 +38,13 @@ function MyCart (props) {
 
   return (
     <div>
+      <Helmet>
+        <title>My Cart</title>
+      </Helmet>
       <br/>
-      {props.token && cart && <Row>
+      {props.token && cart && cart.products.length > 0 && <Row>
         <Col md={1}></Col>
         <Col md={8}>
-          {cart && cart.products.length === 0 && <h4>Please add your first product</h4>}
           <Table responsive hover style={{ 'marginTop': '2px' }}>
             <thead>
             <tr>
@@ -55,6 +61,7 @@ function MyCart (props) {
               <CartTd
                 product={product}
                 index={index}
+                key={`${product.id}`}
                 callBack={afterUpdate}
               />)}
             </tbody>
@@ -69,6 +76,7 @@ function MyCart (props) {
       {props.token && !cart &&
       <Image src={cartEmpty}/>
       }
+      {props.token && cart && cart.products.length === 0 && <Image src={cartEmpty}/>}
     </div>
   )
 }
@@ -79,4 +87,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(MyCart)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCart: (cart) => dispatch(actions.setCart(cart))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MyCart)
