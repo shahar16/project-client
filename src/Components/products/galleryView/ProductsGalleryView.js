@@ -51,9 +51,9 @@ function ProductsGalleryView ({ fetchService, renderStore, editMode, afterDelete
 
   return (
     <div>
-      <Helmet>
+      {!renderStore && <Helmet>
         <title>Store-line</title>
-      </Helmet>
+      </Helmet>}
       {productsList &&
       <InfiniteScroll
         dataLength={productsList.length}
