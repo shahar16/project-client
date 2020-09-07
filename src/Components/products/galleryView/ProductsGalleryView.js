@@ -56,16 +56,11 @@ function ProductsGalleryView ({ fetchService, renderStore, editMode, afterDelete
       </Helmet>}
       {productsList &&
       <InfiniteScroll
+        style={{ overflowX: 'hidden', overflowY: 'hidden' }}
         dataLength={productsList.length}
         next={fetchMoreData}
         hasMore={!endOfProducts}
         loader={<h4>Loading...</h4>}
-        endMessage={
-          <div>
-            <br/>
-            <h4>No More Products :-(</h4>
-          </div>}
-
       >
         {productsList.map((items, index) => <ProductsGroup items={items} key={`${componentId}:${index}`}
                                                            renderStore={renderStore} editMode={editMode}
