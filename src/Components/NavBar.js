@@ -95,8 +95,8 @@ function NavBar (props) {
         <Link to="/my-stores" style={linkStyle}><Shop style={Constants.iconStyle}/>My Stores</Link>
         {props.cart && props.cart.products.length <= 0  && <Link to="/my-cart" style={linkStyle}><Cart4 style={Constants.iconStyle}/>My Cart</Link>}
         {!props.cart &&  <Link to="/my-cart" style={linkStyle}><Cart4 style={Constants.iconStyle}/>My Cart</Link>}
-        {props.cart && props.cart.products.length > 0 && <Link to="/my-cart" style={linkStyle}><Cart4/><Badge pill variant="danger"
-                                                              style={Constants.iconStyle}>{props.cart.products.length}</Badge>My
+        {props.cart && props.cart.products.length > 0 && <Link to="/my-cart" style={linkStyle}><Badge pill variant="danger"
+                                                                                                      style={Constants.iconStyle}>{props.cart.products.length}</Badge><Cart4 style={Constants.iconStyle}/>My
           Cart</Link>}
         <Link to="/my-orders" style={linkStyle}><CartCheck style={Constants.iconStyle}/>My Orders</Link>
         {props.token &&
