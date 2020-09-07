@@ -56,6 +56,8 @@ function NavBar (props) {
       case 'full-opacity':
         style['opacity'] = '100%'
         break
+      default:
+        style['opacity'] = '100%'
     }
     return style
   }
@@ -81,6 +83,7 @@ function NavBar (props) {
           <img
             src={logo}
             height="70"
+            alt="image"
             className="d-inline-block align-top"
           />
         </Navbar.Brand>

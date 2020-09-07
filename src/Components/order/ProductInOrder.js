@@ -3,7 +3,7 @@ import { Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Constants from '../../Shared/Util/Constants'
 
-function ProductInOrder ({ product, index, callBack }) {
+function ProductInOrder ({ product, index }) {
   return (
     <tr>
       <td>

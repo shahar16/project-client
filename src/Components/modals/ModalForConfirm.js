@@ -7,10 +7,10 @@ import * as actions from '../../Store/actions'
 /**
  * this component id modal for confirmation. it returns a button to locate in page.
  *
- * @param info.variant       - button style(bootstrap)
- * @param info.icon          - bootstrap icon to locate on button
- * @param info.text          - text on the button
- * @param info.handleConfirm - callback function to handle confirm
+ * @param props.info.variant       - button style(bootstrap)
+ * @param props.info.icon          - bootstrap icon to locate on button
+ * @param props.info.text          - text on the button
+ * @param props.info.handleConfirm - callback function to handle confirm
  *
  * in case of error, should get the right message in err.message
  */

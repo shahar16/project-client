@@ -68,7 +68,7 @@ function PlaceOrder (props) {
         }}
         validationSchema={PlaceOrderSchema}
         onSubmit={placeOrder}>
-        {({ setFieldValue, values }) => {
+        {({ setFieldValue }) => {
           return (
             <Form>
               <div className="form-group">

@@ -9,14 +9,14 @@ const initialState = {
   cart:    null
 }
 
-const startAction = (state, action) => {
+const startAction = (state) => {
   return updateObject(state, {
     error:   null,
     loading: true
   })
 }
 
-const finishAction = (state, action) => {
+const finishAction = (state) => {
   return updateObject(state, {
     error:   null,
     loading: false
@@ -38,7 +38,7 @@ const authFail = (state, action) => {
   })
 }
 
-const authLogout = (state, action) => {
+const authLogout = (state) => {
   return updateObject(state, {
     token:   null,
     error:   null,

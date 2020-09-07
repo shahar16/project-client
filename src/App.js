@@ -10,7 +10,7 @@ import reducer from './Store/reducers/app'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 
-function App (props) {
+function App () {
 
   return (
     <Provider store={store}>
