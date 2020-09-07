@@ -6,6 +6,7 @@ import CartTd from '../Components/Cart/CartTd'
 import OrderSummary from '../Components/Cart/OrderSummary'
 import cartEmpty from '../resources/images/shopping-cart-empty.png'
 import CartService from '../Services/cart.service'
+import * as actions from '../Store/actions'
 
 function MyCart (props) {
   const [cart, setCart] = useState(null)
@@ -16,8 +17,10 @@ function MyCart (props) {
       try {
         const res = await CartService.getCart(props.token)
         setCart(res)
+        props.setCart(res)
       } catch (e) {
         setCart(null)
+        props.setCart(null)
       }
     }
 
@@ -83,4 +86,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(MyCart)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCart: (cart) => dispatch(actions.setCart(cart))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MyCart)

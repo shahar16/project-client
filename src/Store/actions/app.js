@@ -70,3 +70,10 @@ export const checkState = () => {
     }
   }
 }
+
+export const setCart =(cart) => {
+  return {
+    cart: cart,
+    type: actionsTypes.SET_CART
+  }
+}

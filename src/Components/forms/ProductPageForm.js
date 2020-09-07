@@ -4,10 +4,12 @@ import { Button, Col, Modal, Row } from 'react-bootstrap'
 import { CheckCircleFill } from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import CartService from '../../Services/cart.service'
 import UserService from '../../Services/user.service'
+import * as actions from '../../Store/actions'
 import ModalForEditProduct from '../modals/ModalForEditProduct'
 
-const ProductPageForm = ({ item, token, user, afterEdit }) => {
+const ProductPageForm = ({ item, token, user, afterEdit, setCart }) => {
   const [isOwner, setIsOwner] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
   const [show, setShow] = useState(false)
@@ -20,6 +22,15 @@ const ProductPageForm = ({ item, token, user, afterEdit }) => {
   const handleClose = () => {
     setShow(false)
     setErrorMessage(null)
+  }
+
+  const fetchCart = async () => {
+    try {
+      const res = await CartService.getCart(token)
+      setCart(res)
+    } catch (e) {
+      setCart(null)
+    }
   }
 
   const handleSubmit = async (values) => {
@@ -37,6 +48,7 @@ const ProductPageForm = ({ item, token, user, afterEdit }) => {
 
     try {
       await UserService.addToCart(data, token)
+      await fetchCart()
       setShow(true)
       setTimeout(handleClose, 1000)
     } catch (e) {
@@ -160,4 +172,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, null)(ProductPageForm)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCart: (cart) => dispatch(actions.setCart(cart))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPageForm)

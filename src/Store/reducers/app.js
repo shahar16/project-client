@@ -2,10 +2,11 @@ import { updateObject } from '../../Shared/Util/Util'
 import * as actionTypes from '../actions/actionTypes'
 
 const initialState = {
-  token:         null,
-  error:         null,
-  loading:       null,
-  user:          null,
+  token:   null,
+  error:   null,
+  loading: null,
+  user:    null,
+  cart:    null
 }
 
 const startAction = (state, action) => {
@@ -51,6 +52,12 @@ const setUser = (state, action) => {
   })
 }
 
+const setCart = (state, action) => {
+  return updateObject(state, {
+    cart: action.cart
+  })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.START_ACTION:
@@ -65,6 +72,8 @@ const reducer = (state = initialState, action) => {
       return authLogout(state, action)
     case actionTypes.SET_USER:
       return setUser(state, action)
+    case actionTypes.SET_CART:
+      return setCart(state, action)
     default:
       return state
   }

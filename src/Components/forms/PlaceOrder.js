@@ -46,6 +46,7 @@ function PlaceOrder (props) {
     try {
       await CartService.placeOrder(data, props.token)
       setShowModal(true)
+      props.setCart(null)
       setTimeout(props.afterPay, 1500)
     } catch (err) {
       setErrorMessage('Payment failed!')
@@ -176,6 +177,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     finishAction: () => dispatch(actions.finishAction()),
     startAction:  () => dispatch(actions.startAction()),
+    setCart:      (cart) => dispatch(actions.setCart(cart))
   }
 }
 
