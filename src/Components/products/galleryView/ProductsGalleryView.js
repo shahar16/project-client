@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useId } from 'react-id-generator'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ProductsGroup from './ProductsGroup'
@@ -50,6 +51,9 @@ function ProductsGalleryView ({ fetchService, renderStore, editMode, afterDelete
 
   return (
     <div>
+      <Helmet>
+        <title>Store-line</title>
+      </Helmet>
       {productsList &&
       <InfiniteScroll
         dataLength={productsList.length}

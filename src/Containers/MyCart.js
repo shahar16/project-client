@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Image, Row, Table } from 'react-bootstrap'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import CartTd from '../Components/Cart/CartTd'
 import OrderSummary from '../Components/Cart/OrderSummary'
@@ -34,6 +35,9 @@ function MyCart (props) {
 
   return (
     <div>
+      <Helmet>
+        <title>My Cart</title>
+      </Helmet>
       <br/>
       {props.token && cart && <Row>
         <Col md={1}></Col>

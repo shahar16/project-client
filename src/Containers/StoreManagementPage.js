@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row, Table } from 'react-bootstrap'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import ModalForNewStore from '../Components/modals/ModalForNewStore'
 import StoreTd from '../Components/storeManagement/StoreTd'
@@ -40,6 +41,9 @@ function StoreManagementPage (props) {
 
   return (
     <div>
+      <Helmet>
+        <title>My Stores</title>
+      </Helmet>
       <br/>
       {props.token && <Row>
         <Col md={1}></Col>

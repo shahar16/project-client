@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row, Table } from 'react-bootstrap'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import OrderTd from '../Components/UserOrders/OrderTd'
 import OrderService from '../Services/order.service'
@@ -32,6 +33,9 @@ function UserOrdersPage (props) {
   }
   return (
     <div>
+      <Helmet>
+        <title>My Orders</title>
+      </Helmet>
       <br/>
       {props.token && <Row>
         <Col md={1}></Col>

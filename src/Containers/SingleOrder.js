@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row, Table } from 'react-bootstrap'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import AfterOrderSummary from '../Components/order/AfterOrderSummary'
 import ProductInOrder from '../Components/order/ProductInOrder'
@@ -25,6 +26,9 @@ function SingleOrder (props) {
 
   return (
     <div>
+      {order && <Helmet>
+        <title>Order: {order.id}</title>
+      </Helmet>}
       <br/>
       {props.token && order && <Row>
         <Col md={1}></Col>

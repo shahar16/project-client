@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Row } from 'react-bootstrap'
 import { DashCircleFill } from 'react-bootstrap-icons'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 import ModalForNewProduct from '../Components/modals/ModalForNewProduct'
 import ProductsGalleryView from '../Components/products/galleryView/ProductsGalleryView'
@@ -67,6 +68,9 @@ function StorePage (props) {
   return (
     // <div className="under-nav-bar">
     <div id="storePage">
+      {item && <Helmet>
+        <title>{item.name}</title>
+      </Helmet>}
       {item && <div className="jumbotron text-center" id="jshadow">
         <h1>Welcome to {item.name}</h1>
         <br/>
