@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React, { useState } from 'react'
-import { Button, Col, Modal, Row } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 import { Cart4, CheckCircleFill } from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
 import * as Yup from 'yup'

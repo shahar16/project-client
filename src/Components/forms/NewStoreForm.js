@@ -1,13 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Row } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import { FileEarmarkMinus } from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
 import * as Yup from 'yup'
 import StoreService from '../../Services/store.service'
 import Constants from '../../Shared/Util/Constants'
-import ImagesFieldArray from './fieldArray/ImagesFieldArray'
 import * as actions from '../../Store/actions'
+import ImagesFieldArray from './fieldArray/ImagesFieldArray'
 
 const NewStoreSchema = Yup.object().shape({
   name:        Yup.string().required('Product name is required'),
@@ -134,7 +134,7 @@ function NewStoreForm (props) {
             <div className="form-group row">
               <label htmlFor="newStore-email" className="col-sm-3 col-form-label">Email</label>
               <div className="col-sm-9">
-                <Field type="email" name="email" className="form-control"  id="newStore-email"/>
+                <Field type="email" name="email" className="form-control" id="newStore-email"/>
                 <ErrorMessage name="email" component="div" className="form-validation-alert"/>
               </div>
             </div>

@@ -1,6 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React, { useState } from 'react'
-import { Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import * as Yup from 'yup'
 import UserService from '../../Services/user.service'
