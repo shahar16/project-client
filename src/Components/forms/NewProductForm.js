@@ -111,28 +111,46 @@ function NewProductForm (props) {
       {({ values, setFieldValue }) => {
         return (
           <Form>
-            <div className="form-group">
-              <label>General Information</label>
-              <Field type="text" name="sn" className="form-control" placeholder="Serial Number"
-                     disabled={props.productToEdit}/>
-              <ErrorMessage name="sn" component="div" className="form-validation-alert"/>
+            <label>General Information</label>
+            <div className="form-group row">
+              <label htmlFor="newProduct-sn" className="col-sm-3 col-form-label">Serial Number</label>
+              <div className="col-sm-9">
+                <Field type="text" name="sn" className="form-control"
+                       disabled={props.productToEdit} id="newProduct-sn"/>
+                <ErrorMessage name="sn" component="div" className="form-validation-alert"/>
+              </div>
             </div>
-            <div className="form-group">
-              <Field type="text" name="name" className="form-control" placeholder="Product Name"/>
-              <ErrorMessage name="name" component="div" className="form-validation-alert"/>
+            <div className="form-group row">
+              <label htmlFor="newProduct-name" className="col-sm-3 col-form-label">Product Name</label>
+              <div className="col-sm-9">
+                <Field type="text" name="name" className="form-control"
+                       id="newProduct-name"/>
+                <ErrorMessage name="name" component="div" className="form-validation-alert"/>
+              </div>
             </div>
-            <div className="form-group">
-              <Field type="text" name="price" className="form-control" placeholder="Price"/>
-              <ErrorMessage name="price" component="div" className="form-validation-alert"/>
+            <div className="form-group row">
+              <label htmlFor="newProduct-price" className="col-sm-3 col-form-label">Price</label>
+              <div className="col-sm-9">
+                <Field type="text" name="price" className="form-control" id="newProduct-price"/>
+                <ErrorMessage name="price" component="div" className="form-validation-alert"/>
+              </div>
             </div>
-            <div className="form-group">
-              <Field type="text" name="desc" className="form-control" placeholder="Description"/>
-              <ErrorMessage name="desc" component="div" className="form-validation-alert"/>
+            <div className="form-group row">
+              <label htmlFor="newProduct-desc" className="col-sm-3 col-form-label">Description</label>
+              <div className="col-sm-9">
+                <Field type="text" name="desc" className="form-control"
+                       id="newProduct-desc"/>
+                <ErrorMessage name="desc" component="div" className="form-validation-alert"/>
+              </div>
             </div>
-            <div className="form-group">
-              <label>Quantities</label>
-              <Field type="text" name="type" className="form-control" placeholder="Option Type"/>
-              <ErrorMessage name="type" component="div" className="form-validation-alert"/>
+            <label>Quantities</label>
+            <div className="form-group row">
+              <label htmlFor="newProduct-type" className="col-sm-3 col-form-label">Option Type</label>
+              <div className="col-sm-9">
+                <Field type="text" name="type" className="form-control"
+                       id="newProduct-type"/>
+                <ErrorMessage name="type" component="div" className="form-validation-alert"/>
+              </div>
             </div>
             <QuantitiesFielArray values={values}/>
             <br/>

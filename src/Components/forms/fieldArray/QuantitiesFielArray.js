@@ -13,31 +13,41 @@ function QuantitiesFielArray ({ values }) {
             values.quantities.map((_, index) => (
               <div className="row" key={index}>
                 <div className="col-5">
-                  <Field
-                    name={`quantities.${index}.name`}
-                    className="form-control"
-                    placeholder="Name"
-                    type="text"
-                  />
-                  <ErrorMessage
-                    name={`quantities.${index}.name`}
-                    component="div"
-                    className="form-validation-alert"
-                  />
+                  <div className="form-group row">
+                    <label htmlFor="quant-name" className="col-sm-3 col-form-label">Name</label>
+                    <div className="col-sm-9">
+                      <Field
+                        name={`quantities.${index}.name`}
+                        className="form-control"
+                        type="text"
+                        id="quant-name"
+                      />
+                      <ErrorMessage
+                        name={`quantities.${index}.name`}
+                        component="div"
+                        className="form-validation-alert"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="col-5">
-                  <Field
-                    name={`quantities.${index}.quantity`}
-                    className="form-control"
-                    placeholder="Quantity"
-                    type="number"
-                    min="0"
-                  />
-                  <ErrorMessage
-                    name={`quantities.${index}.quantity`}
-                    component="div"
-                    className="form-validation-alert"
-                  />
+                  <div className="form-group row">
+                    <label htmlFor="quant-quant" className="col-sm-4 col-form-label">Quantity</label>
+                    <div className="col-sm-8">
+                      <Field
+                        name={`quantities.${index}.quantity`}
+                        className="form-control"
+                        type="number"
+                        min="0"
+                        id="quant-quant"
+                      />
+                      <ErrorMessage
+                        name={`quantities.${index}.quantity`}
+                        component="div"
+                        className="form-validation-alert"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="col-2">
                   <button

@@ -6,8 +6,8 @@ import { connect } from 'react-redux'
 import * as Yup from 'yup'
 import StoreService from '../../Services/store.service'
 import Constants from '../../Shared/Util/Constants'
-import * as actions from '../../Store/actions'
 import ImagesFieldArray from './fieldArray/ImagesFieldArray'
+import * as actions from '../../Store/actions'
 
 const NewStoreSchema = Yup.object().shape({
   name:        Yup.string().required('Product name is required'),
@@ -112,42 +112,65 @@ function NewStoreForm (props) {
       {({ values, setFieldValue }) => {
         return (
           <Form>
-            <div className="form-group">
-              <label>General Information</label>
-              <Field type="text" name="name" className="form-control" placeholder="Store Name"
-                     disabled={props.storeToEdit}/>
-              <ErrorMessage name="name" component="div" className="form-validation-alert"/>
+            <label>General Information</label>
+            <div className="form-group row">
+              <label htmlFor="newStore-name" className="col-sm-3 col-form-label">Store Name</label>
+              <div className="col-sm-9">
+                <Field type="text" name="name" className="form-control"
+                       disabled={props.storeToEdit} id="newStore-name"/>
+                <ErrorMessage name="name" component="div" className="form-validation-alert"/>
+              </div>
             </div>
-            <div className="form-group">
-              <Field type="text" name="desc" className="form-control" placeholder="Description"/>
-              <ErrorMessage name="desc" component="div" className="form-validation-alert"/>
+            <div className="form-group row">
+              <label htmlFor="newStore-desc" className="col-sm-3 col-form-label">Description</label>
+              <div className="col-sm-9">
+                <Field type="text" name="desc" className="form-control" id="newStore-desc"/>
+                <ErrorMessage name="desc" component="div" className="form-validation-alert"/>
+              </div>
             </div>
             <div className="form-group">
               <label>Contact</label>
             </div>
-            <div className="form-group">
-              <Field type="email" name="email" className="form-control" placeholder="Email"/>
-              <ErrorMessage name="email" component="div" className="form-validation-alert"/>
+            <div className="form-group row">
+              <label htmlFor="newStore-email" className="col-sm-3 col-form-label">Email</label>
+              <div className="col-sm-9">
+                <Field type="email" name="email" className="form-control"  id="newStore-email"/>
+                <ErrorMessage name="email" component="div" className="form-validation-alert"/>
+              </div>
             </div>
-            <div className="form-group">
-              <Field type="text" name="phoneNumber" className="form-control" placeholder="Phone Number"/>
-              <ErrorMessage name="phoneNumber" component="div" className="form-validation-alert"/>
+            <div className="form-group row">
+              <label htmlFor="newStore-phoneNumber" className="col-sm-3 col-form-label">Phone Number</label>
+              <div className="col-sm-9">
+                <Field type="text" name="phoneNumber" className="form-control"
+                       id="newStore-phoneNumber"/>
+                <ErrorMessage name="phoneNumber" component="div" className="form-validation-alert"/>
+              </div>
             </div>
-            <div className="form-group">
-              <Field type="text" name="city" className="form-control" placeholder="City"/>
-              <ErrorMessage name="city" component="div" className="form-validation-alert"/>
+            <div className="form-group row">
+              <label htmlFor="newStore-city" className="col-sm-3 col-form-label">City</label>
+              <div className="col-sm-9">
+                <Field type="text" name="city" className="form-control" id="newStore-city"/>
+                <ErrorMessage name="city" component="div" className="form-validation-alert"/>
+              </div>
             </div>
             <Row>
               <Col md="8">
-                <div className="form-group">
-                  <Field type="text" name="street" className="form-control" placeholder="Street"/>
-                  <ErrorMessage name="street" component="div" className="form-validation-alert"/>
+                <div className="form-group row">
+                  <label htmlFor="edit-profile-street" className="col-sm-4 col-form-label">Street</label>
+                  <div className="col-sm-8">
+                    <Field type="text" name="street" className="form-control"
+                           id="edit-profile-street"/>
+                    <ErrorMessage name="street" component="div" className="form-validation-alert"/>
+                  </div>
                 </div>
               </Col>
               <Col md="4">
-                <div className="form-group">
-                  <Field min="1" type="number" name="houseNum" className="form-control" placeholder="Number"/>
-                  <ErrorMessage name="houseNum" component="div" className="form-validation-alert"/>
+                <div className="form-group row">
+                  <label htmlFor="edit-profile-num" className="col-sm-3 col-form-label">Num</label>
+                  <div className="col-sm-9">
+                    <Field min="1" type="number" name="houseNum" className="form-control"  id="edit-profile-num"/>
+                    <ErrorMessage name="houseNum" component="div" className="form-validation-alert"/>
+                  </div>
                 </div>
               </Col>
             </Row>
