@@ -93,7 +93,7 @@ function PlaceOrder (props) {
                 </div>
               </div>
               <div className="form-group">
-                {props.user.defaultShippingAddress && !defaultAddressPressed && <Button
+                {props.user.defaultShippingAddress && props.user.defaultShippingAddress.city !== '' && !defaultAddressPressed && <Button
                   variant="success"
                   block
                   onClick={() => {
