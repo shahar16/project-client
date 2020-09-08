@@ -108,27 +108,19 @@ function SignUp (props) {
                 <ErrorMessage name="city" component="div" className="form-validation-alert"/>
               </div>
             </div>
-            <Row>
-              <Col md="8">
-                <div className="form-group row">
-                  <label htmlFor="signUp-street" className="col-sm-4 col-form-label">Street</label>
-                  <div className="col-sm-8">
-                    <Field type="text" name="street" className="form-control"
-                           id="signUp-street"/>
-                    <ErrorMessage name="street" component="div" className="form-validation-alert"/>
-                  </div>
-                </div>
-              </Col>
-              <Col md="4">
-                <div className="form-group row">
-                  <label htmlFor="signUp-num" className="col-sm-3 col-form-label">Num</label>
-                  <div className="col-sm-9">
-                    <Field min="1" type="number" name="houseNum" className="form-control" id="signUp-num"/>
-                    <ErrorMessage name="houseNum" component="div" className="form-validation-alert"/>
-                  </div>
-                </div>
-              </Col>
-            </Row>
+            <div className="form-group row">
+              <label htmlFor="edit-profile-street" className="col-sm-3 col-form-label">Street</label>
+              <div className="col-sm-5">
+                <Field type="text" name="street" className="form-control"
+                       id="edit-profile-street"/>
+                <ErrorMessage name="street" component="div" className="form-validation-alert"/>
+              </div>
+              <label htmlFor="edit-profile-num" className="col-sm-1 col-form-label">Num</label>
+              <div className="col-sm-3">
+                <Field min="1" type="number" name="houseNum" className="form-control" id="edit-profile-num"/>
+                <ErrorMessage name="houseNum" component="div" className="form-validation-alert"/>
+              </div>
+            </div>
             <div className="form-group">
               <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
             </div>

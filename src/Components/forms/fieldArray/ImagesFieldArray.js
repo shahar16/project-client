@@ -12,7 +12,8 @@ function ImagesFieldArray ({ values, setFieldValue }) {
             {values.images.length > 0 &&
             values.images.map((_, index) => (
               <div className="row" key={index}>
-                <div className="col-10">
+                <label className="col-sm-3 col-form-label">Image {index + 1}</label>
+                <div className="col-sm-7">
                   <input type="file" name={`images.${index}.image`}
                          className={'form-control'} onChange={(event) => {
                     setFieldValue(`images.${index}.image`, event.currentTarget.files[0])
@@ -23,7 +24,7 @@ function ImagesFieldArray ({ values, setFieldValue }) {
                     className="form-validation-alert"
                   />
                 </div>
-                <div className="col-2">
+                <div className="col-sm-2">
                   <button
                     type="button"
                     className="btn btn-secondary btn-sm"
@@ -35,13 +36,18 @@ function ImagesFieldArray ({ values, setFieldValue }) {
                 <br/><br/>
               </div>
             ))}
-            <button
-              type="button"
-              className="btn btn-outline-success btn-block"
-              onClick={() => values.images.length < 10 && push({ image: null })}
-            >
-              <PlusCircle style={{ 'marginRight': '5px' }}/> Add Image
-            </button>
+            <div className="row">
+              <div className="col-sm-3"></div>
+              <div className="col-sm-9">
+                <button
+                  type="button"
+                  className="btn btn-outline-success btn-block"
+                  onClick={() => values.images.length < 10 && push({ image: null })}
+                >
+                  <PlusCircle style={{ 'marginRight': '5px' }}/> Add Image
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </FieldArray>

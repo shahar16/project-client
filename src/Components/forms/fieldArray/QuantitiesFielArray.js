@@ -11,45 +11,37 @@ function QuantitiesFielArray ({ values }) {
           <div>
             {values.quantities.length > 0 &&
             values.quantities.map((_, index) => (
-              <div className="row" key={index}>
-                <div className="col-5">
-                  <div className="form-group row">
-                    <label htmlFor="quant-name" className="col-sm-3 col-form-label">Name</label>
-                    <div className="col-sm-9">
-                      <Field
-                        name={`quantities.${index}.name`}
-                        className="form-control"
-                        type="text"
-                        id="quant-name"
-                      />
-                      <ErrorMessage
-                        name={`quantities.${index}.name`}
-                        component="div"
-                        className="form-validation-alert"
-                      />
-                    </div>
-                  </div>
+              <div className="form-group row" key={index}>
+                <label htmlFor="quant-name" className="col-sm-3 col-form-label">Name</label>
+                <div className="col-sm-3">
+                  <Field
+                    name={`quantities.${index}.name`}
+                    className="form-control"
+                    type="text"
+                    id="quant-name"
+                  />
+                  <ErrorMessage
+                    name={`quantities.${index}.name`}
+                    component="div"
+                    className="form-validation-alert"
+                  />
                 </div>
-                <div className="col-5">
-                  <div className="form-group row">
-                    <label htmlFor="quant-quant" className="col-sm-4 col-form-label">Quantity</label>
-                    <div className="col-sm-8">
-                      <Field
-                        name={`quantities.${index}.quantity`}
-                        className="form-control"
-                        type="number"
-                        min="0"
-                        id="quant-quant"
-                      />
-                      <ErrorMessage
-                        name={`quantities.${index}.quantity`}
-                        component="div"
-                        className="form-validation-alert"
-                      />
-                    </div>
-                  </div>
+                <label htmlFor="quant-quant" className="col-sm-2 col-form-label">Quantity</label>
+                <div className="col-sm-2">
+                  <Field
+                    name={`quantities.${index}.quantity`}
+                    className="form-control"
+                    type="number"
+                    min="0"
+                    id="quant-quant"
+                  />
+                  <ErrorMessage
+                    name={`quantities.${index}.quantity`}
+                    component="div"
+                    className="form-validation-alert"
+                  />
                 </div>
-                <div className="col-2">
+                <div className="col-sm-1">
                   <button
                     type="button"
                     className="btn btn-secondary btn-sm"
@@ -61,13 +53,18 @@ function QuantitiesFielArray ({ values }) {
                 <br/><br/>
               </div>
             ))}
-            <button
-              type="button"
-              className="btn btn-outline-success btn-block"
-              onClick={() => push({ name: '', quantity: '' })}
-            >
-              <PlusCircle style={{ 'marginRight': '5px' }}/> Add Quantity
-            </button>
+            <div className="row">
+              <div className="col-sm-3"></div>
+              <div className="col-sm-9">
+                <button
+                  type="button"
+                  className="btn btn-outline-success btn-block"
+                  onClick={() => push({ name: '', quantity: '' })}
+                >
+                  <PlusCircle style={{ 'marginRight': '5px' }}/> Add Quantity
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </FieldArray>

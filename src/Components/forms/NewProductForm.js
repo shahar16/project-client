@@ -154,9 +154,12 @@ function NewProductForm (props) {
             </div>
             <QuantitiesFielArray values={values}/>
             <br/>
-            <div className="form-group">
+            {showImagesArray && <div className="form-group">
               <label>Images</label>
-            </div>
+            </div>}
+            {!showImagesArray && <div className="form-group">
+              <label>To edit images you need to remove them all and upload again</label>
+            </div>}
             {showImagesArray && <ImagesFieldArray values={values} setFieldValue={setFieldValue}/>}
             {!showImagesArray && <div>
               <Button variant="warning" block onClick={() => setShowImagesArray(true)}>
