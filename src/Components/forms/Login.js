@@ -68,17 +68,9 @@ function Login (props) {
             {errorMessage &&
             <div className="alert alert-danger">{errorMessage}</div>
             }
-            <div className="row">
-              <div className="col-6">
-                <a href="https://google.com" style={{ fontSize: '12px' }}
-                   className="btn btn-outline-success btn-block">Forgot your password?</a>
-              </div>
-              <div className="col-6">
-                <button className="btn btn-outline-success btn-block" style={{ fontSize: '12px' }}
-                        onClick={signUpClicked}>Sign Up
-                </button>
-              </div>
-            </div>
+            <button className="btn btn-outline-success btn-block" style={{ fontSize: '12px' }}
+                    onClick={signUpClicked}>Did not have account?? Sign Up
+            </button>
           </Form>
         )
       }
