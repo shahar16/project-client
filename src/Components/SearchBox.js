@@ -75,7 +75,7 @@ export default function SearchBox ({ history }) {
             )
           }}
         />
-        <Button variant="outline-primary" onClick={handleSearch} className="mt-2">
+        <Button type='submit' variant="outline-primary" onClick={handleSearch} className="mt-2">
           <Search/>
         </Button>
       </Form>
