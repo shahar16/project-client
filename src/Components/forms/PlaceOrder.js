@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React, { useState } from 'react'
-import { Button, Col, Modal, Row } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 import { Cart4, CheckCircleFill } from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
 import * as Yup from 'yup'
@@ -71,29 +71,29 @@ function PlaceOrder (props) {
         {({ setFieldValue }) => {
           return (
             <Form>
-              <div className="form-group">
-                <label>Address</label>
-                <Field type="text" name="city" className="form-control" placeholder="City"/>
-                <ErrorMessage name="city" component="div" className="form-validation-alert"/>
+              <label>Address</label>
+              <div className="form-group row">
+                <label htmlFor="placeOrder-city" className="col-sm-3 col-form-label">City</label>
+                <div className="col-sm-9">
+                  <Field type="text" name="city" className="form-control" id="placeOrder-city"/>
+                  <ErrorMessage name="city" component="div" className="form-validation-alert"/>
+                </div>
               </div>
-              <Row>
-                <Col md="8">
-                  <div className="form-group">
-                    <Field type="text" name="street" className="form-control" placeholder="Street"/>
-                    <ErrorMessage name="street" component="div" className="form-validation-alert"/>
-                  </div>
-                </Col>
-                <Col md="4">
-                  <div className="form-group">
-                    <Field min="1" type="number" name="houseNum" className="form-control"
-                           placeholder="Num"/>
-                    <ErrorMessage name="houseNum" component="div"
-                                  className="form-validation-alert"/>
-                  </div>
-                </Col>
-              </Row>
+              <div className="form-group row">
+                <label htmlFor="edit-profile-street" className="col-sm-3 col-form-label">Street</label>
+                <div className="col-sm-5">
+                  <Field type="text" name="street" className="form-control"
+                         id="edit-profile-street"/>
+                  <ErrorMessage name="street" component="div" className="form-validation-alert"/>
+                </div>
+                <label htmlFor="edit-profile-num" className="col-sm-1 col-form-label">Num</label>
+                <div className="col-sm-3">
+                  <Field min="1" type="number" name="houseNum" className="form-control" id="edit-profile-num"/>
+                  <ErrorMessage name="houseNum" component="div" className="form-validation-alert"/>
+                </div>
+              </div>
               <div className="form-group">
-                {props.user.defaultShippingAddress && !defaultAddressPressed && <Button
+                {props.user.defaultShippingAddress && props.user.defaultShippingAddress.city !== '' && !defaultAddressPressed && <Button
                   variant="success"
                   block
                   onClick={() => {
@@ -122,21 +122,28 @@ function PlaceOrder (props) {
               <div className="form-group">
                 <label>Credit Card</label>
               </div>
-              <div className="form-group">
-                <Field min="1" type="number" name="creditCardNumber" className="form-control"
-                       placeholder="Credit Card Number"/>
-                <ErrorMessage name="creditCardNumber" component="div"
-                              className="form-validation-alert"/>
+              <div className="form-group row">
+                <label htmlFor="placeOrder-creditCardNumber" className="col-sm-3 col-form-label">Credit Card</label>
+                <div className="col-sm-9">
+                  <Field min="1" type="number" name="creditCardNumber" className="form-control" id="placeOrder-creditCardNumber"/>
+                  <ErrorMessage name="creditCardNumber" component="div"
+                                className="form-validation-alert"/>
+                </div>
               </div>
-              <div className="form-group">
-                <Field min="1" type="number" name="cvv" className="form-control" placeholder="cvv"/>
-                <ErrorMessage name="cvv" component="div" className="form-validation-alert"/>
+              <div className="form-group row">
+                <label htmlFor="placeOrder-cvv" className="col-sm-3 col-form-label">CVV</label>
+                <div className="col-sm-9">
+                  <Field min="1" type="number" name="cvv" className="form-control" id="placeOrder-cvv"/>
+                  <ErrorMessage name="cvv" component="div" className="form-validation-alert"/>
+                </div>
               </div>
-              <div className="form-group">
-                <Field type="month" name="date" className="form-control"
-                       placeholder="Credit Card Number"
-                       min="2020-09" max="2027-12"/>
-                <ErrorMessage name="date" component="div" className="form-validation-alert"/>
+              <div className="form-group row">
+                <label htmlFor="placeOrder-exp" className="col-sm-3 col-form-label">EXP</label>
+                <div className="col-sm-9">
+                  <Field type="month" name="date" className="form-control"
+                         min="2020-09" max="2027-12" id="placeOrder-exp"/>
+                  <ErrorMessage name="date" component="div" className="form-validation-alert"/>
+                </div>
               </div>
               <div className="form-group">
                 <button type="submit" className="btn btn-primary btn-block">

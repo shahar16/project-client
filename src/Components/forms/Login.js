@@ -48,13 +48,19 @@ function Login (props) {
       {() => {
         return (
           <Form>
-            <div className="form-group">
-              <Field type="email" name="email" className="form-control" placeholder="Email"/>
-              <ErrorMessage name="email" component="div" className="form-validation-alert"/>
+            <div className="form-group row">
+              <label htmlFor="login-profile-email" className="col-sm-3 col-form-label">Email</label>
+              <div className="col-sm-9">
+                <Field type="email" name="email" className="form-control" id="edit-profile-email"/>
+                <ErrorMessage name="email" component="div" className="form-validation-alert"/>
+              </div>
             </div>
-            <div className="form-group">
-              <Field type="password" name="password" className="form-control" placeholder="Password"/>
-              <ErrorMessage name="password" component="div" className="form-validation-alert"/>
+            <div className="form-group row">
+              <label htmlFor="login-profile-password" className="col-sm-3 col-form-label">Password</label>
+              <div className="col-sm-9">
+                <Field type="password" name="password" className="form-control" id="edit-profile-password"/>
+                <ErrorMessage name="password" component="div" className="form-validation-alert"/>
+              </div>
             </div>
             <div className="form-group">
               <button type="submit" className="btn btn-primary btn-block">Log in</button>
@@ -62,17 +68,9 @@ function Login (props) {
             {errorMessage &&
             <div className="alert alert-danger">{errorMessage}</div>
             }
-            <div className="row">
-              <div className="col-6">
-                <a href="https://google.com" style={{ fontSize: '12px' }}
-                   className="btn btn-outline-success btn-block">Forgot your password?</a>
-              </div>
-              <div className="col-6">
-                <button className="btn btn-outline-success btn-block" style={{ fontSize: '12px' }}
-                        onClick={signUpClicked}>Sign Up
-                </button>
-              </div>
-            </div>
+            <button className="btn btn-outline-success btn-block" style={{ fontSize: '12px' }}
+                    onClick={signUpClicked}>Did not have account?? Sign Up
+            </button>
           </Form>
         )
       }
