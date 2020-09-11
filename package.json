@@ -45,7 +45,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clean": "rm -rf node_modules",
-    "reinstall": "npm run clean && npm install"
+    "reinstall": "npm run clean && npm install",
+    "deploy": "npm run build; firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
