@@ -51,6 +51,14 @@ class ProductService {
     const res = await axios.get(`${this.productUrl}/search?searchQuery=${query}`)
     return res.data
   }
+
+  async getLabels () {
+    // const res = await axios.get(`${this.productUrl}/getLabels`)
+    // return res.data
+    return [
+      'computer', 'keyboard', 'shah', 'kfd'
+    ]
+  }
 }
 
 export default new ProductService()

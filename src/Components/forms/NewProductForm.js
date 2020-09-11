@@ -9,6 +9,7 @@ import Constants from '../../Shared/Util/Constants'
 import * as actions from '../../Store/actions'
 import ImagesFieldArray from './fieldArray/ImagesFieldArray'
 import QuantitiesFielArray from './fieldArray/QuantitiesFielArray'
+import Labels from './Labels'
 
 const NewProductSchema = Yup.object().shape({
   name:       Yup.string().required('Product name is required'),
@@ -63,6 +64,7 @@ function NewProductForm (props) {
     const stock = buildStock(values)
     values.images.forEach((currentImage) => formData.append('image', currentImage.image))
     formData.append('name', values.name)
+    formData.append('label', values.label)
     formData.append('price', values.price)
     formData.append('desc', values.desc)
     formData.append('stock', stock)
@@ -104,7 +106,8 @@ function NewProductForm (props) {
         }],
         images:     [{
           image: null
-        }]
+        }],
+        label: []
       }}
       validationSchema={showImagesArray ? NewProductSchema : EditProductSchema}
       onSubmit={handleSubmit}>
@@ -167,6 +170,14 @@ function NewProductForm (props) {
                 Remove Images
               </Button>
             </div>}
+            <br/>
+            <label>Labels</label>
+            <div className="form-group row">
+              <div className="col-sm-2"></div>
+              <div className="col-sm-10">
+                <Labels setFieldValue={setFieldValue} productToEdit={props.productToEdit}/>
+              </div>
+            </div>
             <br/>
             <div className="form-group">
               <button type="submit" className="btn btn-primary btn-block">Submit</button>

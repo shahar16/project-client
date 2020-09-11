@@ -20,6 +20,12 @@ function ProductPageInfo ({ item, afterEdit }) {
           </h1>
         </Col>
       </Row>
+      {item.label && <div>
+        <hr/>
+        <label>Labels</label>
+        <br/>
+        {item.label.map(label => <Badge key={`${item.sn}--${label}`} style={{marginRight: '5px'}} variant="info">{label}</Badge>)}
+      </div>}
       <hr/>
       <ProductPageForm item={item} afterEdit={afterEdit}/>
       <Link to={`/stores/${item.storeID}`}>Go to store</Link>

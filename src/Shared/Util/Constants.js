@@ -3,7 +3,8 @@ import { DashCircleFill } from 'react-bootstrap-icons'
 
 class Constants {
   constructor () {
-    this.serverUrl = 'https://store-line.herokuapp.com'
+    this.serverUrl = 'http://localhost:3001'
+    // this.serverUrl = 'https://store-line.herokuapp.com'
     this.productPageStyle = {
       height: '800px'
     }
