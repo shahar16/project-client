@@ -27,7 +27,13 @@ function Labels ({ setFieldValue, productToEdit }) {
 
   useEffect(() => {
     if (productToEdit) {
-      setTags(productToEdit.label)
+      console.log(productToEdit)
+      setTags(productToEdit.label.map(label => {
+        return {
+          id:   label,
+          text: label
+        }
+      }))
     }
   }, [productToEdit])
 
