@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { Button, Col, OverlayTrigger, Popover, Row } from 'react-bootstrap'
 import { WithContext as ReactTags } from 'react-tag-input'
 import ProductService from '../../Services/product.service'
 import './Labels.css'
+import {QuestionCircle} from 'react-bootstrap-icons'
 
 function Labels ({ setFieldValue, productToEdit }) {
   const [tags, setTags] = useState([])
@@ -37,6 +39,15 @@ function Labels ({ setFieldValue, productToEdit }) {
     }
   }, [productToEdit])
 
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Labels</Popover.Title>
+      <Popover.Content>
+        Add your own labels, from the list and from your mind. Press enter after each label to add the label. Automated labels will added according to your product name and description.
+      </Popover.Content>
+    </Popover>
+  );
+
   const KeyCodes = {
     comma: 188,
     enter: 13,
@@ -63,15 +74,26 @@ function Labels ({ setFieldValue, productToEdit }) {
 
   return (
     <div>
-      <ReactTags tags={tags}
-                 suggestions={suggestions}
-                 handleDelete={handleDelete}
-                 handleAddition={handleAddition}
-                 handleDrag={handleDrag}
-                 delimiters={delimiters}
-                 placeholder="Add new label"
-                 inline={false}
-      />
+      <Row>
+        <Col md={10}>
+          <ReactTags tags={tags}
+                     suggestions={suggestions}
+                     handleDelete={handleDelete}
+                     handleAddition={handleAddition}
+                     handleDrag={handleDrag}
+                     delimiters={delimiters}
+                     placeholder="Add new label"
+                     inline={false}
+          />
+        </Col>
+        <Col md={2}>
+          <OverlayTrigger trigger="hover" placement="right" overlay={popover}>
+            <Button variant="none">
+              <QuestionCircle/>
+            </Button>
+          </OverlayTrigger>
+        </Col>
+      </Row>
     </div>
   )
 }
