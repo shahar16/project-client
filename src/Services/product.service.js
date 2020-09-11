@@ -53,11 +53,8 @@ class ProductService {
   }
 
   async getLabels () {
-    // const res = await axios.get(`${this.productUrl}/getLabels`)
-    // return res.data
-    return [
-      'computer', 'keyboard', 'shah', 'kfd'
-    ]
+    const res = await axios.get(`${this.productUrl}/getLabels`)
+    return res.data
   }
 }
 
