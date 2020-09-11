@@ -24,7 +24,8 @@ function ProductPageInfo ({ item, afterEdit }) {
         <hr/>
         <label>Labels</label>
         <br/>
-        {item.label.map(label => <Badge key={`${item.sn}--${label}`} style={{marginRight: '5px'}} variant="info">{label}</Badge>)}
+        {item.label.length > 0 && item.label.map(label => <Badge key={`${item.sn}--${label}`} style={{marginRight: '5px'}} variant="info">{label}</Badge>)}
+        {item.label.length <= 0 && <h7>This product have no labels</h7>}
       </div>}
       <hr/>
       <ProductPageForm item={item} afterEdit={afterEdit}/>
