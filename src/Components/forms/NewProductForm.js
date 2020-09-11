@@ -64,7 +64,7 @@ function NewProductForm (props) {
     const stock = buildStock(values)
     values.images.forEach((currentImage) => formData.append('image', currentImage.image))
     formData.append('name', values.name)
-    formData.append('label', values.label)
+    formData.append('label', JSON.stringify(values.label))
     formData.append('price', values.price)
     formData.append('desc', values.desc)
     formData.append('stock', stock)
