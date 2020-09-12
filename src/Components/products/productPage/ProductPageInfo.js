@@ -21,7 +21,11 @@ function ProductPageInfo ({ item, afterEdit }) {
         </Col>
       </Row>
       {item.label && <div className='float-left'>
-        {item.label.length > 0 && item.label.map(label => <Badge key={`${item.sn}--${label}`} style={{marginRight: '5px'}} variant="info">#{label}</Badge>)}
+        {item.label.length > 0 && item.label.map(label => {
+          return <Link to={`/label/${label}`}>
+            <Badge key={`${item.sn}--${label}`} style={{ marginRight: '5px' }} variant="info">#{label}</Badge>
+          </Link>
+        })}
       </div>
       }
       <br/>

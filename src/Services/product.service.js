@@ -53,6 +53,11 @@ class ProductService {
     return res.data
   }
 
+  async getLabelProducts (label) {
+    const res = await axios.get(`${this.productUrl}/getLabelProducts?label=${label}`)
+    return res.data
+  }
+
   async getLabels () {
     const res = await axios.get(`${this.productUrl}/getLabels`)
     return res.data
