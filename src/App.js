@@ -3,7 +3,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
-import HomePage from './Containers/HomePage'
+import HomePage from './Containers/Main'
 import './index.css'
 import reducer from './Store/reducers/app'
 

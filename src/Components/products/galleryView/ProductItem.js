@@ -9,8 +9,8 @@ import DeleteProduct from '../deleteProduct'
 function ProductItem ({ item, renderStore, token, user, editMode, afterDelete }) {
   const [showDelete, setShowDelete] = useState(false)
 
-  const styleWithoutDelete = { width: '15rem', height: '20rem' }
-  const styleWithDelete = { width: '15rem', height: '24rem' }
+  const styleWithoutDelete = { width: '15rem', height: '22rem' }
+  const styleWithDelete = { width: '15rem', height: '26rem' }
 
   useEffect(() => {
     const findOwner = async () => {
@@ -32,7 +32,7 @@ function ProductItem ({ item, renderStore, token, user, editMode, afterDelete })
         </div>
         <Card.Body>
           <div className={'d-flex mb-0 justify-content-between'}>
-            <Card.Title as={'h5'} className={'mb-0'}>{item.name}</Card.Title>
+            <Card.Title as={'h7'} className={'mb-0'}>{item.name}</Card.Title>
             <Badge pill className={'mb-1'} variant={'warning'}>{item.price} ₪</Badge>
           </div>
         </Card.Body>
