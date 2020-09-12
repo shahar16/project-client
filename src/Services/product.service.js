@@ -1,4 +1,5 @@
 import axios from '../Axios/axios'
+import products from '../Shared/products.json'
 
 /**
  * This service create a http request to the users api.
@@ -50,6 +51,18 @@ class ProductService {
   async search (query) {
     const res = await axios.get(`${this.productUrl}/search?searchQuery=${query}`)
     return res.data
+  }
+
+  async getLabels () {
+    const res = await axios.get(`${this.productUrl}/getLabels`)
+    return res.data
+  }
+
+  //TODO should return Array of products
+  async getSimilarProducts () {
+    // const res = await axios.get(`${this.productUrl}/getLabels`)
+    // return res.data
+    return products
   }
 }
 

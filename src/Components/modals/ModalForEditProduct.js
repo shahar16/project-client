@@ -51,7 +51,8 @@ function ModalForNewProduct ({ storeID, productToEdit, afterEdit }) {
       quantities: quantities,
       images:     [{
         image: null
-      }]
+      }],
+      label:      product.label
     }
   }
 

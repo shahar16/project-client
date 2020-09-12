@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 import ProductPageCarousel from '../Components/products/productPage/ProductPageCarousel'
 import ProductPageInfo from '../Components/products/productPage/ProductPageInfo'
+import SimilarProducts from '../Components/products/productPage/SimilarProducts'
 import ProductService from '../Services/product.service'
 import StoreService from '../Services/store.service'
 
@@ -50,6 +51,13 @@ function ProductPage (props) {
         </Col>
         <Col>
           {item && <ProductPageInfo item={item} afterEdit={afterEdit}/>}
+        </Col>
+        <Col md={1}></Col>
+      </Row>
+      <Row>
+        <Col md={1}></Col>
+        <Col md={10}>
+          {item && <SimilarProducts productItem={item}/>}
         </Col>
         <Col md={1}></Col>
       </Row>
