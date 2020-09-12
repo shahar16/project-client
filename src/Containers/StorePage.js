@@ -69,26 +69,34 @@ function StorePage (props) {
       {item && <Helmet>
         <title>{item.name}</title>
       </Helmet>}
-      {item && <div className="jumbotron text-center" id="jshadow">
-        <h1>Welcome to {item.name}</h1>
-        <br/>
+      {item &&
         <Row>
-          <Col md={2}></Col>
-          <Col md={4}>
-            <br/>
-            <h5>Store Description</h5>
-            {item.desc}
-          </Col>
-          <Col md={1}>
-            <div className="vr"></div>
-          </Col>
-          <Col md={4} style={{ textAlign: 'left' }}>
-            <br/>
-            {item && printStoreContact()}
+          <Col md={1}></Col>
+          <Col md={10}>
+            <div className="jumbotron text-center" id="jshadow">
+              <h1>Welcome to {item.name}</h1>
+              <br/>
+              <Row>
+                <Col md={2}></Col>
+                <Col md={4}>
+                  <br/>
+                  <h5>Store Description</h5>
+                  {item.desc}
+                </Col>
+                <Col md={1}>
+                  <div className="vr"></div>
+                </Col>
+                <Col md={4} style={{ textAlign: 'left' }}>
+                  <br/>
+                  {item && printStoreContact()}
+                </Col>
+                <Col md={1}></Col>
+              </Row>
+            </div>
           </Col>
           <Col md={1}></Col>
         </Row>
-      </div>}
+      }
       {item && props.token && enableEditingStore() && renderNewProductModal()}
       <br/>
       {item && < ProductsGalleryView fetchService={getStoreProducts} renderStore={true} editMode={editMode}
