@@ -73,7 +73,7 @@ function StorePage (props) {
         <Row>
           <Col md={1}></Col>
           <Col md={10}>
-            <div className="jumbotron text-center" id="jshadow">
+            <div className="jumbotron text-center">
               <h1>Welcome to {item.name}</h1>
               <br/>
               <Row>
