@@ -26,10 +26,10 @@ function Login (props) {
       props.authSuccess(token)
       props.onLog()
     } catch (err) {
-      console.log(err)
-      const error = await err.response.json()
-      setErrorMessage(error.message)
-      props.authFail(error.message)
+      // const error = await err.response.json()
+      // console.log(error)
+      setErrorMessage( "login failed")
+      // props.authFail(error.message)
     }
   }
 

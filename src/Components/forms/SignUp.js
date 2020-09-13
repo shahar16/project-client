@@ -35,9 +35,9 @@ function SignUp (props) {
       props.authSuccess(token)
       props.onLog()
     } catch (err) {
-      const error = await err.response.json()
-      setErrorMessage(error.message)
-      props.authFail(error.message)
+      // const error = await err.response.json()
+      setErrorMessage("Sign Up failed")
+      // props.authFail(error.message)
     }
   }
 
