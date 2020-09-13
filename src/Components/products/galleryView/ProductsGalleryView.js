@@ -13,7 +13,7 @@ function ProductsGalleryView ({ fetchService, renderStore, editMode, afterDelete
 
   useEffect(() => {
     fetchMoreData(init)
-  }, [])
+  }, [setEndOfProducts])
 
   const fetchMoreData = async (init) => {
     console.log('fetch data')

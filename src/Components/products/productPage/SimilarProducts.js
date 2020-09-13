@@ -6,7 +6,7 @@ import ProductsGalleryView from '../galleryView/ProductsGalleryView'
 function SimilarProducts ({ productItem }) {
 
   const fetchSimilarProducts = async () => {
-    return ProductService.getSimilarProducts()
+    return ProductService.getSimilarProducts(productItem.sn, productItem.storeID)
   }
 
   return (

@@ -63,11 +63,10 @@ class ProductService {
     return res.data
   }
 
-  //TODO should return Array of products
-  async getSimilarProducts () {
-    // const res = await axios.get(`${this.productUrl}/getLabels`)
-    // return res.data
-    return products
+  async getSimilarProducts (sn, storeID) {
+    const res = await axios.get(`${this.productUrl}/getSimilarProducts?sn=${sn}&storeID=${storeID}`)
+    const arr = res.data.map(singleProd => singleProd.product)
+    return arr
   }
 }
 
