@@ -3,7 +3,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
-import HomePage from './Containers/HomePage'
+import Main from './Containers/Main'
 import './index.css'
 import reducer from './Store/reducers/app'
 
@@ -14,7 +14,7 @@ function App () {
 
   return (
     <Provider store={store}>
-      <HomePage/>
+      <Main/>
     </Provider>
   )
 }

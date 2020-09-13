@@ -59,6 +59,11 @@ class StoreService {
     console.log(res)
     return res.data
   }
+
+  async getTopStores () {
+    const res = await axios.get(`${this.url}/getTopStores`)
+    return res.data
+  }
 }
 
 export default new StoreService()
