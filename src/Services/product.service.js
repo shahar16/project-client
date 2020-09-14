@@ -1,5 +1,4 @@
 import axios from '../Axios/axios'
-import products from '../Shared/products.json'
 
 /**
  * This service create a http request to the users api.
