@@ -33,7 +33,7 @@ function ProductItem ({ item, renderStore, token, user, editMode, afterDelete })
         <Card.Body>
           <div className={'d-flex mb-0 justify-content-between'}>
             <Card.Title as={'h7'} className={'mb-0'}>{item.name}</Card.Title>
-            <Badge pill className={'mb-1'} variant={'warning'}>{item.price} ₪</Badge>
+            <Badge pill className={'mb-1 align-self-center'} variant={'warning'}>{item.price} ₪</Badge>
           </div>
         </Card.Body>
       </Link>

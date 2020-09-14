@@ -6,6 +6,7 @@ import Footer from '../Components/Footer'
 import ModalForEditUser from '../Components/modals/ModalForEditUser'
 import NavBar from '../Components/NavBar'
 import ProductsGalleryView from '../Components/products/galleryView/ProductsGalleryView'
+import ScrollToTop from '../Components/ScrollToTop'
 import CartService from '../Services/cart.service'
 import ProductService from '../Services/product.test.service'
 import * as actions from '../Store/actions'
@@ -41,6 +42,7 @@ function Main (props) {
 
   return (
     <BrowserRouter>
+      <ScrollToTop/>
       <Route component={NavBar}/>
       <div className="under-nav-bar">
         <Switch>

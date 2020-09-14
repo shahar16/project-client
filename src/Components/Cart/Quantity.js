@@ -37,7 +37,7 @@ function Quantity ({ quantity, product, token, callBack }) {
           return (
             <Form>
               <Row>
-                <Col md={4}></Col>
+                <Col md={3}></Col>
                 <Col>
                   <div className="form-group">
                     <Field type="number"
@@ -65,7 +65,7 @@ function Quantity ({ quantity, product, token, callBack }) {
                     </button>
                   </div>
                 </Col>
-                <Col md={4}></Col>
+                <Col md={3}></Col>
               </Row>
               {/*{errorMessage &&*/}
               {/*<div className="alert alert-danger">{errorMessage}</div>*/}

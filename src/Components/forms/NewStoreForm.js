@@ -1,20 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
-import { FileEarmarkMinus } from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
 import * as Yup from 'yup'
 import StoreService from '../../Services/store.service'
-import Constants from '../../Shared/Util/Constants'
 import * as actions from '../../Store/actions'
-import ImagesFieldArray from './fieldArray/ImagesFieldArray'
 
 const NewStoreSchema = Yup.object().shape({
   name:        Yup.string().required('Product name is required'),
   desc:        Yup.string().required('Description is required'),
-  images:      Yup.array().of(Yup.object().shape({
-    image: Yup.mixed().required('image is required')
-  })).min(1).required('You must enter at least one image'),
   email:       Yup.string().required('Contact email is required ').email('Invalid email'),
   phoneNumber: Yup.string().required('Phone number is required'),
   city:        Yup.string(),
@@ -25,9 +18,6 @@ const NewStoreSchema = Yup.object().shape({
 const EditStoreSchema = Yup.object().shape({
   name:        Yup.string().required('Product name is required'),
   desc:        Yup.string().required('Description is required'),
-  images:      Yup.array().of(Yup.object().shape({
-    image: Yup.mixed()
-  })),
   email:       Yup.string().required('Contact email is required ').email('Invalid email'),
   phoneNumber: Yup.string().required('Phone number is required'),
   city:        Yup.string(),
@@ -60,9 +50,7 @@ function NewStoreForm (props) {
   const handleSubmit = async (values) => {
     let formData = new FormData()
     const contact = buildContact(values)
-    if (showImagesArray) {
-      values.images.forEach((currentImage) => formData.append('image', currentImage.image))
-    }
+
     formData.append('name', values.name)
     formData.append('desc', values.desc)
     formData.append('contact', contact)
@@ -98,9 +86,6 @@ function NewStoreForm (props) {
       initialValues={props.storeToEdit || {
         name:        '',
         desc:        '',
-        images:      [{
-          image: null
-        }],
         email:       '',
         phoneNumber: '',
         city:        '',
@@ -166,16 +151,6 @@ function NewStoreForm (props) {
                 <ErrorMessage name="houseNum" component="div" className="form-validation-alert"/>
               </div>
             </div>
-            <div className="form-group">
-              <label>Images</label>
-            </div>
-            {showImagesArray && <ImagesFieldArray values={values} setFieldValue={setFieldValue}/>}
-            {!showImagesArray && <div>
-              <Button variant="warning" block onClick={() => setShowImagesArray(true)}>
-                <FileEarmarkMinus style={Constants.iconStyle}/>
-                Remove Images
-              </Button>
-            </div>}
             <br/>
             <div className="form-group">
               <button type="submit" className="btn btn-primary btn-block">Submit</button>

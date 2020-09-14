@@ -26,8 +26,8 @@ function QuantitiesFielArray ({ values }) {
                     className="form-validation-alert"
                   />
                 </div>
-                <label htmlFor="quant-quant" className="col-sm-2 col-form-label">Quantity</label>
-                <div className="col-sm-2">
+                <label htmlFor="quant-quant" className="col-sm-1 col-form-label">Qty</label>
+                <div className="col-sm-3">
                   <Field
                     name={`quantities.${index}.quantity`}
                     className="form-control"

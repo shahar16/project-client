@@ -7,6 +7,7 @@ function ModalForAuth ({ token, history, user }) {
   const [show, setShow] = useState(true)
 
   const handleClose = () => {
+    setShow(false)
     history.goBack()
   }
 
