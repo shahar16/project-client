@@ -12,6 +12,7 @@ function ProductPage (props) {
 
   useEffect(() => {
     const fetchProduct = async () => {
+      setItem(null)
       try {
         const productItem = await ProductService.getProduct(props.match.params)
         const owner = await StoreService.getOwner(productItem.storeID)
